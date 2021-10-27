@@ -28,8 +28,17 @@
         //Obtiene todos los usuarios con el nombre del rol correspondiente
         public function obtenerListadoUsuaurios (){
             
-            $consulta = $this->db->query("SELECT u.id_usuario, u.username, u.nombre, u.apellido, u.email, u.dni, u.fecha_nacimiento, r.nombre AS rol FROM usuario u JOIN rol r ON (u.id_rol = r.id_rol)");
+            $consulta = $this->db->query("SELECT u.id_usuario, u.username, u.nombre, u.apellido, u.email," . 
+                    "u.dni, u.fecha_nacimiento, r.nombre AS rol FROM usuario u JOIN rol r ON (u.id_rol = r.id_rol)");
             return $consulta->getResultArray();
+        }
+        
+        public function registrarUsuario($username, $nombre, $apellido, $email, $dni, 
+                                                        $fecha_nacimiento, $contraseña, $rol){  
+        
+            $this->db->query("INSERT INTO usuario (username, nombre, apellido, email, dni, fecha_nacimiento, contraseña, id_rol) " . 
+                    "VALUES ('$username', '$nombre', '$apellido', '$email', '$dni', '$fecha_nacimiento', '$contraseña', '$rol')");                                        
+
         }
     
 

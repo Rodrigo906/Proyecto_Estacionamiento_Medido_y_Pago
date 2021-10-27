@@ -4,7 +4,7 @@
 
     use CodeIgniter\Model;
 
-    class UserModel extends Model{
+    class RolModel extends Model{
 
         protected $table = 'rol';
         protected $primaryKey = 'id_rol';
