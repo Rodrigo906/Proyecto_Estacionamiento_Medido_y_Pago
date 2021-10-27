@@ -9,7 +9,7 @@
     <body>
         <h1> Formulario </h1>
 
-        <form method="POST" action="<?= base_url('Usercontroller/registrarUsuario')?>">
+        <form method="POST" action="<?= base_url('User_controller/registrarUsuario')?>">
             <input type="text" name="valor1">
             <input type="text" name="valor2">
             <button> Enviar </button>
