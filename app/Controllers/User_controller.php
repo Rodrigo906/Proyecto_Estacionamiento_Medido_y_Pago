@@ -21,23 +21,30 @@ class User_controller extends BaseController{
     public function index(){
 
         $data['usuarios'] = $this->userModel->obtenerListadoUsuaurios();
+        $data['titulo'] = "Listado de usuarios";
         return view('vistas_administrador/listado_usuarios', $data);  
     }
 
     //Al llamarlo mostrara el formulario de registro de usuario
     public function MostrarFormularioRegistro (){
-        return view('vistas_administrador/formulario_registro_usuario');
+
+        $data['roles'] = $this->rolModel->findAll();
+        $data['titulo'] = "Registrar usuario";
+        return view('vistas_administrador/formulario_registro_usuario', $data);
     }
 
     //tomara los datos del formulario y los guardara en la BD
     public function registrarUsuario(){
         
-        /* PARA PRUEBAS
-        $valor1 = $_POST['valor1'];
-        $valor2 = $_POST['valor2'];
-        echo $valor1 ."---". $valor2;
-        */
+        $validation = service('validation');                  //inicializo la libreria de validacion
+        $validation->setRuleGroup('formValidation');          //establesco con que reglas se debe validar el formulario
         
+        /*si hubo algun error redirecciono de nuevo al usuario al formulario con los datos que eran correctos y
+        marcando los errores*/
+        if(!$validation->withRequest($this->request)->run()){
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
         $username = $_POST['username'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
