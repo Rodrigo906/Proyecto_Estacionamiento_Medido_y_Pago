@@ -74,17 +74,17 @@ class Validation
         ],
 
         'dni' => [
-            'rules' => 'required|numeric',
+            'rules' => 'required|numeric|exact_length[8]',
             'errors' => [
                 'required' => 'Este campo es obligatorio' ,
                 'numeric' => 'Verifique que su numero de dni no contenga letras',
+                'exact_length' => 'Por favor ingrese su dni completo' ,
              ],
         ],
 
         'fecha_nacimiento' => [
-            'rules' => 'required|valid_date[d/m/Y]',
+            'rules' => 'valid_date[d/m/Y]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
                 'valid_date' => 'Ingrese la fecha en formato dd/mm/yy',
              ],
         ],

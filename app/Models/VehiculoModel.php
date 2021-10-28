@@ -29,10 +29,14 @@ class VehiculoModel extends Model
 
     public function registrarVehiculo($patente, $id_usuario, $marca, $modelo)
     {
-
         $this->db->query("INSERT INTO vehiculo (patente, id_usuario, marca, modelo) " .
             "VALUES ('$patente', '$id_usuario', '$marca', '$modelo')");
     }
+
+    
+
+
+
 
 }
 
