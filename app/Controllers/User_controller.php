@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\UserModel;
 use App\Models\RolModel;
 
 
-class User_controller extends BaseController{
+class User_controller extends BaseController
+{
 
     protected $userModel;
     protected $rolModel;
-    
-    public function __construct(){
+
+    public function __construct()
+    {
 
         $this->userModel = new UserModel();
         $this->rolModel = new RolModel();
@@ -54,20 +57,26 @@ class User_controller extends BaseController{
         $contraseña = $_POST['contraseña'];
         $rol = $this->rolModel->find($_POST['rol']);
 
-        $this->userModel->registrarUsuario($username, $nombre, $apellido, $email, $dni, 
-                                                    $fecha_nacimiento, $contraseña, $rol);
-                                                
+        $this->userModel->registrarUsuario(
+            $username,
+            $nombre,
+            $apellido,
+            $email,
+            $dni,
+            $fecha_nacimiento,
+            $contraseña,
+            $rol
+        );
     }
 
-    
+
     //Elimina cualquier usuario pasado por parametro
-    public function eliminar ($id_usuario){
+    public function eliminar($id_usuario)
+    {
 
         $this->userModel->delete($id_usuario);
         $data['usuarios'] = $this->userModel->obtenerListadoUsuaurios();
 
-        return view('vistas_administrador/listado_usuarios', $data);  
+        return view('vistas_administrador/listado_usuarios', $data);
     }
 }
-
-?>
