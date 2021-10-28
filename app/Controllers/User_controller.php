@@ -23,16 +23,18 @@ class User_controller extends BaseController
     //retorna el listado de todos los usuarios del sistema
     public function index()
     {
-
-        $data['usuarios'] = $this->userModel->obtenerListadoUsuaurios();
-        return view('vistas_administrador/listado_usuarios', $data);
-        print_r("Hola");
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        $data['usuarios'] = $this->userModel->obtenerListadoUsuarios();
+        echo view('usuarios/listado_usuarios', $data);
+        echo view('template/footer');
     }
 
     //Al llamarlo mostrara el formulario de registro de usuario
     public function MostrarFormularioRegistro()
     {
-        return view('vistas_administrador/formulario_registro_usuario');
+        echo view('usuarios/crear_usuario');
     }
 
     //tomara los datos del formulario y los guardara en la BD
