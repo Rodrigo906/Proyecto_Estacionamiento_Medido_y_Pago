@@ -1,39 +1,54 @@
-<!-- DataTable User -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
+<div class="card-header py-3">
+    <h4 class="m-0 font-weight-bold text-primary">Usuarios</h4>
+</div>
+
+<div class="contenedor_tabla" style="margin: 20px;">
+
+    <div class="content-icono">
+        <a href="MostrarFormularioRegistro" data-toggle="tooltip" title="Agregar">
+            <i class="bi bi-plus-circle-fill" style="font-size: 2rem;"></i>
+        </a>
+
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
 
-                        <th>Email</th>
-                        <th>dni</th>
-                        <th>Fecha de nacimiento</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <?php foreach ($usuarios as $usuario) : ?>
-                        <tr>
-                            <td> <?= $usuario['username'] ?> </td>
-                            <td> <?= $usuario['nombre'] ?> </td>
-                            <td> <?= $usuario['apellido'] ?> </td>
+    <table class=" table table-striped table-bordered">
+        <thead>
+            <tr class="text-center">
+                <th scope="col"> Nombre </th>
+                <th scope="col"> Apellido </th>
+                <th scope="col"> Username </th>
+                <th scope="col"> DNI </th>
+                <th scope="col"> Email </th>
+                <th scope="col"> Rol </th>
+                <th scope="col"> Opciones </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($usuarios as $usuario) {
+            ?>
+                <tr class="text-center">
+                    <td> <?php echo $usuario['nombre'] ?> </td>
+                    <td> <?php echo $usuario['apellido'] ?> </td>
+                    <td> <?php echo $usuario['username'] ?> </td>
+                    <td> <?php echo $usuario['dni'] ?> </td>
+                    <td> <?php echo $usuario['email'] ?> </td>
+                    <td> <?php echo $usuario['rol'] ?> </td>
+                    <td>
 
-                            <td> <?= $usuario['email'] ?> </td>
-                            <td> <?= $usuario['dni'] ?> </td>
-                            <td> <?= $usuario['fecha_nacimiento'] ?> </td>
-                            <td>Editar / Eliminar</td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                        <a href="#" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
+                        </a>
+
+                        <a href="MostrarFormularioRegistro" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
+                            <i class="bi bi-pencil-square" style="font-size: .8rem"></i>
+                        </a>
+
+                    </td>
+                </tr>
+            <?php };
+            ?>
+        </tbody>
+    </table>
 </div>

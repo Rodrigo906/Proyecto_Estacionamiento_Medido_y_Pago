@@ -34,7 +34,10 @@ class User_controller extends BaseController
     //Al llamarlo mostrara el formulario de registro de usuario
     public function MostrarFormularioRegistro()
     {
-        echo view('usuarios/crear_usuario');
+        $data['roles'] = $this->rolModel->findAll();
+        $data['titulo'] = "Crear usuario";
+        $data['subtitulo'] = "Crea una cuenta!";
+        echo view('usuarios/crear_usuario', $data);
     }
 
     //tomara los datos del formulario y los guardara en la BD
