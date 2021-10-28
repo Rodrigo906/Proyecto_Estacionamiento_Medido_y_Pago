@@ -39,14 +39,14 @@ class User_controller extends BaseController
 
         $data['roles'] = $this->rolModel->findAll();
         $data['titulo'] = "Registrar usuario";
-        return view('vistas_administrador/formulario_registro_usuario', $data);
+        return view('usuarios/crear_usuario', $data);
     }
 
     //tomara los datos del formulario y los guardara en la BD
     public function registrarUsuario(){
         
         $validation = service('validation');                  //inicializo la libreria de validacion
-        $validation->setRuleGroup('formValidation');          //establesco con que reglas se debe validar el formulario
+        $validation->setRuleGroup('formUsuarioValidation');          //establesco con que reglas se debe validar el formulario
         
         /*si hubo algun error redirecciono de nuevo al usuario al formulario con los datos que eran correctos y
         marcando los errores*/

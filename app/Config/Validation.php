@@ -41,12 +41,12 @@ class Validation
     // Rules
     //--------------------------------------------------------------------
 
-    public $formValidation = [
+    public $formUsuarioValidation = [
 
         'username' => [
             'rules' => 'required|is_unique[usuario.username]',
             'errors' => [
-                'required' => 'El campo "nombre de usuario" es obligatorio.' ,
+                'required' => 'Este campo es obligatorio' ,
                 'is_unique' => 'El usuario ya existe.' ,
              ],
         ],
@@ -54,21 +54,21 @@ class Validation
         'nombre' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'El campo "nombre" es obligatorio.' ,
+                'required' => 'Este campo es obligatorio' ,
              ],
         ],
 
         'apellido' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'El campo "apellido" es obligatorio.' ,
+                'required' => 'Este campo es obligatorio' ,
              ],
         ],
 
         'email' => [
             'rules' => 'required|valid_email',
             'errors' => [
-                'required' => 'El campo "email" es obligatorio.' ,
+                'required' => 'Este campo es obligatorio' ,
                 'valid_email' => 'Ingrese un email en un formato valido',
              ],
         ],
@@ -76,7 +76,7 @@ class Validation
         'dni' => [
             'rules' => 'required|numeric',
             'errors' => [
-                'required' => 'El campo "dni" es obligatorio.' ,
+                'required' => 'Este campo es obligatorio' ,
                 'numeric' => 'Verifique que su numero de dni no contenga letras',
              ],
         ],
@@ -84,7 +84,7 @@ class Validation
         'fecha_nacimiento' => [
             'rules' => 'required|valid_date[d/m/Y]',
             'errors' => [
-                'required' => 'El campo "fecha de nacimiento" es obligatorio.' ,
+                'required' => 'Este campo es obligatorio' ,
                 'valid_date' => 'Ingrese la fecha en formato dd/mm/yy',
              ],
         ],
@@ -99,5 +99,44 @@ class Validation
     ];
 
 
-    
+    public $formVehiculoValidation = [
+
+        'marca' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+             ],
+        ],
+
+        'patente' => [
+            'rules' => 'required|is_unique[vehiculo.patente]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_unique' => 'Esta patente ya se encuentra registrada en el sistema' ,
+             ],
+        ],
+
+    ];
+
+
+    //Tambien sirve para la venta de estadias por parte del vendedor
+    public $formEstacionarValidation = [
+
+        'patente' => [
+            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema' ,
+             ],
+        ],
+
+        'cant_horas' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'numeric' => 'Por favor solo ingrese números enteros' ,
+             ],
+        ],
+    ];
+
 }
