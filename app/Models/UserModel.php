@@ -41,4 +41,12 @@ class UserModel extends Model
         $this->db->query("INSERT INTO usuario (username, nombre, apellido, contraseña, email, dni, fecha_nacimiento, id_rol) " .
             "VALUES ('$username', '$nombre', '$apellido', '$contraseña','$email','$dni', '$fecha_nacimiento', '$rol')");
     }
+
+    public function obtenerDatosUsuario ($username){
+        $result = $this->db->query("SELECT * FROM usuario u JOIN cuenta c ON (u.id_usuario = c.id_usuario) WHERE u.username = '$username'");
+        
+        return $result->getResultArray();
+    }
+
+
 }

@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\VehiculoModel;
 
 
-
 class Vehiculo_controller extends BaseController
 {
     protected $vehiculoModel;
@@ -22,15 +21,16 @@ class Vehiculo_controller extends BaseController
     //mostrara el formulario de registro
     public function formularioRegistroVehiculo(){
 
+        $data['subtitulo'] = 'Registar vehiculo';
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        echo view('');
+        echo view('vehiculo/crear_vehiculo', $data);
         echo view('template/footer');
     }
 
     public function registrarVehiculo(){     
-
+        
         $validation = service('validation');                  
         $validation->setRuleGroup('formVehiculoValidation');    
         
@@ -42,7 +42,7 @@ class Vehiculo_controller extends BaseController
         $marca = $_POST['marca'];
         $modelo = $_POST['modelo'];
         
-        $this->vehiculoModel->registrarVehiculo($patente, $_SESSION['id_usuario'], $marca, $modelo);
+        $this->vehiculoModel->registrarVehiculo($patente, session('id_usuario'), $marca, $modelo);
     }
 
 }

@@ -42,6 +42,12 @@
             <span>Puntos de ventas</span></a>
     </li>
 
+     <!-- Nav Item - Registar vehiculo -->
+     <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('Vehiculo_controller/formularioRegistroVehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+            <span> Registar vehiculo </span></a>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\CuentaModel;
 use App\Models\EstadiaModel;
 use App\Models\VehiculoModel;
 use App\Models\ZonaModel;
@@ -35,7 +34,7 @@ class Estadia_controller extends BaseController{
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        $id_usuario =  $_SESSION['id_usuario'];
+        $id_usuario =  session('id_usuario');
         $id_vendedor = null;
         $id_zona = ['zona'];
         $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
@@ -78,7 +77,7 @@ class Estadia_controller extends BaseController{
         }
 
         $id_usuario =  null;
-        $id_vendedor = $_SESSION['id_usuario'];
+        $id_vendedor = session('id_usuario');
         $id_zona = ['zona'];
         $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
         $estado = $_POST['estado'];

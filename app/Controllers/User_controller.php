@@ -92,12 +92,4 @@ class User_controller extends BaseController
         return view('vistas_administrador/listado_usuarios', $data);
     }
 
-    public function formularioVehiculo()
-    {
-        echo view('template-form/formulario_head');
-        $data['titulo'] = "Crear vehiculo";
-        $data['subtitulo'] = "Registra un vehiculo!";
-        echo view('vehiculo/crear_vehiculo', $data);
-        echo view('template-form/formulario_footer');
-    }
 }
