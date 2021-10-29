@@ -23,8 +23,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    //public $baseURL = 'http://localhost/framework/public/';
-    public $baseURL = 'http://localhost:8080/Proyecto_Estacionamiento_Medido_y_Pago/public/';
+    public $baseURL = 'http://localhost/framework/public/';
+    /*public $baseURL = 'http://localhost:8080/Proyecto_Estacionamiento_Medido_y_Pago/public/';*/
 
 
     /**

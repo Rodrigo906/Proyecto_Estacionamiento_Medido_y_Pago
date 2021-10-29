@@ -38,7 +38,7 @@ class UserModel extends Model
     public function registrarUsuario($username, $nombre, $apellido, $email, $dni, $fecha_nacimiento, $contraseña, $rol)
     {
 
-        $this->db->query("INSERT INTO usuario (username, nombre, apellido, email, dni, fecha_nacimiento, contraseña, id_rol) " .
-            "VALUES ('$username', '$nombre', '$apellido', '$email','$dni', '$fecha_nacimiento', '$contraseña', '$rol')");
+        $this->db->query("INSERT INTO usuario (username, nombre, apellido, contraseña, email, dni, fecha_nacimiento, id_rol) " .
+            "VALUES ('$username', '$nombre', '$apellido', '$contraseña','$email','$dni', '$fecha_nacimiento', '$rol')");
     }
 }
