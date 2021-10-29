@@ -33,6 +33,11 @@ class VehiculoModel extends Model
             "VALUES ('$patente', '$id_usuario', '$marca', '$modelo')");
     }
 
+    public function obtenerVehiculo ($patente){
+        $consulta = $this->db->query('SELECT * FROM vehiculo WHERE patente = '. $patente);
+        return $consulta->getResultArray();
+    }
+
     
 
 
