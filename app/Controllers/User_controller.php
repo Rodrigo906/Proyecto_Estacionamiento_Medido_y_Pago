@@ -40,7 +40,8 @@ class User_controller extends BaseController
         $data['roles'] = $this->rolModel->findAll();
         $data['titulo'] = "Crear usuario";
         $data['subtitulo'] = "Crea una cuenta!";
-        echo view('template-form/formulario_head');
+        
+        echo view('template-form/formulario_head', $data);
         echo view('usuarios/crear_usuario', $data);
         echo view('template-form/formulario_footer');
     }
