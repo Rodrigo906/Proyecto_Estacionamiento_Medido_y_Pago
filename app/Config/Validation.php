@@ -24,6 +24,7 @@ class Validation
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
+        SaldoDisponibleRules::class,
     ];
 
     /**
@@ -118,8 +119,6 @@ class Validation
 
     ];
 
-
-    //Tambien sirve para la venta de estadias por parte del vendedor
     public $formEstacionarValidation = [
 
         'patente' => [
@@ -135,6 +134,40 @@ class Validation
             'errors' => [
                 'required' => 'Este campo es obligatorio' ,
                 'numeric' => 'Por favor solo ingrese números enteros' ,
+             ],
+        ],
+
+        'precio' => [
+            'rules' => 'numeric|tieneSaldo',
+            'errors' => [
+                'tieneSaldo' => 'Saldo insuficiente, recargue dinero en su cuenta por favor' ,
+                'numeric' => 'Solo se permiten valores numericos' ,
+             ],
+        ],
+    ];
+
+    public $formVenderEstadiaValidation = [
+
+        'patente' => [
+            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema' ,
+             ],
+        ],
+
+        'cant_horas' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'numeric' => 'Por favor solo ingrese números enteros' ,
+             ],
+        ],
+
+        'precio' => [
+            'rules' => 'numeric',
+            'errors' => [
+                'numeric' => 'Solo se permiten valores numericos' ,
              ],
         ],
     ];
