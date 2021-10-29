@@ -37,5 +37,14 @@
                     '$fecha_inicio', '$fecha_fin', '$precio')");
         }
 
+        //cierra una estadia indefinida
+        public function terminarEstadia ($id_vehiculo, $fecha_fin){
+                $this->db->query(" UPDATE estadia SET fecha_fin='$fecha_fin' .
+                        WHERE id_vehiculo= '$id_vehiculo' AND fecha_fin IS NULL");
+        }
+
+        
+
+
     
     }
