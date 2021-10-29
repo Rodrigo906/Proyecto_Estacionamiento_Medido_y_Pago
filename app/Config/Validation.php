@@ -40,4 +40,103 @@ class Validation
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+
+    public $formUsuarioValidation = [
+
+        'username' => [
+            'rules' => 'required|is_unique[usuario.username]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_unique' => 'El usuario ya existe.' ,
+             ],
+        ],
+
+        'nombre' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+             ],
+        ],
+
+        'apellido' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+             ],
+        ],
+
+        'email' => [
+            'rules' => 'required|valid_email',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'valid_email' => 'Ingrese un email en un formato valido',
+             ],
+        ],
+
+        'dni' => [
+            'rules' => 'required|numeric|exact_length[8]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'numeric' => 'Verifique que su numero de dni no contenga letras',
+                'exact_length' => 'Por favor ingrese su dni completo' ,
+             ],
+        ],
+
+        'fecha_nacimiento' => [
+            'rules' => 'valid_date[d/m/Y]',
+            'errors' => [
+                'valid_date' => 'Ingrese la fecha en formato dd/mm/yy',
+             ],
+        ],
+
+        'contraseña' => [
+            'rules' => 'required|matches[confirmacionContraseña]',
+            'errors' => [
+                'required' => 'Ingrese una contraseña por favor' ,
+                'matches' => 'La confirmacion de contraseña no es correcta, reintentelo por favor',
+             ],
+        ],
+    ];
+
+
+    public $formVehiculoValidation = [
+
+        'marca' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+             ],
+        ],
+
+        'patente' => [
+            'rules' => 'required|is_unique[vehiculo.patente]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_unique' => 'Esta patente ya se encuentra registrada en el sistema' ,
+             ],
+        ],
+
+    ];
+
+
+    //Tambien sirve para la venta de estadias por parte del vendedor
+    public $formEstacionarValidation = [
+
+        'patente' => [
+            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema' ,
+             ],
+        ],
+
+        'cant_horas' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'numeric' => 'Por favor solo ingrese números enteros' ,
+             ],
+        ],
+    ];
+
 }

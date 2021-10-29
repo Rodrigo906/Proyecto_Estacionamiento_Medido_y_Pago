@@ -21,14 +21,17 @@ class User_controller extends BaseController
 
 
     //retorna el listado de todos los usuarios del sistema
-    public function index()
-    {
+    public function index(){
+
+        $data['usuarios'] = $this->userModel->obtenerListadoUsuarios();
+        $data['titulo'] = "Listado de usuarios";
+
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        $data['usuarios'] = $this->userModel->obtenerListadoUsuarios();
-        echo view('usuarios/listado_usuarios', $data);
+        echo view('usuarios/listado_usuarios', $data);  
         echo view('template/footer');
+        
     }
 
     //Al llamarlo mostrara el formulario de registro de usuario
@@ -43,14 +46,19 @@ class User_controller extends BaseController
     }
 
     //tomara los datos del formulario y los guardara en la BD
-    public function registrarUsuario()
-    {
+  
+    public function registrarUsuario(){
+        
+        $validation = service('validation');                  //inicializo la libreria de validacion
+        $validation->setRuleGroup('formUsuarioValidation');          //establesco con que reglas se debe validar el formulario
+        
+        /*si hubo algun error redirecciono de nuevo al usuario al formulario con los datos que eran correctos y
+        marcando los errores*/
+        if(!$validation->withRequest($this->request)->run()){
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
 
-        /* PARA PRUEBAS
-        $valor1 = $_POST['valor1'];
-        $valor2 = $_POST['valor2'];
-        echo $valor1 ."---". $valor2;
-        */
+
         $username = $_POST['username'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];

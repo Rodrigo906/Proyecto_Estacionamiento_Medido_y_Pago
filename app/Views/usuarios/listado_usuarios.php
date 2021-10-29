@@ -5,7 +5,9 @@
 <div class="contenedor_tabla" style="margin: 20px;">
 
     <div class="content-icono">
+      
         <a href="<?= base_url('User_controller/MostrarFormularioRegistro') ?>" data-toggle="tooltip" title="Agregar">
+
             <i class="bi bi-plus-circle-fill" style="font-size: 2rem;"></i>
         </a>
 
