@@ -40,10 +40,13 @@ class User_controller extends BaseController
         $data['roles'] = $this->rolModel->findAll();
         $data['titulo'] = "Crear usuario";
         $data['subtitulo'] = "Crea una cuenta!";
+        echo view('template-form/formulario_head');
         echo view('usuarios/crear_usuario', $data);
+        echo view('template-form/formulario_footer');
     }
 
     //tomara los datos del formulario y los guardara en la BD
+  
     public function registrarUsuario(){
         
         $validation = service('validation');                  //inicializo la libreria de validacion
@@ -55,6 +58,7 @@ class User_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
+
         $username = $_POST['username'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
@@ -62,7 +66,7 @@ class User_controller extends BaseController
         $dni = $_POST['dni'];
         $fecha_nacimiento = $_POST['fecha_nacimiento'];
         $contraseña = $_POST['contraseña'];
-        $rol = $this->rolModel->find($_POST['rol']);
+        $rol = $_POST['rol'];
 
         $this->userModel->registrarUsuario(
             $username,
@@ -85,5 +89,14 @@ class User_controller extends BaseController
         $data['usuarios'] = $this->userModel->obtenerListadoUsuaurios();
 
         return view('vistas_administrador/listado_usuarios', $data);
+    }
+
+    public function formularioVehiculo()
+    {
+        echo view('template-form/formulario_head');
+        $data['titulo'] = "Crear vehiculo";
+        $data['subtitulo'] = "Registra un vehiculo!";
+        echo view('vehiculo/crear_vehiculo', $data);
+        echo view('template-form/formulario_footer');
     }
 }
