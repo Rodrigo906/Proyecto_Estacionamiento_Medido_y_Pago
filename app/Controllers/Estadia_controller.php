@@ -20,8 +20,15 @@ class Estadia_controller extends BaseController{
         $this->vehiculoModel = new VehiculoModel();
     }
 
+    //formulario para que el cliente estacione su vehiculo
     public function mostrarFormularioEstacionamiento(){
-        $data['zonas'] = $this->zonaModel->findAll();
+
+        $data['zonas'] = $this->zonaModel->findAll(); 
+    }
+
+    //vista de venta de estadia por parte del vendedor
+    public function mostrarFormularioVentaEstadia (){
+
     }
 
     //Registro desde el cliente
