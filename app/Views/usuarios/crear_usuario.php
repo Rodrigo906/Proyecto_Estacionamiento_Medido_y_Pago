@@ -1,6 +1,6 @@
    <div class="container">
 
-       <div class="card o-hidden border-0 shadow-lg my-5">
+       <div class="card o-hidden border-0 shadow-lg my-2">
            <div class="card-body p-0 ">
                <!-- Nested Row within Card Body -->
                <div class="row justify-content-center">
@@ -13,30 +13,35 @@
                            <form class="user" method="POST" action="<?= base_url('User_controller/registrarUsuario') ?>">
                                <div class="form-group row">
                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <input type="text" class="form-control form-control-user" id="nombre" placeholder="Nombre" name="nombre" required>
-                                   </div>
+                                       <input type="text" class="form-control form-control-user" id="nombre" placeholder="Nombre" name="nombre" value="<?= old('nombre')?>" required>
+                                       <p class="text-danger"> <?=session('errors.nombre') ?> </p>
+                                    </div>
                                    <div class="col-sm-6">
-                                       <input type="text" class="form-control form-control-user" id="apellido" placeholder="Apellido" name="apellido" required>
-                                   </div>
+                                       <input type="text" class="form-control form-control-user" id="apellido" placeholder="Apellido" name="apellido" value="<?= old('apellido')?>" required>
+                                       <p class="text-danger"> <?=session('errors.apellido') ?> </p>
+                                    </div>
                                </div>
 
                                <div class="form-group">
-                                   <input type="text" class="form-control form-control-user" id="dni" placeholder="Dni" name="dni" required>
+                                   <input type="number" class="form-control form-control-user" id="dni" placeholder="Dni" name="dni" value="<?= old('dni')?>"  required>
+                                   <p class="text-danger"> <?=session('errors.dni') ?> </p>
                                </div>
 
 
                                <div class="form-group row">
                                    <div class="col-sm-5 mb-4 mb-sm-0">
-                                       <label class="classLabel" style="margin-top: 7%; margin-left: 6%">Fecha de nacimiento</label>
+                                       <label class="classLabel" style="margin-top: 7%; margin-left: 6%">Fecha de nacimiento: </label>
                                    </div>
                                    <div class="col-sm-7">
-                                       <input type="date" class="form-control form-control-user" id="fechaNacimiento" name="fecha_nacimiento">
-                                   </div>
+                                       <input type="date" class="form-control form-control-user" id="fechaNacimiento" name="fecha_nacimiento" value="<?= old('fecha_nacimiento')?>" required>
+                                       <p class="text-danger"> <?=session('errors.fecha_nacimiento') ?> </p>
+                                    </div>
                                </div>
 
                                <div class="form-group">
-                                   <input type="text" class="form-control form-control-user" id="username" placeholder="Nombre de usuario" name="username" required>
-                               </div>
+                                   <input type="text" class="form-control form-control-user" id="username" placeholder="Nombre de usuario" name="username" value="<?= old('username')?>" required>
+                                   <p class="text-danger"> <?=session('errors.username') ?> </p>
+                                </div>
 
                                <div class="form-group row">
                                    <div class="col-sm-6 mb-3 mb-sm-1">
@@ -55,13 +60,15 @@
                                </div>
 
                                <div class="form-group">
-                                   <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email" required>
-                               </div>
+                                   <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email"  value="<?= old('email')?>" required>
+                                   <p class="text-danger"> <?=session('errors.email') ?> </p>
+                                </div>
 
                                <div class="form-group row">
                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña" name="contraseña" required>
-                                   </div>
+                                       <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña" name="contraseña" value="<?= old('contraseña')?>" required>
+                                       <p class="text-danger"> <?=session('errors.contraseña') ?> </p>
+                                    </div>
                                    <div class="col-sm-6">
                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Confirmar contraseña" name="confirmarContraseña" required>
                                    </div>
