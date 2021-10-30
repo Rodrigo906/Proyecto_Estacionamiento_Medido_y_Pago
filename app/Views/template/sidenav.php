@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Inicio -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('Inicio_controller/index') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?= base_url('Inicio_controller/inicio') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Inicio</span></a>
     </li>
 
