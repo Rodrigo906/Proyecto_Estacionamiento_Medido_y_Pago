@@ -173,4 +173,27 @@ class Validation
         ],
     ];
 
+    public $formLoginValidation = [
+
+        'username' => [
+            'rules' => 'required|is_not_unique[usuario.username]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'is_not_unique' => 'El nombre de usuario ingresado no existe' ,
+             ],
+        ],
+
+        'contraseña' => [
+            'rules' => 'required|if_exist',
+            'errors' => [
+                'required' => 'Este campo es obligatorio' ,
+                'if_exist' => 'Ingrese su contraseña por favor' ,
+
+             ],
+        ],
+    
+
+
+    ];
+
 }

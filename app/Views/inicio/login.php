@@ -14,8 +14,11 @@
     <h1>Loging</h1>
     <p>Username</p>
     <input type="text" name="username"> 
+    <p class="text-danger"> <?= session('errors.username') ?> </p>
+
     <p>Contraseña</p>
     <input type="text" name="contraseña">
+    <p class="text-danger"> <?= session('errors.contraseña') ?> </p>
     <button type="submit"> Ingresar </button>
 
 </form>

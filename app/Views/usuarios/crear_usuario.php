@@ -43,9 +43,10 @@
                                    <p class="text-danger"> <?=session('errors.username') ?> </p>
                                 </div>
 
+                         
                                <div class="form-group row">
                                    <div class="col-sm-6 mb-3 mb-sm-1">
-                                       <select class="classSelect" style="font-size: .8rem;border-radius: 10rem;width: 100%;height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem;background-color: #fff;color: #6e707e;border: 1px solid #d1d3e2;" name="rol" required>
+                                       <select class="classSelect" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="rol" required>
                                            <option value="" disabled selected>Seleccione un rol</option>
                                            <?php
 
@@ -58,6 +59,7 @@
                                        </select>
                                    </div>
                                </div>
+                             
 
                                <div class="form-group">
                                    <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email"  value="<?= old('email')?>" required>

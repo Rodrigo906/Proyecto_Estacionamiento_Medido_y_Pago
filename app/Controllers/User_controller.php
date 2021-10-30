@@ -37,13 +37,28 @@ class User_controller extends BaseController
     //Al llamarlo mostrara el formulario de registro de usuario
     public function MostrarFormularioRegistro()
     {
-        $data['roles'] = $this->rolModel->findAll();
+       
         $data['titulo'] = "Crear usuario";
-        $data['subtitulo'] = "Crea una cuenta!";
+        $data['subtitulo'] = "¡Crea tu cuenta!";
+
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        //echo view('template-form/formulario_head', $data);
+        if(session('rol') == "Cliente"){
+            echo view('usuarios/crear_usuario_cliente', $data);
+        }
+        else if(session('rol') == "Administrador"){
+            
+            $data['roles'] = $this->rolModel->findAll();
+            echo view('usuarios/crear_usuario', $data);
+        }
+    
+        //echo view('template-form/formulario_footer');
+        echo view('template/footer');
+
+        /* Que hacen de diferente las vistas formulario head y footer??*/
         
-        echo view('template-form/formulario_head', $data);
-        echo view('usuarios/crear_usuario', $data);
-        echo view('template-form/formulario_footer');
     }
 
     //tomara los datos del formulario y los guardara en la BD
