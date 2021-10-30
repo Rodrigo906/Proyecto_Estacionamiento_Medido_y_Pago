@@ -51,6 +51,8 @@ class Estadia_controller extends BaseController{
 
         $cantHoras = $_POST['cant_horas'];
         $indefinido = $_POST['indefinido'];
+        
+        //indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
         if($indefinido){
             $fecha_fin = null;
         }
