@@ -34,6 +34,77 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Inicio_controller::index');
 
 
+/* Aqui se definen las rutas a las cuales tiene acceso cada rol*/
+
+//ADMINISTRADOR
+$routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function($routes){
+
+    $routes->get('listado-usuarios', 'User_controller::index');
+
+    $routes->get('alta-usuario', 'User_controller::MostrarFormularioRegistro');
+    $routes->post('registrar-usuario', 'User_controller::registrarUsuario');
+
+    /* SIN IMPLEMENTAR AUN
+    $routes->delete('eliminar-usuario/(:num)', 'User_controller::  ');
+    $routes->get('editar-usuario', 'User_controller::  ');
+    $routes->get('modificar-zona', 'Zona_controller::  ');
+    $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::  ');
+    $routes->get('listar-multas', 'Infraccion_controller::  ');
+    $routes->get('mi-perfil', 'User_controller::  ');
+    $routes->get('editar-mi-perfil', 'User_controller:: ');
+    */
+
+});
+
+//CLIENTE
+$routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function($routes){
+
+    $routes->get('registrarme', 'User_controller::MostrarFormularioRegistro');
+    $routes->post('registrar-cliente', 'User_controller::registrarUsuario');
+
+    $routes->get('registro-auto', 'Vehiculo_controller::formularioRegistroVehiculo');
+    $routes->post('registrar-auto', 'Vehiculo_controller::registrarVehiculo');
+
+    $routes->get('estacionar-vehiculo', 'Estadia_controller::mostrarFormularioEstacionamiento');
+    $routes->post('registrar-estacionamiento', 'Estadia_controller::registrarEstadia');
+    $routes->get('des_estacionar-vehiculo', 'Estadia_controller::desEstacionar');
+    
+    /* SIN IMPLEMENTAR AUN
+    $routes->get('cargar-saldo', 'User_controller::  ');
+    $routes->get('pagar-estadias-pendientes', 'Estadia_controller::  ');
+    $routes->get('mi-perfil', 'User_controller::  ');
+    $routes->get('editar-mi-perfil', 'User_controller:: ');
+    */
+
+});
+
+//VENDEDOR
+$routes->group('/', ['filter' => 'Filter_permisos:Vendedor'], function($routes){
+
+    $routes->get('formulario-venta', 'Estadia_controller::mostrarFormularioVentaEstadia');
+    $routes->post('registrar-venta', 'Estadia_controller::registrarEstadia');
+
+    /* SIN IMPLEMENTAR AUN
+    $routes->get('listar-ventas', 'Estadia_controller::  ');
+    $routes->get('mi-perfil', 'User_controller::  ');
+    $routes->get('editar-mi-perfil', 'User_controller:: ');
+    */
+
+
+});
+
+//INSPECTOR
+$routes->group('/', ['filter' => 'Filter_permisos:Inspector'], function($routes){
+    
+      /* SIN IMPLEMENTAR AUN
+    $routes->get('consultar-estacionamiento', 'Vehiculo_controller::  ');
+    $routes->get('alta-infraccion', 'Infraccion_controller::  ');
+    $routes->get('mi-perfil', 'User_controller::  ');
+    $routes->get('editar-mi-perfil', 'User_controller:: ');
+    */
+});
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

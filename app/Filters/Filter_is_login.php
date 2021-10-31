@@ -2,17 +2,16 @@
 
 namespace App\Filters;
 
-use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class Filter_acceso implements FilterInterface
+class Filter_is_login implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if(!in_array(session('rol'), $arguments)){
-            throw PageNotFoundException::forPageNotFound();
+        if (!session('estaLogueado')) {
+            return redirect()->to('Inicio_controller')->with('error_login', 'Primero debe loguearse'); 
         }
     }
 

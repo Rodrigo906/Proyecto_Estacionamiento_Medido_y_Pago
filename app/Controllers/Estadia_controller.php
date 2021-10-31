@@ -116,6 +116,9 @@ class Estadia_controller extends BaseController{
         );
     }
 
+    public function desEstacionar(){
+
+    }
 
 
 

@@ -106,5 +106,4 @@ class User_controller extends BaseController
 
         return view('vistas_administrador/listado_usuarios', $data);
     }
-
 }
