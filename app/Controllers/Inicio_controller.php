@@ -28,12 +28,14 @@ class Inicio_controller extends BaseController
         $validation = service('validation');
         $validation->setRuleGroup('formLoginValidation');
 
-        if ($validation->withRequest($this->request)->run()) {
+        if ($validation->withRequest($this->request)->run()) 
+        {
 
             $username = $_POST['username'];
             $usuario = $this->userModel->obtenerDatosUsuario($username);
 
-            if ($_POST['contraseña'] == $usuario[0]['contraseña']) {
+            if ($_POST['contraseña'] == $usuario[0]['contraseña']) 
+            {
                 $rol = $this->rolModel->find($usuario[0]['id_rol']);
                 $datosLogin = [
                     'id_usuario' => $usuario[0]['id_usuario'],
@@ -49,8 +51,8 @@ class Inicio_controller extends BaseController
             }
             else
                 return redirect()->back()->withInput()->with('contraseña', 'Contraseña incorrecta');
-            }
-        } else
+        }
+         else
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
     }
 
