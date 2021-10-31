@@ -36,14 +36,19 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4" >Bienvenido!</h1>
                                     </div>
+
+                                    <p class="text-danger"> <?=session('error_login') ?> </p>
+
                                     <form class="user" method="POST" action="<?= base_url('Inicio_controller/loguear') ?>">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="username" aria-describedby="username" placeholder="Username" name="username" required>
+                                            <input type="text" class="form-control form-control-user" id="username" aria-describedby="username" placeholder="username" name="username" value="<?= old('username')?>" required>
+                                            <p class="text-danger"> <?= session('errors.username')?> </p>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña" name="contraseña" required>
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="contraseña" name="contraseña" required>
+                                            <p class="text-danger"> <?= session('contraseña')?> </p>
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">
                                             Aceptar

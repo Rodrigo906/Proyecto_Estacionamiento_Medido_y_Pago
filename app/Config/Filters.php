@@ -35,7 +35,7 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             // 'csrf',
-            'Filter_is_login' => ['except' => 'Inicio_controller'] ,
+            'Filter_is_login' => ['except' => ['Inicio_controller', 'Inicio_controller/loguear']] ,
         ],
         'after' => [
             'toolbar',
