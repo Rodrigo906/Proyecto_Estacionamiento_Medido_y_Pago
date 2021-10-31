@@ -25,56 +25,42 @@ class Inicio_controller extends BaseController
     //Guarda el estado del usuario y lo redirige al home correspondiente
     public function loguear(){
 
-
         $validation = service('validation');                 
         $validation->setRuleGroup('formLoginValidation');         
        
-        if(!$validation->withRequest($this->request)->run()){
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-        }
+        if($validation->withRequest($this->request)->run()){
 
-       $username = $_POST['username'];
+            $username = $_POST['username'];
+            $usuario = $this->userModel->obtenerDatosUsuario($username);
 
-       $filas = $this->userModel->obtenerDatosUsuario($username);
+            if($_POST['contraseña'] == $usuario[0]['contraseña']){
 
-       foreach ($filas as $fila){
-        $id_usuario = $fila['id_usuario'];
-        $id_cuenta = $fila['id_cuenta'];
-        $contraseña = $fila['contraseña'];
-        $rol = $this->rolModel->find($fila['id_rol']);
-        }
-      
-       if (!empty($filas) && $_POST['contraseña'] == $contraseña){
+                $rol = $this->rolModel->find($usuario[0]['id_rol']);
             
-            $datosLogin = [
-                'id_usuario' => $id_usuario , 
-                'id_cuenta' => $id_cuenta ,
-                'username' => $username ,
-                'rol' => $rol['nombre'],
-            ]; 
+                $datosLogin = [
+                    'id_usuario' => $usuario[0]['id_usuario'] , 
+                    'id_cuenta' => $usuario[0]['id_cuenta'] ,
+                    'username' => $username ,
+                    'rol' => $rol['nombre'],
+                ]; 
             
                 $session = session();
                 $session->set($datosLogin);
+                return redirect()->to('Inicio_controller/inicio'); 
                 
-                echo view('template/head');
-                echo view('template/sidenav');
-                echo view('template/layout');
-                echo view('inicio/inicio');
-                echo view('template/footer');
-           
-       }
-       else{
-        echo 'contraseña incorrecta';
-        echo view('inicio/login'); 
-   }
-     
+            }
+            else
+                return redirect()->back()->withInput()->with('contraseña', 'Contraseña incorrecta');
+        }
+        else
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
      
     }
 
     public function cerrarSesion (){
 
             session()->session_destroy;
-            echo view('inicio/login'); 
+            return redirect()->to('Inicio_controller'); 
     }   
 
     public function inicio(){

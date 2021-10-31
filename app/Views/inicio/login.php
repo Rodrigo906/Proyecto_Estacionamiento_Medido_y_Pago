@@ -19,6 +19,7 @@
     <p>Contraseña</p>
     <input type="text" name="contraseña">
     <p class="text-danger"> <?= session('errors.contraseña') ?> </p>
+    <p class="text-danger"> <?= session('contraseña') ?> </p>
     <button type="submit"> Ingresar </button>
 
 </form>

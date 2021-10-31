@@ -1,6 +1,8 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
+    <!-- Se puede usar style="display: none" para ocultar un item-->
+
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -19,31 +21,31 @@
     </li>
 
     <!-- Nav Item - Usuarios -->
-    <li class="nav-item">
+    <li class="nav-item" id="usuarios">
         <a class="nav-link" href="<?php echo base_url('User_controller/index') ?>" <i class=" fas fa-fw fa-chart-area"></i>
-            <span>Usuarios</span></a>
+            <span> Usuarios </span></a>
     </li>
 
     <!-- Nav Item - Vehiculos estacionados -->
-    <li class="nav-item">
+    <li class="nav-item" id="vehiculos_estacionados">
         <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Vehiculos estacionados</span></a>
     </li>
 
     <!-- Nav Item - Multas -->
-    <li class="nav-item">
+    <li class="nav-item" id="multas">
         <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Multas</span></a>
     </li>
 
     <!-- Nav Item - Puntos de ventas -->
-    <li class="nav-item">
+    <li class="nav-item" id="puntos_venta">
         <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Puntos de ventas</span></a>
     </li>
 
      <!-- Nav Item - Registar vehiculo -->
-     <li class="nav-item">
+     <li class="nav-item" id="registrar_vehiculo">
         <a class="nav-link" href="<?= base_url('Vehiculo_controller/formularioRegistroVehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> Registar vehiculo </span></a>
     </li>

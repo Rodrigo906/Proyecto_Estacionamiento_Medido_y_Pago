@@ -6,7 +6,7 @@ use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
-use App\Models\SaldoDisponibleRules;
+use App\Models\MisReglas;
 
 class Validation
 {
@@ -25,7 +25,7 @@ class Validation
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
-        //SaldoDisponibleRules::class,
+        MisReglas::class,
     ];
 
     /**
@@ -184,10 +184,9 @@ class Validation
         ],
 
         'contraseña' => [
-            'rules' => 'required|if_exist',
+            'rules' => 'required',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'if_exist' => 'Ingrese su contraseña por favor' ,
+                'required' => 'Este campo es obligatorio' ,             
 
              ],
         ],
