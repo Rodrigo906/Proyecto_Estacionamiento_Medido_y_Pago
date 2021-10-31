@@ -6,6 +6,7 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
+use App\Filters\Filter_acceso;
 
 class Filters extends BaseConfig
 {
@@ -19,6 +20,7 @@ class Filters extends BaseConfig
         'csrf'     => CSRF::class,
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
+        'my_filtro' => Filter_acceso::class,
     ];
 
     /**
@@ -31,6 +33,7 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             // 'csrf',
+            'my_filtro'=> ['except' => 'Inicio_controller'] ,
         ],
         'after' => [
             'toolbar',
