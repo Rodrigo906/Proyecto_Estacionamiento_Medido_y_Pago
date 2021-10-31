@@ -40,11 +40,14 @@ class Inicio_controller extends BaseController
                     'id_cuenta' => $usuario[0]['id_cuenta'],
                     'username' => $username,
                     'rol' => $rol['nombre'],
-                ];
+                    'estaLogueado' => true,
+                ]; 
+            
                 $session = session();
                 $session->set($datosLogin);
-                return redirect()->to('Inicio_controller/inicio');
-            } else {
+                return redirect()->to('Inicio_controller/inicio'); 
+            }
+            else
                 return redirect()->back()->withInput()->with('contraseña', 'Contraseña incorrecta');
             }
         } else
@@ -53,10 +56,10 @@ class Inicio_controller extends BaseController
 
     public function cerrarSesion()
     {
+        session()->destroy(); 
+        return redirect()->to('Inicio_controller'); 
+    }   
 
-        session()->session_destroy;
-        return redirect()->to('Inicio_controller');
-    }
 
     public function inicio()
     {
