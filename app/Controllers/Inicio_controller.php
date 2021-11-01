@@ -72,4 +72,13 @@ class Inicio_controller extends BaseController
         echo view('inicio/inicio');
         echo view('template/footer');
     }
+
+
+    public function registrar_login (){
+        
+        $data['subtitulo'] = 'Registrar';
+        echo view('template/head');
+        echo view('usuarios/crear_usuario_cliente', $data);
+        echo view('template/footer');
+    }
 }

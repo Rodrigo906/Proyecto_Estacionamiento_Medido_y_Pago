@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CuentaModel;
 use App\Models\EstadiaModel;
 use App\Models\VehiculoModel;
 use App\Models\ZonaModel;
@@ -12,12 +13,14 @@ class Estadia_controller extends BaseController{
     protected $estadiaModel;
     protected $zonaModel;
     protected $vehiculoModel;
+    protected $cuentaModel;
 
     public function __construct(){
 
         $this->estadiaModel = new EstadiaModel();
         $this->zonaModel = new ZonaModel();
         $this->vehiculoModel = new VehiculoModel();
+        $this->cuentaModel = new CuentaModel();
     }
 
     //formulario para que el cliente estacione su vehiculo
@@ -43,12 +46,10 @@ class Estadia_controller extends BaseController{
 
         $id_usuario =  session('id_usuario');
         $id_vendedor = null;
-        $id_zona = ['zona'];
-        $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
-        $estado = $_POST['estado'];
-        $estado_pago = $_POST['estado_pago'];
+        $id_zona = $_POST['zona'];
+        $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']); 
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
-
+        $estado = "Activa";
         $cantHoras = $_POST['cant_horas'];
         $indefinido = $_POST['indefinido'];
         
@@ -56,10 +57,18 @@ class Estadia_controller extends BaseController{
         if($indefinido){
             $fecha_fin = null;
         }
-        else
+        else{
             $fecha_fin = new Time('now +'.$cantHoras.'hours', 'America/Argentina/Buenos_Aires');
+        }
 
-        $precio = $_POST['precio'];
+        if($this->zonaModel->esHorarioCobro($id_zona)){
+            $precio = $_POST['precio'];
+            $estado_pago = $this->cuentaModel->estadoPago($precio);
+        }
+        else{
+            $precio = 0;
+            $estado_pago = "Pagado";
+        }
 
         $this->EstadiaModel->registrarEstadia(
             $id_usuario,
@@ -79,7 +88,7 @@ class Estadia_controller extends BaseController{
     public function VenderEstadia (){
 
         $validation = service('validation');                  
-        $validation->setRuleGroup('formVenderEstadiaValidation');    
+        $validation->setRuleGroup('formEstacionarValidation');    
         
         if(!$validation->withRequest($this->request)->run()){
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
@@ -89,8 +98,8 @@ class Estadia_controller extends BaseController{
         $id_vendedor = session('id_usuario');
         $id_zona = ['zona'];
         $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
-        $estado = $_POST['estado'];
-        $estado_pago = $_POST['estado_pago'];
+        $estado = "Activa";
+        $estado_pago = "Pagado";
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
 
         $cantHoras = $_POST['cant_horas'];

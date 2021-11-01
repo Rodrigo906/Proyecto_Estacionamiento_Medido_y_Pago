@@ -3,7 +3,7 @@
 
 <div class="container">
 
-<div class="card o-hidden border-0 shadow-lg my-2">
+<div class="card o-hidden border-0 shadow-lg my-1" style="margin-left: -15px;">
     <div class="card-body p-0 ">
         <!-- Nested Row within Card Body -->
         <div class="row justify-content-center">

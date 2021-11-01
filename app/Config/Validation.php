@@ -6,7 +6,6 @@ use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
-use App\Models\MisReglas;
 
 class Validation
 {
@@ -25,7 +24,6 @@ class Validation
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
-        MisReglas::class,
     ];
 
     /**
@@ -139,39 +137,13 @@ class Validation
         ],
 
         'precio' => [
-            'rules' => 'numeric|tieneSaldo',
-            'errors' => [
-                'tieneSaldo' => 'Saldo insuficiente, recargue dinero en su cuenta por favor' ,
-                'numeric' => 'Solo se permiten valores numericos' ,
-             ],
-        ],
-    ];
-
-    public $formVenderEstadiaValidation = [
-
-        'patente' => [
-            'rules' => 'required|is_not_unique[vehiculo.patente]',
-            'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema' ,
-             ],
-        ],
-
-        'cant_horas' => [
-            'rules' => 'required|numeric',
-            'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'numeric' => 'Por favor solo ingrese números enteros' ,
-             ],
-        ],
-
-        'precio' => [
             'rules' => 'numeric',
             'errors' => [
                 'numeric' => 'Solo se permiten valores numericos' ,
              ],
         ],
     ];
+
 
     public $formLoginValidation = [
 

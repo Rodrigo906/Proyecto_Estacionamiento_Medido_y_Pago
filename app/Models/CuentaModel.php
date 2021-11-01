@@ -26,4 +26,14 @@ class CuentaModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
+
+    public function estadoPago($costo)
+    {
+        $cuenta = $this->find(session('id_cuenta'));
+
+        if ($cuenta['saldo'] - $costo < 0) {
+            return "Pendiente";
+        }
+        return "Pagado";
+    }
 }
