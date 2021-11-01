@@ -46,7 +46,6 @@ class Estadia_controller extends BaseController{
 
         $id_usuario =  session('id_usuario');
         $id_vendedor = null;
-        $id_zona = $_POST['zona'];
         $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']); 
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
         $estado = "Activa";
@@ -61,8 +60,11 @@ class Estadia_controller extends BaseController{
             $fecha_fin = new Time('now +'.$cantHoras.'hours', 'America/Argentina/Buenos_Aires');
         }
 
+        $id_zona = $_POST['zona'];
+
         if($this->zonaModel->esHorarioCobro($id_zona)){
-            $precio = $_POST['precio'];
+            $zona = $this->zonaModel->find($id_zona);
+            $precio = $zona[0]['precio'];
             $estado_pago = $this->cuentaModel->estadoPago($precio);
         }
         else{
@@ -81,6 +83,8 @@ class Estadia_controller extends BaseController{
             $fecha_fin,
             $precio,
         );
+
+        session()->set(['estadia' => 'id_vehiculo']);
     }
 
     /*Lo unico que cambia del anterior es que ahora solo se guarda el id del vendedor y no del usuario
@@ -96,12 +100,10 @@ class Estadia_controller extends BaseController{
 
         $id_usuario =  null;
         $id_vendedor = session('id_usuario');
-        $id_zona = ['zona'];
         $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
         $estado = "Activa";
         $estado_pago = "Pagado";
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
-
         $cantHoras = $_POST['cant_horas'];
         $indefinido = $_POST['indefinido'];
         if($indefinido){
@@ -110,7 +112,18 @@ class Estadia_controller extends BaseController{
         else
             $fecha_fin = new Time('now +'.$cantHoras.'hours', 'America/Argentina/Buenos_Aires');
 
-        $result = $this->zonaModel->find($id_zona);
+        $id_zona = ['zona'];
+        if($this->zonaModel->esHorarioCobro($id_zona)){
+
+            $zona = $this->zonaModel->find($id_zona);
+            $precio = $zona[0]['precio'];
+            $estado_pago = $this->cuentaModel->estadoPago($precio);
+        }
+        else{
+
+            $precio = 0;
+            $estado_pago = "Pagado";
+            }
 
         $this->EstadiaModel->registrarEstadia(
             $id_usuario,
@@ -121,11 +134,16 @@ class Estadia_controller extends BaseController{
             $estado_pago,
             $fecha_inicio,
             $fecha_fin,
-            $result['precio'],
+            $precio,
         );
     }
 
     public function desEstacionar(){
+
+        if(session('id_vehiculo') != null){
+            $this->estadiaModel->terminarEstadia(session('id_vehiculo'), new Time('now', 'America/Argentina/Buenos_Aires'));
+            session()->remove('id_vehiculo');
+        }
 
     }
 

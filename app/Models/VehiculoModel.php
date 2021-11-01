@@ -38,6 +38,14 @@ class VehiculoModel extends Model
         return $consulta->getResultArray();
     }
 
+    public function estaEstacionado ($id_vehiculo){
+        $estadia = $this->db->query("SELECT * FROM estadia e WHERE e.id_vehiculo = '$id_vehiculo' AND fecha_fin IS NULL");
+        if ($estadia != null){
+            return true;
+        }
+        return false;
+    }
+
     
 
 
