@@ -46,55 +46,55 @@ class Validation
         'username' => [
             'rules' => 'required|is_unique[usuario.username]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'is_unique' => 'El usuario ya existe.' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+                'is_unique' => 'El usuario ya existe.',
+            ],
         ],
 
         'nombre' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+            ],
         ],
 
         'apellido' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+            ],
         ],
 
         'email' => [
             'rules' => 'required|valid_email',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
+                'required' => 'Este campo es obligatorio',
                 'valid_email' => 'Ingrese un email en un formato valido',
-             ],
+            ],
         ],
 
         'dni' => [
             'rules' => 'required|numeric|exact_length[8]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
+                'required' => 'Este campo es obligatorio',
                 'numeric' => 'Verifique que su numero de dni no contenga letras',
-                'exact_length' => 'Por favor ingrese su dni completo' ,
-             ],
+                'exact_length' => 'Por favor ingrese su dni completo',
+            ],
         ],
 
         'fecha_nacimiento' => [
             'rules' => 'valid_date[d/m/Y]',
             'errors' => [
                 'valid_date' => 'Ingrese la fecha en formato dd/mm/yy',
-             ],
+            ],
         ],
 
         'contraseña' => [
             'rules' => 'required|matches[confirmacionContraseña]',
             'errors' => [
-                'required' => 'Ingrese una contraseña por favor' ,
+                'required' => 'Ingrese una contraseña por favor',
                 'matches' => 'La confirmacion de contraseña no es correcta, reintentelo por favor',
-             ],
+            ],
         ],
     ];
 
@@ -104,16 +104,16 @@ class Validation
         'marca' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+            ],
         ],
 
         'patente' => [
             'rules' => 'required|is_unique[vehiculo.patente]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'is_unique' => 'Esta patente ya se encuentra registrada en el sistema' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+                'is_unique' => 'Esta patente ya se encuentra registrada en el sistema',
+            ],
         ],
 
     ];
@@ -123,25 +123,35 @@ class Validation
         'patente' => [
             'rules' => 'required|is_not_unique[vehiculo.patente]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+            ],
         ],
 
         'cant_horas' => [
             'rules' => 'required|numeric',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'numeric' => 'Por favor solo ingrese números enteros' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+                'numeric' => 'Por favor solo ingrese números enteros',
+            ],
         ],
 
         'precio' => [
             'rules' => 'numeric',
             'errors' => [
-                'numeric' => 'Solo se permiten valores numericos' ,
-             ],
+                'numeric' => 'Solo se permiten valores numericos',
+            ],
         ],
+    ];
+
+    public $formVentaEstadiaValidation = [
+        'patente' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio...',
+            ]
+        ],
+
     ];
 
 
@@ -150,21 +160,20 @@ class Validation
         'username' => [
             'rules' => 'required|is_not_unique[usuario.username]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
-                'is_not_unique' => 'El nombre de usuario ingresado no existe' ,
-             ],
+                'required' => 'Este campo es obligatorio',
+                'is_not_unique' => 'El nombre de usuario ingresado no existe',
+            ],
         ],
 
         'contraseña' => [
             'rules' => 'required',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,             
+                'required' => 'Este campo es obligatorio',
 
-             ],
+            ],
         ],
-    
+
 
 
     ];
-
 }
