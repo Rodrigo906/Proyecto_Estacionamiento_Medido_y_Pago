@@ -20,7 +20,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <select style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona">
+                                        <select required style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona">
                                             <option value='' disabled selected>
                                                 Seleccione una zona
                                             </option>
@@ -34,10 +34,11 @@
                                             <?php };
                                             ?>
                                         </select>
+                                        <p class="text-danger"> <?= session('errors.zona') ?> </p>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="number" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas" value="<?= old('cant_horas') ?>">
+                                        <input type="number" step=".1" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas" value="<?= old('cant_horas') ?>">
                                         <p class="text-danger"> <?= session('errors.cant_horas') ?> </p>
                                     </div>
 
