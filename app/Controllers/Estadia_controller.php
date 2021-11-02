@@ -28,8 +28,11 @@ class Estadia_controller extends BaseController
     //formulario para que el cliente estacione su vehiculo
     public function mostrarFormularioEstacionamiento()
     {
-
+        echo view('template/head');
         $data['zonas'] = $this->zonaModel->findAll();
+        $data['vehiculos'] = $this->vehiculoModel->findAll();
+        echo view('estadia/estacionar_vehiculo', $data);
+        echo view('template/footer');
     }
 
     //vista de venta de estadia por parte del vendedor
@@ -106,7 +109,7 @@ class Estadia_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-       
+
         $id_usuario =  null;
         $id_vendedor = session('id_usuario');
         $vehiculo = $this->vehiculoModel->first($_POST['patente']);
@@ -122,12 +125,11 @@ class Estadia_controller extends BaseController
             $zona = $this->zonaModel->find($id_zona);
             $precio = $zona['costo_hora'];
             $estado_pago = $this->cuentaModel->estadoPago($precio);
-
         } else {
             $precio = 0;
             $estado_pago = "Pagado";
         }
-                
+
         $this->estadiaModel->registrarEstadia(
             $id_vendedor,
             $id_zona,
