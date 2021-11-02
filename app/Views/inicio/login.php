@@ -44,16 +44,3 @@
             </div>
         </div>
     </div>
-
-    <?php
-
-use CodeIgniter\I18n\Time;
-
-list($hora, $minutos) = explode(":", "1:12");
-$hora_decimal = (($hora * 60) + $minutos) /60;
-$precio = $zona['costo_hora'] * $hora_decimal;
-    
-$time = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
-echo $time;
-    
-    ?>
