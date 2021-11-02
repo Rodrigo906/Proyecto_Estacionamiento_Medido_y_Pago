@@ -52,9 +52,10 @@ class Estadia_controller extends BaseController
         $validation->setRuleGroup('formEstacionarValidation');
 
         if (!$validation->withRequest($this->request)->run()) {
+            
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-
+        
         $id_usuario =  session('id_usuario');
         $vehiculo = $this->vehiculoModel->first($_POST['patente']);
         $id_vehiculo = $vehiculo['id_vehiculo'];
@@ -64,13 +65,15 @@ class Estadia_controller extends BaseController
         $cantHoras = $_POST['cant_horas'];
         list($hora, $minutos) = explode(":", $cantHoras);
 
-        $indefinido = $_POST['indefinido'];
-        //indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
+        /*$indefinido = $_POST['indefinido'];
+        indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
         if ($indefinido = "on") {
             $fecha_fin = null;
         } else {
             $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
-        }
+        }*/
+        
+        $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
 
         $id_zona = $_POST['zona'];
 
@@ -86,7 +89,7 @@ class Estadia_controller extends BaseController
             $estado_pago = "Pagado";
         }
 
-        $this->EstadiaModel->registrarEstadiaCliente(
+        $this->estadiaModel->registrarEstadiaCliente(
             $id_usuario,
             $id_zona,
             $id_vehiculo,

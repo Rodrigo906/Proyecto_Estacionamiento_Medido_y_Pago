@@ -121,7 +121,7 @@ class Validation
     public $formEstacionarValidation = [
 
         'patente' => [
-            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'rules' => 'required|is_unique[vehiculo.patente]',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
                 'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
@@ -129,17 +129,9 @@ class Validation
         ],
 
         'cant_horas' => [
-            'rules' => 'required|numeric',
+            'rules' => 'required',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
-                'numeric' => 'Por favor solo ingrese números enteros',
-            ],
-        ],
-
-        'precio' => [
-            'rules' => 'numeric',
-            'errors' => [
-                'numeric' => 'Solo se permiten valores numericos',
             ],
         ],
     ];
@@ -157,7 +149,7 @@ class Validation
             'rules' => 'required|is_not_unique[zona.id_zona]',
             'errors' => [
                 'required' =>  'Por favor, seleccione una zona' ,
-                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+                'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
             ],
         ],
 
