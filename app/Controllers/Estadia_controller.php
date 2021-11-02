@@ -56,34 +56,38 @@ class Estadia_controller extends BaseController
         }
 
         $id_usuario =  session('id_usuario');
-        $id_vendedor = null;
-        $id_vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
+        $vehiculo = $this->vehiculoModel->first($_POST['patente']);
+        $id_vehiculo = $vehiculo['id_vehiculo'];
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
         $estado = "Activa";
-        $cantHoras = $_POST['cant_horas'];
-        $indefinido = $_POST['indefinido'];
 
+        $cantHoras = $_POST['cant_horas'];
+        list($hora, $minutos) = explode(":", $cantHoras);
+
+        $indefinido = $_POST['indefinido'];
         //indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
-        if ($indefinido) {
+        if ($indefinido = "on") {
             $fecha_fin = null;
         } else {
-            $fecha_fin = new Time('now +' . $cantHoras . 'hours', 'America/Argentina/Buenos_Aires');
+            $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
         }
 
         $id_zona = $_POST['zona'];
 
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
             $zona = $this->zonaModel->find($id_zona);
-            $precio = $zona[0]['precio'];
+
+            $hora_decimal = (($hora * 60) + $minutos) /60;
+            $precio = $zona['costo_hora'] * $hora_decimal;
+            
             $estado_pago = $this->cuentaModel->estadoPago($precio);
         } else {
             $precio = 0;
             $estado_pago = "Pagado";
         }
 
-        $this->EstadiaModel->registrarEstadia(
+        $this->EstadiaModel->registrarEstadiaCliente(
             $id_usuario,
-            $id_vendedor,
             $id_zona,
             $id_vehiculo,
             $estado,
@@ -96,10 +100,7 @@ class Estadia_controller extends BaseController
         session()->set(['estadia' => 'id_vehiculo']);
     }
 
-    /*Lo unico que cambia del anterior es que ahora solo se guarda el id del vendedor y no del usuario
-    Ademas de no tener la verificacion de saldo
-    Venta de estadia por parte del usuario vendedor !!
-    */
+    //Venta de estadia por parte del usuario vendedor !!
     public function venderEstadia()
     {
         $validation = service('validation');
@@ -109,21 +110,25 @@ class Estadia_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-
-        $id_usuario =  null;
         $id_vendedor = session('id_usuario');
         $vehiculo = $this->vehiculoModel->first($_POST['patente']);
         $id_vehiculo = $vehiculo['id_vehiculo'];
         $estado = "Activa";
         $estado_pago = "Pagado";
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
+
         $cantHoras = $_POST['cant_horas'];
-        $fecha_fin = new Time('now +' . $cantHoras . 'hours', 'America/Argentina/Buenos_Aires');
+        list($hora, $minutos) = explode(":", $cantHoras);
+
+        $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
         $id_zona = $_POST['zona'];
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
 
             $zona = $this->zonaModel->find($id_zona);
-            $precio = $zona['costo_hora'];
+          
+            $hora_decimal = (($hora * 60) + $minutos) /60;
+            $precio = $zona['costo_hora'] * $hora_decimal;
+
             $estado_pago = $this->cuentaModel->estadoPago($precio);
         } else {
             $precio = 0;
@@ -144,7 +149,6 @@ class Estadia_controller extends BaseController
 
     public function desEstacionar()
     {
-
         if (session('id_vehiculo') != null) {
             $this->estadiaModel->terminarEstadia(session('id_vehiculo'), new Time('now', 'America/Argentina/Buenos_Aires'));
             session()->remove('id_vehiculo');
