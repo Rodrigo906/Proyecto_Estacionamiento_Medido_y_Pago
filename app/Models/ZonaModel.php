@@ -41,9 +41,9 @@ class ZonaModel extends Model
 
         $fechaActual = new Time('now', 'America/Argentina/Buenos_Aires');
 
-        $hora = (int) Time::createFromTime(13, 30)->getHour();
+        $hora = strtotime(Time::createFromTime(13, 30)->toDateTimeString());
 
-        if ((int) $fechaActual->gethour() < $hora) {
+        if (strtotime($fechaActual->toDateTimeString()) <= $hora) {
             if ($this->horaActualSeEncuentraEnRango($zona['horario_pago_mañana'], $fechaActual)) {
                 return true;
             }
@@ -54,22 +54,21 @@ class ZonaModel extends Model
                 }
             }
         }
-
         return false;
     }
 
     private function horaActualSeEncuentraEnRango($horario_pago, $fechaActual): bool
     {
-
         list($inf_hMañana, $sup_hMañana) = explode("-", $horario_pago);
 
         $inf_hMañana = $this->crearHora($inf_hMañana);
         $sup_hMañana = $this->crearHora($sup_hMañana);
-        $horaActual = Time::createFromTime($fechaActual->getHour(), $fechaActual->getMinute());
 
-        /*if ((int) $inf_hMañana->getHour() <= (int)$horaActual->getHour() <= (int)$sup_hMañana->getHour()) {
-            return true;
-        }*/
+        $horaActual = Time::createFromTime($fechaActual->getHour(), $fechaActual->getMinute());
+       
+        if (strtotime($inf_hMañana->toDateTimeString()) <= strtotime($horaActual->toDateTimeString()) && strtotime($horaActual->toDateTimeString()) <= strtotime($sup_hMañana->toDateTimeString())) {
+            return true; 
+        }
         return false;
     }
 

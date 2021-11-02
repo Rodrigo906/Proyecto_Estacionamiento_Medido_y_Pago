@@ -28,12 +28,12 @@
 
 
 
-        public function registrarEstadia($id_usuario, $id_vendedor, $id_zona, $id_vehiculo, 
+        public function registrarEstadia($id_vendedor, $id_zona, $id_vehiculo, 
                                             $estado, $estado_pago, $fecha_inicio, $fecha_fin, $precio)
         {
-            $this->db->query("INSERT INTO estadia (id_usuario, id_vendedor, id_zona, 
+            $this->db->query("INSERT INTO estadia (id_vendedor, id_zona, 
                     id_vehiculo, estado, estado_pago, fecha_inicio, fecha_fin, precio) " .
-            "VALUES ('$id_usuario', '$id_vendedor', '$id_zona', '$id_vehiculo','$estado','$estado_pago', 
+            "VALUES ('$id_vendedor', '$id_zona', '$id_vehiculo','$estado','$estado_pago', 
                     '$fecha_inicio', '$fecha_fin', '$precio')");
         }
 

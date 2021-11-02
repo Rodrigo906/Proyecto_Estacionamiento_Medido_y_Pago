@@ -106,6 +106,7 @@ class Estadia_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
+       
         $id_usuario =  null;
         $id_vendedor = session('id_usuario');
         $vehiculo = $this->vehiculoModel->first($_POST['patente']);
@@ -114,25 +115,20 @@ class Estadia_controller extends BaseController
         $estado_pago = "Pagado";
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
         $cantHoras = $_POST['cant_horas'];
-
-        if ($_POST['indefinido'] == 'on') {
-            $fecha_fin = null;
-        } else {
-            $fecha_fin = new Time('now +' . $cantHoras . 'hours', 'America/Argentina/Buenos_Aires');
-        }
+        $fecha_fin = new Time('now +' . $cantHoras . 'hours', 'America/Argentina/Buenos_Aires');
         $id_zona = $_POST['zona'];
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
 
             $zona = $this->zonaModel->find($id_zona);
-            $precio = $zona[0]['precio'];
+            $precio = $zona['costo_hora'];
             $estado_pago = $this->cuentaModel->estadoPago($precio);
+
         } else {
             $precio = 0;
             $estado_pago = "Pagado";
         }
-
-        $this->EstadiaModel->registrarEstadia(
-            $id_usuario,
+                
+        $this->estadiaModel->registrarEstadia(
             $id_vendedor,
             $id_zona,
             $id_vehiculo,
