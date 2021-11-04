@@ -29,6 +29,8 @@ class Estadia_controller extends BaseController
     public function mostrarFormularioEstacionamiento()
     {
         echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
         $data['zonas'] = $this->zonaModel->findAll();
         $data['vehiculos'] = $this->vehiculoModel->findAll();
         echo view('estadia/estacionar_vehiculo', $data);
@@ -39,6 +41,8 @@ class Estadia_controller extends BaseController
     public function mostrarFormularioVentaEstadia()
     {
         echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
         $data['zonas'] = $this->zonaModel->findAll();
         echo view('estadia/venta_estadia', $data);
         echo view('template/footer');
@@ -73,8 +77,10 @@ class Estadia_controller extends BaseController
             $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
         }*/
         
-        $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
+       // $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
 
+        $fecha_fin = null;
+    
         $id_zona = $_POST['zona'];
 
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
@@ -88,9 +94,12 @@ class Estadia_controller extends BaseController
             $precio = 0;
             $estado_pago = "Pagado";
         }
-
-        $this->estadiaModel->registrarEstadiaCliente(
+        
+        $id_vendedor = null;
+        
+        $this->estadiaModel->registrarEstadia(
             $id_usuario,
+            $id_vendedor,
             $id_zona,
             $id_vehiculo,
             $estado,
@@ -100,7 +109,14 @@ class Estadia_controller extends BaseController
             $precio,
         );
 
-        session()->set(['estadia' => 'id_vehiculo']);
+        session()->set(['estadia' => $id_vehiculo]);
+
+        $mensajeExito = [
+        'exito' => 'Registrado correctamente',
+        'tipo' => 'alert',
+        ];
+
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
     }
 
     //Venta de estadia por parte del usuario vendedor !!
@@ -137,8 +153,10 @@ class Estadia_controller extends BaseController
             $precio = 0;
             $estado_pago = "Pagado";
         }
+        $id_usuario = null;
 
         $this->estadiaModel->registrarEstadia(
+            $id_usuario,
             $id_vendedor,
             $id_zona,
             $id_vehiculo,
@@ -148,13 +166,26 @@ class Estadia_controller extends BaseController
             $fecha_fin,
             $precio,
         );
+
+        $mensajeExito = [
+            'exito' => 'Registrado correctamente',
+            'tipo' => 'alert',
+            ];
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
     }
 
+    //Desestaciona un vehiculo previamente estacionado
     public function desEstacionar()
     {
-        if (session('id_vehiculo') != null) {
-            $this->estadiaModel->terminarEstadia(session('id_vehiculo'), new Time('now', 'America/Argentina/Buenos_Aires'));
-            session()->remove('id_vehiculo');
+        if (session('estadia') != null) { 
+            $this->estadiaModel->terminarEstadia(session('estadia'), new Time('now', 'America/Argentina/Buenos_Aires'));
+            session()->remove('estadia');
+            $data['mensaje'] = "Vehiculo estacionado correctamente";
+            echo view('errores/operacionExitosa', $data);
+        }
+        else{
+            $data['mensaje'] = "Debe estacionar un auto con anterioridad";
+            echo view('errores/accesoRestringido', $data);
         }
     }
 }

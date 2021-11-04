@@ -27,31 +27,19 @@
         protected $skipValidation = false;
 
 
-        //Registro de estadia por parte del Vendedor
-        public function registrarEstadia($id_vendedor, $id_zona, $id_vehiculo, 
+        //Registro de estadia por parte del Cliente y Vendedor
+        public function registrarEstadia($id_usuario, $id_vendedor, $id_zona, $id_vehiculo, 
                                             $estado, $estado_pago, $fecha_inicio, $fecha_fin, $precio)
         {
-            $this->db->query("INSERT INTO estadia (id_vendedor, id_zona, 
+            $this->db->query("INSERT INTO estadia (id_usuario, id_vendedor, id_zona, 
                     id_vehiculo, estado, estado_pago, fecha_inicio, fecha_fin, precio) " .
-            "VALUES ('$id_vendedor', '$id_zona', '$id_vehiculo','$estado','$estado_pago', 
-                    '$fecha_inicio', '$fecha_fin', '$precio')");
+            "VALUES (NULLIF('$id_usuario', ''), NULLIF('$id_vendedor', ''), '$id_zona', '$id_vehiculo','$estado','$estado_pago', 
+                    '$fecha_inicio', NULLIF('$fecha_fin', ''), '$precio')");
         }
-
-        //Registro de estadia por parte del Cliente
-        public function registrarEstadiaCliente($id_usuario, $id_zona, $id_vehiculo, 
-                                            $estado, $estado_pago, $fecha_inicio, $fecha_fin, $precio)
-        {
-            $this->db->query("INSERT INTO estadia (id_usuario, id_zona, 
-                id_vehiculo, estado, estado_pago, fecha_inicio, fecha_fin, precio) " .
-            "VALUES ('$id_usuario', '$id_zona', '$id_vehiculo','$estado','$estado_pago', 
-                '$fecha_inicio', '$fecha_fin', '$precio')");
-        }
-
 
         //cierra una estadia indefinida
         public function terminarEstadia ($id_vehiculo, $fecha_fin){
-                $this->db->query(" UPDATE estadia SET fecha_fin='$fecha_fin' .
-                        WHERE id_vehiculo= '$id_vehiculo' AND fecha_fin IS NULL");
+                $this->db->query(" UPDATE estadia SET fecha_fin ='$fecha_fin' WHERE id_vehiculo = '$id_vehiculo' AND fecha_fin IS NULL");
         }
 
 }

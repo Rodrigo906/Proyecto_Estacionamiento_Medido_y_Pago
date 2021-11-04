@@ -1,5 +1,5 @@
  <div class="container">
-       <div class="card o-hidden border-0 shadow-lg my-2">
+       <div class="card o-hidden border-0 shadow-lg my-3">
            <div class="card-body p-4 ">
                <!-- Nested Row within Card Body -->
                <div class="row justify-content-center">

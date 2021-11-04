@@ -64,6 +64,16 @@
         </div>
     </li>
 
+    <li class="nav-item" id="estacionar_vehiculo">
+        <a class="nav-link" href="<?= base_url('Estadia_controller/mostrarFormularioEstacionamiento') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+            <span> Estacionar vehiculo </span></a>
+    </li>
+
+    <li class="nav-item" id="desEstacionar_vehiculo">
+        <a class="nav-link" href="<?= base_url('Estadia_controller/desEstacionar') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+            <span> DesEstacionar vehiculo </span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
