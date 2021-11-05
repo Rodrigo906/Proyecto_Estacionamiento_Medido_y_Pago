@@ -108,13 +108,65 @@ class User_controller extends BaseController
     }
 
 
+    //AGREGADO EN SPRINT 2
+
+    public function mostrarFormularioActualizacion (){
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        //Formulario aqui
+        echo view('template/footer');
+    }
+
+    public function actualizarInformacionPersonal (){
+
+        $validation = service('validation');                
+        $validation->setRuleGroup('formActualizacionValidation');        
+        
+        if(!$validation->withRequest($this->request)->run()){
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+    
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $email = $_POST['email'];
+        $fecha_nacimiento = $_POST['fecha_nacimiento'];
+
+        $this->userModel->actualizarDatosPersonales(session('username'), $nombre, $apellido, $email, $fecha_nacimiento);
+    
+        $mensajeExito = [
+            'exito' => 'Datos actualizados',
+            'tipo' => 'alert',
+            ];
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);    
+    }
+
+    public function recuperarContraseña(){
+
+        $validation = service('validation');                
+        $validation->setRuleGroup('formRestablecerContraseñaValidation');        
+        
+        if(!$validation->withRequest($this->request)->run()){
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+        //Aqui se deberia enviar un mail al usuario
+        $this->userModel->restablecerContraseña($_POST("username"));
+
+        $mensajeExito = [
+            'exito' => 'Se restablecio su contraseña a "1234" ',
+            'tipo' => 'alert',
+            ];
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);    
+    }
+    
+    
     //Elimina cualquier usuario pasado por parametro
+    //Ver si es mejor una baja logica
     public function eliminar($id_usuario)
     {
 
-        $this->userModel->delete($id_usuario);
-        $data['usuarios'] = $this->userModel->obtenerListadoUsuaurios();
-
-        return view('vistas_administrador/listado_usuarios', $data);
+        
     }
+
+
 }

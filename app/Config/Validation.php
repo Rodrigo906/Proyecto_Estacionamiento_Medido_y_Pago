@@ -183,8 +183,58 @@ class Validation
 
             ],
         ],
-
-
-
     ];
+
+    public $formActualizacionValidation = [
+
+        'nombre' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+            ],
+        ],
+
+        'apellido' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+            ],
+        ],
+
+        'email' => [
+            'rules' => 'required|valid_email',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'valid_email' => 'Ingrese un email en un formato valido',
+            ],
+        ],
+
+        'fecha_nacimiento' => [
+            'rules' => 'valid_date',
+            'errors' => [
+                'valid_date' => 'Ingrese la fecha en formato dd/mm/yyyy',
+            ],
+        ],
+    ];
+
+    public $formRestablecerContraseñaValidation = [
+        'username' => [
+            'rules' => 'required|is_not_unique[usuario.username]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'is_not_unique' => 'El nombre de usuario ingresado no existe',
+            ],
+        ],
+
+        'email' => [
+            'rules' => 'required|valid_email|is_not_unique[usuario.email]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'valid_email' => 'Ingrese un email en un formato valido',
+                'is_not_unique' => 'El email ingresado no es correcto',
+            ],
+        ],
+    ];
+
+
 }
