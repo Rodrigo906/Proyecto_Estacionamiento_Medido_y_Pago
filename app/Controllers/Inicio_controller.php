@@ -63,7 +63,6 @@ class Inicio_controller extends BaseController
 
     public function inicio()
     {
-
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
@@ -74,7 +73,6 @@ class Inicio_controller extends BaseController
 
     public function registrar_login()
     {
-
         $data['subtitulo'] = 'Registrar';
         echo view('template/head');
         echo view('usuarios/crear_usuario_cliente', $data);

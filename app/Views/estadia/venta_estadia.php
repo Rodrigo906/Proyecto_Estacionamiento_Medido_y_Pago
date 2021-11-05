@@ -1,10 +1,15 @@
 <div class="container">
     <!-- Outer Row -->
+
+    <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 8px;" >   
+    <p> <?= session('mensajes.exito'); ?> </p>   
+    </div>
+    
     <div class="row justify-content-center">
 
-        <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="col-xl-15 col-lg-12 col-md-9">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card o-hidden border-0 shadow-lg my-1">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row justify-content-center">

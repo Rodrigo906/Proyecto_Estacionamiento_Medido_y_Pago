@@ -25,6 +25,11 @@
         protected $validationMessages = [];
         protected $skipValidation = false;
     
+
+        public function obtenerIdRol ($nombreRol){
+           $result = $this->db->query("SELECT * FROM rol WHERE nombre = '$nombreRol'");
+            return $result->getResultArray();
+        }
     }
 
 ?>

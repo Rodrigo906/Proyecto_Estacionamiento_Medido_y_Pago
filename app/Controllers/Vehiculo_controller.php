@@ -43,6 +43,12 @@ class Vehiculo_controller extends BaseController
         $modelo = $_POST['modelo'];
         
         $this->vehiculoModel->registrarVehiculo($patente, session('id_usuario'), $marca, $modelo);
+
+        $mensajeExito = [
+            'exito' => 'Registrado correctamente',
+            'tipo' => 'alert',
+            ];
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
     }
 
 }

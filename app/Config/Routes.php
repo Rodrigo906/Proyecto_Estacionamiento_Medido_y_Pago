@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Inicio_controller::index');
 
+$routes->get('cerrar-sesion', 'Inicio_controller::cerrarSesion');
+
 
 /* Aqui se definen las rutas a las cuales tiene acceso cada rol*/
 
@@ -53,8 +55,9 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function($rou
     $routes->get('mi-perfil', 'User_controller::  ');
     $routes->get('editar-mi-perfil', 'User_controller:: ');
     */
-
 });
+
+
 
 //CLIENTE
 $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function($routes){

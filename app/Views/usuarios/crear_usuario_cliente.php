@@ -3,7 +3,11 @@
 
 <div class="container">
 
-<div class="card o-hidden border-0 shadow-lg my-1" style="margin-left: -15px;">
+<div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 8px;" >   
+    <p> <?= session('mensajes.exito'); ?> </p>   
+</div>
+
+<div class="card o-hidden border-0 shadow-lg my-1" >
     <div class="card-body p-0 ">
         <!-- Nested Row within Card Body -->
         <div class="row justify-content-center">
@@ -58,6 +62,7 @@
                              </div>
                             <div class="col-sm-6">
                                 <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Confirmar contraseña" name="confirmarContraseña" required>
+                                <p class="text-danger"> <?=session('errors.confirmarContraseña') ?> </p>
                             </div>
                         </div>
 
@@ -65,8 +70,8 @@
                             Guardar
                         </button>
                         <hr>
-                        <a href="index" class="btn btn-google btn-user btn-block">
-                            Cancelar
+                        <a href="<?= base_url('inicio_controller')?>" class="btn btn-google btn-user btn-block">
+                            Volver
                         </a>
                     </form>
                 </div>
