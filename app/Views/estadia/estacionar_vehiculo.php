@@ -56,7 +56,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="time" min= "1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas">
+                                        <input type="time" min= "1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas" required>
                                         <p class="text-danger"> <?= session('errors.cant_horas')?></p>
                                     </div>
 

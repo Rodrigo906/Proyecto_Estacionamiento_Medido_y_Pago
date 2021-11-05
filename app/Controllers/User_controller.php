@@ -164,7 +164,7 @@ class User_controller extends BaseController
     //Ver si es mejor una baja logica
     public function eliminar($id_usuario)
     {
-
+        
         
     }
 

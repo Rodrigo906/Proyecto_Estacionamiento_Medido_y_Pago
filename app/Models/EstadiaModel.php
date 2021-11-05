@@ -42,4 +42,9 @@
                 $this->db->query(" UPDATE estadia SET fecha_fin ='$fecha_fin' WHERE id_vehiculo = '$id_vehiculo' AND fecha_fin IS NULL");
         }
 
+        public function obtenerVehiculosEstacionados($fecha_actual){
+                $result = $this->db->query("SELECT * FROM estadia WHERE ('$fecha_actual' BETWEEN fecha_inicio AND fecha_fin) OR fecha_fin IS NULL");
+                return $result->getResultArray();
+        }
+
 }
