@@ -35,7 +35,7 @@
                                             <?php };
                                             ?>
                                         </select>
-                                        <p class="text-danger"> <?= session('errors.patente')?></p>
+                                        <p class="text-danger"> <?= session('errors.patente') ?></p>
                                     </div>
 
                                     <div class="form-group">
@@ -55,15 +55,17 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <input type="time" min= "1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas" required>
-                                        <p class="text-danger"> <?= session('errors.cant_horas')?></p>
-                                    </div>
-
-                                    <div class="form-group" style="margin-left: .4rem;">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="checkIndefinido">
-                                            <label class="custom-control-label" for="customCheck"> Indefinido</label>
+                                    <div class="form-group row">
+                                        <div class="col-sm-5 mb-4 mb-sm-0">
+                                            <label class="classLabel" style="margin-top: 1rem; margin-left: .6rem">Hora de salida: </label>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input type="time" min="1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas" readonly>
+                                            <p class="text-danger"> <?= session('errors.cant_horas') ?></p>
+                                        </div>
+                                        <div class="custom-control custom-checkbox small" style="margin-left: 1.3rem">
+                                            <input type="checkbox" class="custom-control-input" id="checkIndefinido" onchange="comprobar();" checked>
+                                            <label class="custom-control-label" for="checkIndefinido"> Indefinido</label>
                                         </div>
                                     </div>
 
