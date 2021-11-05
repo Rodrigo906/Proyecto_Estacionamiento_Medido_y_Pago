@@ -15,7 +15,7 @@
         protected $useSoftdeletes = false;  //ver que tipo de eliminado se usara luego
 
         protected $allowedFields = ['id_estadia', 'id_usuario', 'id_vendedor', 'id_zona', 
-                'id_vehiculo', 'estado', 'estado_pago', 'fecha_inicio', 'fecha_fin', 'precio'];
+                'id_vehiculo', 'estado_pago', 'fecha_inicio', 'fecha_fin', 'precio'];
 
         protected $useTimestamps = false;
         protected $createdField = 'created_at';
@@ -29,22 +29,27 @@
 
         //Registro de estadia por parte del Cliente y Vendedor
         public function registrarEstadia($id_usuario, $id_vendedor, $id_zona, $id_vehiculo, 
-                                            $estado, $estado_pago, $fecha_inicio, $fecha_fin, $precio)
+                                           $estado_pago, $fecha_inicio, $fecha_fin, $precio)
         {
             $this->db->query("INSERT INTO estadia (id_usuario, id_vendedor, id_zona, 
-                    id_vehiculo, estado, estado_pago, fecha_inicio, fecha_fin, precio) " .
-            "VALUES (NULLIF('$id_usuario', ''), NULLIF('$id_vendedor', ''), '$id_zona', '$id_vehiculo','$estado','$estado_pago', 
+                    id_vehiculo, estado_pago, fecha_inicio, fecha_fin, precio) " .
+            "VALUES (NULLIF('$id_usuario', ''), NULLIF('$id_vendedor', ''), '$id_zona', '$id_vehiculo','$estado_pago', 
                     '$fecha_inicio', NULLIF('$fecha_fin', ''), '$precio')");
         }
 
         //cierra una estadia indefinida
-        public function terminarEstadia ($id_vehiculo, $fecha_fin){
-                $this->db->query(" UPDATE estadia SET fecha_fin ='$fecha_fin' WHERE id_vehiculo = '$id_vehiculo' AND fecha_fin IS NULL");
+        public function terminarEstadia ($id_vehiculo, $fecha_fin, $precio, $estado_pago){
+                $this->db->query(" UPDATE estadia SET fecha_fin ='$fecha_fin', precio='$precio', estado_pago='$estado_pago' WHERE id_vehiculo = '$id_vehiculo' AND fecha_fin IS NULL");
         }
+
+        public function obtenerUltimaEstadia($id_vehiculo){
+                $result = $this->db->query("SELECT * FROM estadia WHERE id_vehiculo='$id_vehiculo' AND fecha_fin IS NULL");
+                return $result->getResultArray();
+        }
+
 
         public function obtenerVehiculosEstacionados($fecha_actual){
                 $result = $this->db->query("SELECT * FROM estadia WHERE ('$fecha_actual' BETWEEN fecha_inicio AND fecha_fin) OR fecha_fin IS NULL");
                 return $result->getResultArray();
         }
-
 }

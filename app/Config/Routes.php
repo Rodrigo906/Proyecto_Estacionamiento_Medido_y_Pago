@@ -45,9 +45,10 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function($rou
 
     $routes->get('alta-usuario', 'User_controller::MostrarFormularioRegistro');
     $routes->post('registrar-usuario', 'User_controller::registrarUsuario');
+    $routes->delete('eliminar/(:num)', 'User_controller::eliminar/17');
 
     /* SIN IMPLEMENTAR AUN
-    $routes->delete('eliminar-usuario/(:num)', 'User_controller::  ');
+   
     $routes->get('editar-usuario', 'User_controller::  ');
     $routes->get('modificar-zona', 'Zona_controller::  ');
     $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::  ');

@@ -39,7 +39,7 @@
                     <td> <?php echo $usuario['rol'] ?> </td>
                     <td>
 
-                        <a href="#" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
+                        <a href="<?= base_url('eliminar-usuario/'.$usuario['id_usuario']) ?>" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
                         </a>
 

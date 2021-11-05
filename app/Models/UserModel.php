@@ -31,7 +31,7 @@ class UserModel extends Model
     {
 
         $consulta = $this->db->query("SELECT u.id_usuario, u.username, u.nombre, u.apellido, u.email," .
-            "u.dni, u.fecha_nacimiento, r.nombre AS rol FROM usuario u JOIN rol r ON (u.id_rol = r.id_rol)");
+            "u.dni, u.fecha_nacimiento, r.nombre AS rol FROM usuario u JOIN rol r ON (u.id_rol = r.id_rol) WHERE u.eliminado = false");
         return $consulta->getResultArray();
     }
 
@@ -55,7 +55,7 @@ class UserModel extends Model
     public function restablecerContraseña ($username){
         $this->db->query("UPDATE usuario SET contraseña= '1234' WHERE username= '$username'");
     }
-    
+
 
 
 
