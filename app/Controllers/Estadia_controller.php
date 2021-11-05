@@ -177,15 +177,23 @@ class Estadia_controller extends BaseController
     //Desestaciona un vehiculo previamente estacionado
     public function desEstacionar()
     {
+        
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        
         if (session('estadia') != null) { 
             $this->estadiaModel->terminarEstadia(session('estadia'), new Time('now', 'America/Argentina/Buenos_Aires'));
             session()->remove('estadia');
-            $data['mensaje'] = "Vehiculo estacionado correctamente";
+            $data['mensaje'] = "Vehiculo desEstacionado correctamente";
             echo view('errores/operacionExitosa', $data);
+           
         }
         else{
             $data['mensaje'] = "Debe estacionar un auto con anterioridad";
             echo view('errores/accesoRestringido', $data);
+          
         }
+        echo view('template/footer');
     }
 }

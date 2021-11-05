@@ -34,7 +34,7 @@
                                         <a class="small" href="forgot-password.html">Olvidó su contraseña ?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create una cuenta !</a>
+                                        <a class="small" href=" <?= base_url('User_controller/MostrarFormularioRegistro')?> ">Create una cuenta !</a>
                                     </div>
                                 </div>
                             </div>

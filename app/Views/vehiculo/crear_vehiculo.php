@@ -1,4 +1,9 @@
  <div class="container">
+
+    <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 8px;" >   
+        <p> <?= session('mensajes.exito'); ?> </p>   
+    </div>
+
        <div class="card o-hidden border-0 shadow-lg my-3">
            <div class="card-body p-4 ">
                <!-- Nested Row within Card Body -->

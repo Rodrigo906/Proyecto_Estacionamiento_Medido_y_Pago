@@ -63,7 +63,6 @@ class Inicio_controller extends BaseController
 
     public function inicio()
     {
-
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');

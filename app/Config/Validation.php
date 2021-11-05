@@ -74,23 +74,31 @@ class Validation
         ],
 
         'dni' => [
-            'rules' => 'required|numeric|exact_length[8]',
+            'rules' => 'required|numeric|exact_length[8]|is_unique[usuario.dni]',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
                 'numeric' => 'Verifique que su numero de dni no contenga letras',
                 'exact_length' => 'Por favor ingrese su dni completo',
+                'is_unique' => 'El n° de dni ya se encuentra registrado',
             ],
         ],
 
         'fecha_nacimiento' => [
-            'rules' => 'valid_date[d/m/Y]',
+            'rules' => 'valid_date',
             'errors' => [
-                'valid_date' => 'Ingrese la fecha en formato dd/mm/yy',
+                'valid_date' => 'Ingrese la fecha en formato dd/mm/yyyy',
             ],
         ],
 
         'contraseña' => [
-            'rules' => 'required|matches[confirmacionContraseña]',
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Ingrese una contraseña por favor',
+            ],
+        ],
+
+        'confirmarContraseña' => [
+            'rules' => 'required|matches[contraseña]',
             'errors' => [
                 'required' => 'Ingrese una contraseña por favor',
                 'matches' => 'La confirmacion de contraseña no es correcta, reintentelo por favor',
