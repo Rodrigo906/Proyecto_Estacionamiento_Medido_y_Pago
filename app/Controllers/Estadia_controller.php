@@ -52,13 +52,13 @@ class Estadia_controller extends BaseController
         $validation->setRuleGroup('formEstacionarValidation');
 
         if (!$validation->withRequest($this->request)->run()) {
-            
+
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-        
+
         $id_usuario =  session('id_usuario');
-        $vehiculo = $this->vehiculoModel->first($_POST['patente']);
-        $id_vehiculo = $vehiculo['id_vehiculo'];
+        $id_vehiculo = $_POST['patente'];
+        /**Trae el id del vehiculo */
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
         $estado = "Activa";
 
@@ -72,7 +72,7 @@ class Estadia_controller extends BaseController
         } else {
             $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
         }*/
-        
+
         $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
 
         $id_zona = $_POST['zona'];
@@ -80,9 +80,9 @@ class Estadia_controller extends BaseController
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
             $zona = $this->zonaModel->find($id_zona);
 
-            $hora_decimal = (($hora * 60) + $minutos) /60;
+            $hora_decimal = (($hora * 60) + $minutos) / 60;
             $precio = $zona['costo_hora'] * $hora_decimal;
-            
+
             $estado_pago = $this->cuentaModel->estadoPago($precio);
         } else {
             $precio = 0;
@@ -128,8 +128,8 @@ class Estadia_controller extends BaseController
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
 
             $zona = $this->zonaModel->find($id_zona);
-          
-            $hora_decimal = (($hora * 60) + $minutos) /60;
+
+            $hora_decimal = (($hora * 60) + $minutos) / 60;
             $precio = $zona['costo_hora'] * $hora_decimal;
 
             $estado_pago = $this->cuentaModel->estadoPago($precio);
