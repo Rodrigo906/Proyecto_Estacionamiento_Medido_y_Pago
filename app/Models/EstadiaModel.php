@@ -49,7 +49,28 @@
 
 
         public function obtenerVehiculosEstacionados($fecha_actual){
-                $result = $this->db->query("SELECT * FROM estadia WHERE ('$fecha_actual' BETWEEN fecha_inicio AND fecha_fin) OR fecha_fin IS NULL");
+                $result = $this->db->query("SELECT * FROM estadia e JOIN vehiculo v ON (e.id_vehiculo = v.id_vehiculo) ".
+                        "JOIN usuario u ON (e.id_usuario = u.id_usuario) WHERE ".
+                         "('$fecha_actual' BETWEEN e.fecha_inicio AND e.fecha_fin) OR e.fecha_fin IS NULL");
                 return $result->getResultArray();
         }
+
+        public function tieneEstadiaActiva($id_vehiculo, $fecha_actual){
+                $result = $this->db->query("SELECT * FROM estadia WHERE id_vehiculo= '$id_vehiculo' AND (('$fecha_actual' BETWEEN fecha_inicio AND fecha_fin) OR fecha_fin IS NULL)");
+                if(empty($result)){
+                        return false;
+                }
+                return true;
+        }
+
+        public function obtenerVentas ($id_vendedor){
+                $result = $this->db->query("SELECT v.patente, v.marca, CONCAT('Desde ', e.fecha_inicio, ' hasta ', e.fecha_fin) fecha, e.precio ".
+                        "FROM estadia e JOIN vehiculo v ON (e.id_vehiculo = v.id_vehiculo) ".
+                                "JOIN usuario u ON (e.id_vendedor = u.id_usuario) WHERE e.id_vendedor= '$id_vendedor'");
+                return $result->getResultArray();
+        }
+
+
+
+
 }

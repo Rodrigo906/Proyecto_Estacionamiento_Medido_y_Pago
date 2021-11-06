@@ -6,7 +6,7 @@
 
     <div class="content-icono">
       
-        <a href="<?= base_url('User_controller/MostrarFormularioRegistro') ?>" data-toggle="tooltip" title="Agregar">
+        <a href="<?= base_url('User_controller/mostrarFormularioAltaUsuario') ?>" data-toggle="tooltip" title="Agregar">
 
             <i class="bi bi-plus-circle-fill" style="font-size: 2rem;"></i>
         </a>

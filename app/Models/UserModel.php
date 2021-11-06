@@ -29,9 +29,8 @@ class UserModel extends Model
     //Obtiene todos los usuarios con el nombre del rol correspondiente
     public function obtenerListadoUsuarios()
     {
-
         $consulta = $this->db->query("SELECT u.id_usuario, u.username, u.nombre, u.apellido, u.email," .
-            "u.dni, u.fecha_nacimiento, r.nombre AS rol FROM usuario u JOIN rol r ON (u.id_rol = r.id_rol) WHERE u.eliminado = false");
+            "u.dni, u.fecha_nacimiento, r.nombre AS rol FROM usuario u JOIN rol r ON (u.id_rol = r.id_rol) WHERE u.eliminado= false");
         return $consulta->getResultArray();
     }
 
@@ -43,6 +42,11 @@ class UserModel extends Model
     }
 
     public function obtenerDatosUsuario ($username){
+        $result = $this->db->query("SELECT * FROM usuario WHERE username='$username'");
+        return $result->getResultArray();
+    }
+
+    public function obtenerDatosUsuarioCliente ($username){
         $result = $this->db->query("SELECT * FROM usuario u JOIN cuenta c ON (u.id_usuario = c.id_usuario) WHERE u.username = '$username'");
         
         return $result->getResultArray();

@@ -141,6 +141,13 @@ class User_controller extends BaseController
         return redirect()->back()->withInput()->with('mensajes', $mensajeExito);    
     }
 
+    public function mostrarFormularioRecuperacion (){
+        echo view('template/head');
+        echo view('inicio/recuperar_contraseña');
+        echo view('template/footer');
+      
+    }
+
     public function recuperarContraseña(){
 
         $validation = service('validation');                
@@ -150,10 +157,11 @@ class User_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
         //Aqui se deberia enviar un mail al usuario
-        $this->userModel->restablecerContraseña($_POST("username"));
+        //$username = $_POST['username'];
+        $this->userModel->restablecerContraseña($_POST['username']);
 
         $mensajeExito = [
-            'exito' => 'Se restablecio su contraseña a "1234" ',
+            'exito' => 'Se restablecio su contraseña correctamente. Ahora esta es "1234" ',
             'tipo' => 'alert',
             ];
         return redirect()->back()->withInput()->with('mensajes', $mensajeExito);    
@@ -161,12 +169,10 @@ class User_controller extends BaseController
     
     
     //Elimina cualquier usuario pasado por parametro
-    //Ver si es mejor una baja logica
     public function eliminar($id_usuario)
     {
 
         echo "eliminado".$id_usuario;
     }
-
 
 }

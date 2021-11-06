@@ -212,11 +212,52 @@ class Estadia_controller extends BaseController
     }
 
     public function mostrarListadoAutosEstacionados (){
-        $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
-
+        //$fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
+        $fecha_actual= "2021-11-05 16:07:00";
         $data['estadias'] = $this->estadiaModel->obtenerVehiculosEstacionados($fecha_actual);
         $data['titulo'] = "Listado de vehiculos estacionados";
-
-        //Vista de formulario
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        echo view('estadia/listado_autos_estacionados', $data);
+        echo view('template/footer');
     }
+
+    public function mostrarConsultaEstadia (){
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        //formulario
+        echo view('template/footer');
+    }
+
+    public function consultarEstadoEstadia(){
+        $vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
+        $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
+
+        if ($this->estadiaModel->tieneEstadiaActiva($vehiculo['id_vehiculo'], $fecha_actual)){
+           $mensaje = "La estadia del vehiculo ". $vehiculo['patente'] ." esta activa";
+        }
+        else{
+            $mensaje = "La estadia del vehiculo ". $vehiculo['patente'] ." esta inactiva";
+        }
+        return redirect()->back()->withInput()->with('mensaje', $mensaje);
+    }
+
+    //Consultado por el vendedor
+    public function mostrarMisVentas(){
+        $data['ventas'] = $this->estadiaModel->obtenerVentas(session('id_usuario'));
+        $data['titulo'] = "Listado de ventas";
+
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        echo view('estadia/listado_ventas', $data); 
+        echo view('template/footer');
+        
+    }
+
+    
+
+    
 }

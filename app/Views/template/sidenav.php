@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Vehiculos estacionados -->
     <li class="nav-item" id="vehiculos_estacionados">
-        <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?= base_url('Estadia_controller/mostrarListadoAutosEstacionados') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Vehiculos estacionados</span></a>
     </li>
 
