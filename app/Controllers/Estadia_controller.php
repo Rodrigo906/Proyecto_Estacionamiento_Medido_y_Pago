@@ -212,8 +212,7 @@ class Estadia_controller extends BaseController
     }
 
     public function mostrarListadoAutosEstacionados (){
-        //$fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
-        $fecha_actual= "2021-11-05 16:07:00";
+        $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
         $data['estadias'] = $this->estadiaModel->obtenerVehiculosEstacionados($fecha_actual);
         $data['titulo'] = "Listado de vehiculos estacionados";
         echo view('template/head');
