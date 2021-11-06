@@ -26,7 +26,7 @@
                                             <p class="text-danger"> <?= session('contraseña') ?> </p>
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">
-                                            Aceptar
+                                            Ingresar
                                         </button>
                                         <hr>
                                     </form>

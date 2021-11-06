@@ -39,9 +39,6 @@
                                    Guardar
                                </button>
                             
-                               <a href=" <?= base_url('Inicio_controller/inicio') ?>" class="btn btn-google btn-user btn-block" style="width: 420px; margin:auto; margin-top: 10px;">
-                                   Cancelar
-                               </a>
                                </div>
 
                               

@@ -85,7 +85,7 @@
                                </button>
                                <hr>
                                <a href="index" class="btn btn-google btn-user btn-block">
-                                   Cancelar
+                                   Volver
                                </a>
                            </form>
                        </div>
