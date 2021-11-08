@@ -1,4 +1,3 @@
-<!-- Esta parece la opcion mas sencilla, ver si se puede mejorar -->
 <div class="container">
 
     <?php if (session()->get('msg')) : ?>
@@ -11,7 +10,7 @@
     <?php endif; ?>
 
 
-    <div class="card o-hidden border-0 shadow-lg my-1">
+    <div class="card o-hidden border-0 shadow-lg my-1" style="margin: -2%;">
         <div class="card-body p-0 ">
             <!-- Nested Row within Card Body -->
             <div class="row justify-content-center">
@@ -33,13 +32,6 @@
                                     <p class="text-danger"> <?= session('errors.apellido') ?> </p>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <input type="number" class="form-control form-control-user" id="dni" placeholder="Dni" name="dni" value="<?= old('dni') ?>" required>
-                                <p class="text-danger"> <?= session('errors.dni') ?> </p>
-                            </div>
-
-
                             <div class="form-group row">
                                 <div class="col-sm-5 mb-4 mb-sm-0">
                                     <label class="classLabel" style="margin-top: 7%; margin-left: 6%">Fecha de nacimiento: </label>
@@ -51,22 +43,17 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="username" placeholder="Nombre de usuario" name="username" value="<?= old('username') ?>" required>
-                                <p class="text-danger"> <?= session('errors.username') ?> </p>
-                            </div>
-
-                            <div class="form-group">
                                 <input type="email" class="form-control form-control-user" id="email" placeholder="Email" name="email" value="<?= old('email') ?>" required>
                                 <p class="text-danger"> <?= session('errors.email') ?> </p>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña" name="contraseña" value="<?= old('contraseña') ?>" required>
+                                    <input type="text" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña" name="contraseña" value="<?= old('contraseña') ?>" required>
                                     <p class="text-danger"> <?= session('errors.contraseña') ?> </p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Confirmar contraseña" name="confirmarContraseña" required>
+                                    <input type="text" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Confirmar contraseña" name="confirmarContraseña" required>
                                     <p class="text-danger"> <?= session('errors.confirmarContraseña') ?> </p>
                                 </div>
                             </div>
@@ -75,7 +62,7 @@
                                 Guardar
                             </button>
                             <hr>
-                            <a href="<?= base_url('inicio_controller') ?>" class="btn btn-google btn-user btn-block">
+                            <a href="<?= base_url('listado-usuarios') ?>" class="btn btn-google btn-user btn-block">
                                 Volver
                             </a>
                         </form>

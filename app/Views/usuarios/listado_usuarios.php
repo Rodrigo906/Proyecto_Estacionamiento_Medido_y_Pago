@@ -1,12 +1,20 @@
+<?php if (session()->get('msg')) : ?>
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+        <strong><?= session()->getFlashdata('msg') ?></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
 <div class="card-header py-3">
     <h4 class="m-0 font-weight-bold text-primary">Usuarios</h4>
 </div>
-
 <div class="contenedor_tabla" style="margin: 20px;">
 
     <div class="content-icono">
-      
-        <a href="<?= base_url('User_controller/MostrarFormularioRegistro') ?>" data-toggle="tooltip" title="Agregar">
+
+        <a href="<?= base_url('alta-usuario') ?>" data-toggle="tooltip" title="Agregar">
 
             <i class="bi bi-plus-circle-fill" style="font-size: 2rem;"></i>
         </a>
@@ -39,11 +47,11 @@
                     <td> <?php echo $usuario['rol'] ?> </td>
                     <td>
 
-                        <a href="#" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
+                        <a href="<?= base_url('eliminar/' . $usuario['id_usuario']) ?>" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
                         </a>
 
-                        <a href="MostrarFormularioRegistro" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
+                        <a href="<?= base_url('editar') ?>" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
                             <i class="bi bi-pencil-square" style="font-size: .8rem"></i>
                         </a>
 

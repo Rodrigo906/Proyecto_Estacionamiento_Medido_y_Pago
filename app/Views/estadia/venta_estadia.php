@@ -1,10 +1,15 @@
 <div class="container">
     <!-- Outer Row -->
 
-    <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 8px;" >   
-    <p> <?= session('mensajes.exito'); ?> </p>   
-    </div>
-    
+    <?php if (session()->get('msg')) : ?>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong><?= session()->getFlashdata('msg') ?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+
     <div class="row justify-content-center">
 
         <div class="col-xl-15 col-lg-12 col-md-9">
@@ -18,7 +23,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Vender estadia</h1>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('Estadia_controller/venderEstadia') ?>">
+                                <form class="user" method="POST" action="<?= base_url('registrar-venta') ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="dominio" aria-describedby="dominio" placeholder="Dominio" name="patente" value="<?= old('patente') ?>">
                                         <p class="text-danger"> <?= session('errors.patente') ?> </p>
@@ -43,11 +48,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="time" min= "1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas" value="<?= old('cant_horas') ?>">
+                                        <input type="time" min="1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" placeholder="Cantidad de horas" name="cant_horas" value="<?= old('cant_horas') ?>">
                                         <p class="text-danger"> <?= session('errors.cant_horas') ?> </p>
                                     </div>
-
-
 
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
                                         Aceptar

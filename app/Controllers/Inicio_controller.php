@@ -47,7 +47,7 @@ class Inicio_controller extends BaseController
 
                 $session = session();
                 $session->set($datosLogin);
-                return redirect()->to('Inicio_controller/inicio');
+                return redirect()->to('inicio');
             } else
                 return redirect()->back()->withInput()->with('contraseña', 'Contraseña incorrecta');
         } else
