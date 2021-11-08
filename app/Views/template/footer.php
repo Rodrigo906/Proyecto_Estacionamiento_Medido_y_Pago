@@ -25,11 +25,17 @@
 </script>
 
 <!-- Core plugin JavaScript-->
+
+<!-- Core plugin JavaScript-->
 <script src="<?= base_url('assets/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/js/sb-admin-2.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/funciones.js'); ?>"></script>
+
+
 
 </body>
 

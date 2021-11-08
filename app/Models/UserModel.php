@@ -41,6 +41,7 @@ class UserModel extends Model
             "VALUES ('$username', '$nombre', '$apellido', '$contraseña','$email','$dni', '$fecha_nacimiento', '$rol')");
     }
 
+
     public function obtenerDatosUsuario ($username){
         $result = $this->db->query("SELECT * FROM usuario WHERE username='$username'");
         return $result->getResultArray();
@@ -48,19 +49,24 @@ class UserModel extends Model
 
     public function obtenerDatosUsuarioCliente ($username){
         $result = $this->db->query("SELECT * FROM usuario u JOIN cuenta c ON (u.id_usuario = c.id_usuario) WHERE u.username = '$username'");
-        
+
         return $result->getResultArray();
     }
 
-    public function actualizarDatosPersonales ($username, $nombre, $apellido, $email, $fecha_nacimiento){
+    public function actualizarDatosPersonales($username, $nombre, $apellido, $email, $fecha_nacimiento)
+    {
         $this->db->query("UPDATE usuario SET nombre= '$nombre', apellido='$apellido', email='$email', fecha_nacimiento='$fecha_nacimiento' WHERE username= '$username'");
     }
 
-    public function restablecerContraseña ($username){
+    public function restablecerContraseña($username)
+    {
         $this->db->query("UPDATE usuario SET contraseña= '1234' WHERE username= '$username'");
     }
 
 
-
-
+    public function eliminarUsuario($id)
+    {
+        $estado = true;
+        $this->db->query("UPDATE usuario SET eliminado='$estado' WHERE id_usuario='$id'");
+    }
 }

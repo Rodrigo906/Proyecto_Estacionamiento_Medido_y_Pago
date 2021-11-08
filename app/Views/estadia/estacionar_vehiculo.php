@@ -1,16 +1,19 @@
-
 <div class="container">
     <!-- Outer Row -->
-    
-    <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 8px;" >   
-    <p> <?= session('mensajes.exito'); ?> </p>   
-    </div>
+    <?php if (session()->get('msg')) : ?>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong><?= session()->getFlashdata('msg') ?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
 
     <div class="row justify-content-center">
 
         <div class="col-xl-15 col-lg-12 col-md-9">
 
-            <div class="card o-hidden border-0 shadow-lg my-1">
+            <div class="card o-hidden border-0 shadow-lg my-1" style="margin: -2%;">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row justify-content-center">
@@ -19,7 +22,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Estacionar vehiculo</h1>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('Estadia_controller/registrarEstadia') ?>">
+                                <form class="user" method="POST" action="<?= base_url('registrar-estacionamiento') ?>">
                                     <div class="form-group">
                                         <select style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="patente" required>
                                             <option value='' disabled selected>
@@ -60,7 +63,7 @@
                                             <label class="classLabel" style="margin-top: 1rem; margin-left: .6rem">Hora de salida: </label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <input type="time" min="1:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas" readonly>
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas" readonly>
                                             <p class="text-danger"> <?= session('errors.cant_horas') ?></p>
                                         </div>
                                         <div class="custom-control custom-checkbox small" style="margin-left: 1.3rem">

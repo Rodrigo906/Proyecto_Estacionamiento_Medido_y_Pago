@@ -8,7 +8,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3"> PS 2021 </div>
     </a>
 
     <!-- Divider -->
@@ -16,13 +16,13 @@
 
     <!-- Nav Item - Inicio -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('Inicio_controller/inicio') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?= base_url('inicio') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Inicio</span></a>
     </li>
 
     <!-- Nav Item - Usuarios -->
     <li class="nav-item" id="usuarios">
-        <a class="nav-link" href="<?php echo base_url('User_controller/index') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?php echo base_url('listado-usuarios') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> Usuarios </span></a>
     </li>
 
@@ -44,9 +44,9 @@
             <span>Puntos de ventas</span></a>
     </li>
 
-     <!-- Nav Item - Registar vehiculo -->
-     <li class="nav-item" id="registrar_vehiculo">
-        <a class="nav-link" href="<?= base_url('Vehiculo_controller/formularioRegistroVehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+    <!-- Nav Item - Registar vehiculo -->
+    <li class="nav-item" id="registrar_vehiculo">
+        <a class="nav-link" href="<?= base_url('registro-auto') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> Registar vehiculo </span></a>
     </li>
 
@@ -65,12 +65,12 @@
     </li>
 
     <li class="nav-item" id="estacionar_vehiculo">
-        <a class="nav-link" href="<?= base_url('Estadia_controller/mostrarFormularioEstacionamiento') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?= base_url('estacionar-vehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> Estacionar vehiculo </span></a>
     </li>
 
     <li class="nav-item" id="desEstacionar_vehiculo">
-        <a class="nav-link" href="<?= base_url('Estadia_controller/desEstacionar') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?= base_url('des_estacionar-vehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> DesEstacionar vehiculo </span></a>
     </li>
 

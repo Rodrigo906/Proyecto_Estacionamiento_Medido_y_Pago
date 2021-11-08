@@ -74,7 +74,7 @@ class Estadia_controller extends BaseController
             list($hora, $minutos) = explode(":", $cantHoras);
             $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
         }
-    
+
         $id_zona = $_POST['zona'];
 
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
@@ -97,9 +97,9 @@ class Estadia_controller extends BaseController
             $precio = 0;
             $estado_pago = "Pagado";
         }
-        
+
         $id_vendedor = null;
-        
+
         $this->estadiaModel->registrarEstadia(
             $id_usuario,
             $id_vendedor,
@@ -113,12 +113,14 @@ class Estadia_controller extends BaseController
 
         session()->set(['estadia' => $id_vehiculo]);
 
-        $mensajeExito = [
+        /*$mensajeExito = [
         'exito' => 'Registrado correctamente',
         'tipo' => 'alert',
         ];
 
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);*/
+        session()->setFlashdata('msg', 'Se registró correctamente');
+        return redirect()->back();
     }
 
     //Venta de estadia por parte del usuario vendedor !!
@@ -167,17 +169,19 @@ class Estadia_controller extends BaseController
             $precio,
         );
 
-        $mensajeExito = [
+        /*$mensajeExito = [
             'exito' => 'Registrado correctamente',
             'tipo' => 'alert',
-            ];
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
+        ];
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);*/
+        session()->setFlashdata('msg', 'Se registró correctamente');
+        return redirect()->back();
     }
 
     //Desestaciona un vehiculo previamente estacionado
     public function desEstacionar()
     {
-        
+
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
@@ -204,9 +208,9 @@ class Estadia_controller extends BaseController
             echo view('errores/operacionExitosa', $data);
         }
         else{
+
             $data['mensaje'] = "Debe estacionar un auto con anterioridad";
             echo view('errores/accesoRestringido', $data);
-          
         }
         echo view('template/footer');
     }

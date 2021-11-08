@@ -141,7 +141,7 @@ class Validation
         'patente' => [
             'rules' => 'required|is_not_unique[vehiculo.patente]',
             'errors' => [
-                'required' => 'Este campo es obligatorio' ,
+                'required' => 'Este campo es obligatorio',
                 'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
             ],
         ],
@@ -149,7 +149,7 @@ class Validation
         'zona' => [
             'rules' => 'required|is_not_unique[zona.id_zona]',
             'errors' => [
-                'required' =>  'Por favor, seleccione una zona' ,
+                'required' =>  'Por favor, seleccione una zona',
                 'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
             ],
         ],
@@ -228,6 +228,4 @@ class Validation
             ],
         ],
     ];
-
-
 }

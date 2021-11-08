@@ -14,14 +14,15 @@ class Vehiculo_controller extends BaseController
         $this->vehiculoModel = new VehiculoModel();
     }
 
-    public function index(){
-
+    public function index()
+    {
     }
 
     //mostrara el formulario de registro
-    public function formularioRegistroVehiculo(){
+    public function formularioRegistroVehiculo()
+    {
 
-        $data['subtitulo'] = 'Registar vehiculo';
+        $data['subtitulo'] = 'Registrar vehiculo';
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
@@ -29,28 +30,28 @@ class Vehiculo_controller extends BaseController
         echo view('template/footer');
     }
 
-    public function registrarVehiculo(){     
-        
-        $validation = service('validation');                  
-        $validation->setRuleGroup('formVehiculoValidation');    
-        
-        if(!$validation->withRequest($this->request)->run()){
+    public function registrarVehiculo()
+    {
+
+        $validation = service('validation');
+        $validation->setRuleGroup('formVehiculoValidation');
+
+        if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
         $patente = $_POST['patente'];
         $marca = $_POST['marca'];
         $modelo = $_POST['modelo'];
-        
+
         $this->vehiculoModel->registrarVehiculo($patente, session('id_usuario'), $marca, $modelo);
 
-        $mensajeExito = [
+        /*$mensajeExito = [
             'exito' => 'Registrado correctamente',
             'tipo' => 'alert',
             ];
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
+        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);*/
+        session()->setFlashdata('msg', 'Registrado correctamente');
+        return redirect()->back();
     }
-
 }
-
-?>
