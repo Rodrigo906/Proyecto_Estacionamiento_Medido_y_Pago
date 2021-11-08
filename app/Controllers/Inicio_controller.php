@@ -34,17 +34,31 @@ class Inicio_controller extends BaseController
 
             $username = $_POST['username'];
             $usuario = $this->userModel->obtenerDatosUsuario($username);
-
+        
             if ($_POST['contraseña'] == $usuario[0]['contraseña']) {
-                $rol = $this->rolModel->find($usuario[0]['id_rol']);
-                $datosLogin = [
-                    'id_usuario' => $usuario[0]['id_usuario'],
-                    'id_cuenta' => $usuario[0]['id_cuenta'],
-                    'username' => $username,
-                    'rol' => $rol['nombre'],
-                    'estaLogueado' => true,
-                ];
 
+                $rol = $this->rolModel->find($usuario[0]['id_rol']);
+
+                if($rol['nombre'] == "Cliente"){
+                    $cliente = $this->userModel->obtenerDatosUsuarioCliente($username);
+               
+                    $datosLogin = [
+                        'id_usuario' => $cliente[0]['id_usuario'],
+                        'id_cuenta' => $cliente[0]['id_cuenta'],
+                        'username' => $username,
+                        'rol' => $rol['nombre'],
+                        'estaLogueado' => true,
+                    ];
+                }
+                else{
+                    $datosLogin = [
+                        'id_usuario' => $usuario[0]['id_usuario'],
+                        'username' => $username,
+                        'rol' => $rol['nombre'],
+                        'estaLogueado' => true,
+                    ];
+                }
+                
                 $session = session();
                 $session->set($datosLogin);
                 return redirect()->to('inicio');

@@ -67,17 +67,14 @@
                                             <p class="text-danger"> <?= session('errors.cant_horas') ?></p>
                                         </div>
                                         <div class="custom-control custom-checkbox small" style="margin-left: 1.3rem">
-                                            <input type="checkbox" class="custom-control-input" id="checkIndefinido" onchange="comprobar();" checked>
+                                            <input type="checkbox" name="indefinido" class="custom-control-input" id="checkIndefinido" onchange="comprobar();" checked>
                                             <label class="custom-control-label" for="checkIndefinido"> Indefinido</label>
                                         </div>
                                     </div>
 
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
-                                        Aceptar
+                                       Registrar
                                     </button>
-                                    <a href="index" class="btn btn-danger btn-user btn-block">
-                                        Cancelar
-                                    </a>
                                 </form>
                             </div>
                         </div>

@@ -90,7 +90,8 @@
                                </button>
                                <hr>
                                <a href="<?= base_url('listado-usuarios') ?>" class="btn btn-google btn-user btn-block">
-                                   Cancelar
+                                   Volver
+
                                </a>
                            </form>
                        </div>

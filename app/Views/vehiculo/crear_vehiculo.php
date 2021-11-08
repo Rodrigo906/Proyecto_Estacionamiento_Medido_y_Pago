@@ -41,11 +41,9 @@
                                     </div>
 
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
-                                        Aceptar
+                                        Registrar
                                     </button>
-                                    <a href="index" class="btn btn-danger btn-user btn-block">
-                                        Cancelar
-                                    </a>
+                                 
                                 </form>
                             </div>
                         </div>
@@ -55,3 +53,4 @@
         </div>
     </div>
 </div>
+

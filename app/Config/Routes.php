@@ -53,8 +53,6 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($ro
     $routes->get('editar', 'User_controller::mostrarFormularioActualizacion()');
 
 
-
-
     /* SIN IMPLEMENTAR AUN
     $routes->get('editar-usuario', 'User_controller::  ');
     $routes->get('modificar-zona', 'Zona_controller::  ');

@@ -26,12 +26,14 @@
                                             <p class="text-danger"> <?= session('contraseña') ?> </p>
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">
-                                            Aceptar
+                                            Ingresar
                                         </button>
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Olvidó su contraseña?</a>
+
+                                        <a class="small" href="<?= base_url('User_controller/mostrarFormularioRecuperacion')?>" > Olvidó su contraseña? </a>
+
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href=" <?= base_url('registrarme') ?> ">Crear una cuenta!</a>

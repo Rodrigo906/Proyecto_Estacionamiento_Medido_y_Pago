@@ -135,13 +135,6 @@ class Validation
                 'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
             ],
         ],
-
-        'cant_horas' => [
-            //  'rules' => 'required',
-            'errors' => [
-                'required' => 'Este campo es obligatorioooo',
-            ],
-        ],
     ];
 
     public $formVentaEstadiaValidation = [
