@@ -37,7 +37,9 @@ $routes->get('cerrar-sesion', 'Inicio_controller::cerrarSesion');
 $routes->get('inicio', 'Inicio_controller::inicio');
 
 $routes->get('registrarme', 'User_controller::MostrarFormularioRegistro');
-$routes->post('registrar-usuario', 'User_controller::registrarUsuario');
+
+$routes->get('actualizar-usuario/(:num)', 'User_controller::mostrarFormularioActualizacion/$1');
+$routes->post('actualizar-usuario', 'User_controller::actualizarInformacionPersonal');
 
 
 /* Aqui se definen las rutas a las cuales tiene acceso cada rol*/
@@ -47,19 +49,13 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($ro
 
     $routes->get('listado-usuarios', 'User_controller::index');
     $routes->get('alta-usuario', 'User_controller::mostrarFormularioAltaUsuario');
-
+    $routes->post('registrar-usuario', 'User_controller::registrarUsuario');
     $routes->get('eliminar/(:num)', 'User_controller::eliminar/$1');
-    $routes->get('editar-usuario', 'User_controller:: actualizarInformacionPersonal');
-    $routes->get('editar', 'User_controller::mostrarFormularioActualizacion()');
-
-
+    
     /* SIN IMPLEMENTAR AUN
-    $routes->get('editar-usuario', 'User_controller::  ');
     $routes->get('modificar-zona', 'Zona_controller::  ');
     $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::  ');
     $routes->get('listar-multas', 'Infraccion_controller::  ');
-    $routes->get('mi-perfil', 'User_controller::  ');
-    $routes->get('editar-mi-perfil', 'User_controller:: ');
     */
 });
 
@@ -81,8 +77,6 @@ $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function ($routes) 
     /* SIN IMPLEMENTAR AUN
     $routes->get('cargar-saldo', 'User_controller::  ');
     $routes->get('pagar-estadias-pendientes', 'Estadia_controller::  ');
-    $routes->get('mi-perfil', 'User_controller::  ');
-    $routes->get('editar-mi-perfil', 'User_controller:: ');
     */
 });
 
@@ -105,8 +99,6 @@ $routes->group('/', ['filter' => 'Filter_permisos:Inspector'], function ($routes
     /* SIN IMPLEMENTAR AUN
     $routes->get('consultar-estacionamiento', 'Vehiculo_controller::  ');
     $routes->get('alta-infraccion', 'Infraccion_controller::  ');
-    $routes->get('mi-perfil', 'User_controller::  ');
-    $routes->get('editar-mi-perfil', 'User_controller:: ');
     */
 });
 

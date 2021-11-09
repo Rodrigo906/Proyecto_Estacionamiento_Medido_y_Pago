@@ -22,7 +22,6 @@
 
     </div>
 
-
     <table class=" table table-striped table-bordered">
         <thead>
             <tr class="text-center">
@@ -47,13 +46,11 @@
                     <td> <?php echo $usuario['email'] ?> </td>
                     <td> <?php echo $usuario['rol'] ?> </td>
                     <td>
+                    <a onclick="return confirm('¿Realmente desea eliminar al usuario <?= $usuario['username']?>?')" href="<?= base_url('eliminar/' . $usuario['id_usuario']) ?>" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
+                    </a>
 
-                        <a href="<?= base_url('eliminar/' . $usuario['id_usuario']) ?>" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
-
-                            <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
-                        </a>
-
-                        <a href="<?= base_url('editar') ?>" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
+                        <a href="<?= base_url('actualizar-usuario/'.$usuario['id_usuario']) ?>" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
                             <i class="bi bi-pencil-square" style="font-size: .8rem"></i>
                         </a>
 

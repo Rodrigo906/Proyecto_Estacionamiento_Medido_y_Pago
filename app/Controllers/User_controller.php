@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\RolModel;
 use CodeIgniter\CLI\Console;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class User_controller extends BaseController
 {
@@ -106,10 +107,17 @@ class User_controller extends BaseController
 
     //AGREGADO EN SPRINT 2
 
-    public function mostrarFormularioActualizacion()
+    public function mostrarFormularioActualizacion($id_usuario)
     {
+        //si no es administrador no puede acceder a la informacion de otro usuario, solo a la suya
+        if(session('rol') != "Administrador" && session('id_usuario') != $id_usuario){
+            throw PagenotFoundException::forPageNotFound();
+        }
+
         $data['titulo'] = "Editar usuario";
         $data['subtitulo'] = "Editar usuario";
+
+        $data['usuario'] = $this->userModel->find($id_usuario);
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
@@ -119,26 +127,24 @@ class User_controller extends BaseController
 
     public function actualizarInformacionPersonal()
     {
-
         $validation = service('validation');
         $validation->setRuleGroup('formActualizacionValidation');
 
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-
+        
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $email = $_POST['email'];
         $fecha_nacimiento = $_POST['fecha_nacimiento'];
+        $contraseña = $_POST['contraseña'];
+        $username = $_POST['username'];
 
-        $this->userModel->actualizarDatosPersonales(session('username'), $nombre, $apellido, $email, $fecha_nacimiento);
+        $this->userModel->actualizarDatosPersonales($username, $nombre, $apellido, $email, $fecha_nacimiento, $contraseña);
 
-        $mensajeExito = [
-            'exito' => 'Datos actualizados',
-            'tipo' => 'alert',
-        ];
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
+        session()->setFlashdata('msg', 'Se actualizaron sus datos correctamente');
+        return redirect()->back();
     }
 
     public function mostrarFormularioRecuperacion (){
@@ -150,11 +156,13 @@ class User_controller extends BaseController
 
     public function recuperarContraseña(){
 
+        $validation = service('validation');
+        $validation->setRuleGroup('formRestablecerContraseñaValidation');
+
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
         //Aqui se deberia enviar un mail al usuario
-        //$username = $_POST['username'];
         $this->userModel->restablecerContraseña($_POST['username']);
 
         $mensajeExito = [

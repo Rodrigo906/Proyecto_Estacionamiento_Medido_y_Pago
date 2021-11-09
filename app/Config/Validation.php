@@ -208,6 +208,21 @@ class Validation
                 'valid_date' => 'Ingrese la fecha en formato dd/mm/yyyy',
             ],
         ],
+
+        'contraseña' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Ingrese una contraseña por favor',
+            ],
+        ],
+
+        'confirmarContraseña' => [
+            'rules' => 'required|matches[contraseña]',
+            'errors' => [
+                'required' => 'Ingrese una contraseña por favor',
+                'matches' => 'La confirmacion de contraseña no es correcta, reintentelo por favor',
+            ],
+        ],
     ];
 
     public $formRestablecerContraseñaValidation = [

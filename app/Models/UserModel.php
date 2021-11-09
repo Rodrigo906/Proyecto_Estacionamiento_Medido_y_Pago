@@ -53,9 +53,9 @@ class UserModel extends Model
         return $result->getResultArray();
     }
 
-    public function actualizarDatosPersonales($username, $nombre, $apellido, $email, $fecha_nacimiento)
+    public function actualizarDatosPersonales($username, $nombre, $apellido, $email, $fecha_nacimiento, $contraseña)
     {
-        $this->db->query("UPDATE usuario SET nombre= '$nombre', apellido='$apellido', email='$email', fecha_nacimiento='$fecha_nacimiento' WHERE username= '$username'");
+        $this->db->query("UPDATE usuario SET nombre= '$nombre', apellido='$apellido', email='$email', fecha_nacimiento='$fecha_nacimiento', contraseña='$contraseña' WHERE username= '$username'");
     }
 
     public function restablecerContraseña($username)
