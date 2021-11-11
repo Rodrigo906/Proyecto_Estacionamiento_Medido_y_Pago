@@ -78,8 +78,8 @@ class Estadia_controller extends BaseController
         $id_zona = $_POST['zona'];
 
         if ($this->zonaModel->esHorarioCobro($id_zona)) {
-            
-            if(!isset($_POST['indefinido'])){
+
+            if (!isset($_POST['indefinido'])) {
 
                 $zona = $this->zonaModel->find($id_zona);
 
@@ -87,12 +87,10 @@ class Estadia_controller extends BaseController
                 $precio = $zona['costo_hora'] * $hora_decimal;
 
                 $estado_pago = $this->cuentaModel->estadoPago($precio);
-            }
-            else{
+            } else {
                 $estado_pago = "En curso";
                 $precio = 0;
             }
-
         } else {
             $precio = 0;
             $estado_pago = "Pagado";
@@ -185,12 +183,12 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        
+
         if (session('estadia') != null) {
-            
+
             $estadia = $this->estadiaModel->obtenerUltimaEstadia(session('estadia'));
             $precio = 0;
-            if ($estadia[0]['estado_pago'] == "En curso"){
+            if ($estadia[0]['estado_pago'] == "En curso") {
 
                 $fechaActual = new DateTime(new Time('now', 'America/Argentina/Buenos_Aires'));
                 $fechaInicio = new DateTime($estadia[0]['fecha_inicio']);
@@ -198,7 +196,6 @@ class Estadia_controller extends BaseController
                 $hora_decimal = $diferenciaHoras / 60;
                 $zona = $this->zonaModel->find($estadia[0]['id_zona']);
                 $precio = $zona['costo_hora'] * $hora_decimal;
-
             }
             $estado_pago = $this->cuentaModel->estadoPago($precio);
             $this->estadiaModel->terminarEstadia(session('estadia'), new Time('now', 'America/Argentina/Buenos_Aires'), $precio, $estado_pago);
@@ -206,8 +203,7 @@ class Estadia_controller extends BaseController
 
             $data['mensaje'] = "Vehiculo desEstacionado correctamente";
             echo view('errores/operacionExitosa', $data);
-        }
-        else{
+        } else {
 
             $data['mensaje'] = "Debe estacionar un auto con anterioridad";
             echo view('errores/accesoRestringido', $data);
@@ -215,7 +211,8 @@ class Estadia_controller extends BaseController
         echo view('template/footer');
     }
 
-    public function mostrarListadoAutosEstacionados (){
+    public function mostrarListadoAutosEstacionados()
+    {
         $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
         $data['estadias'] = $this->estadiaModel->obtenerVehiculosEstacionados($fecha_actual);
         $data['titulo'] = "Listado de vehiculos estacionados";
@@ -226,41 +223,42 @@ class Estadia_controller extends BaseController
         echo view('template/footer');
     }
 
-    public function mostrarConsultaEstadia (){
+    public function mostrarConsultaEstadia()
+    {
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        //formulario
+        echo view('estadia/consultar_estadia');
         echo view('template/footer');
     }
 
-    public function consultarEstadoEstadia(){
+    public function consultarEstadoEstadia()
+    {
         $vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
         $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
 
-        if ($this->estadiaModel->tieneEstadiaActiva($vehiculo['id_vehiculo'], $fecha_actual)){
-           $mensaje = "La estadia del vehiculo ". $vehiculo['patente'] ." esta activa";
+        if ($this->estadiaModel->tieneEstadiaActiva($vehiculo[0]['id_vehiculo'], $fecha_actual)) {
+            /*mensaje = "La estadia del vehiculo " . $vehiculo['patente'] . " esta activa";*/
+            session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está activa.");
+            return redirect()->back();
+        } else {
+            /*$mensaje = "La estadia del vehiculo " . $vehiculo['patente'] . " esta inactiva";*/
+            session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo['patente'] . " está inactiva.");
+            return redirect()->back();
         }
-        else{
-            $mensaje = "La estadia del vehiculo ". $vehiculo['patente'] ." esta inactiva";
-        }
-        return redirect()->back()->withInput()->with('mensaje', $mensaje);
+        //return redirect()->back()->withInput()->with('mensaje', $mensaje);
     }
 
     //Consultado por el vendedor
-    public function mostrarMisVentas(){
+    public function mostrarMisVentas()
+    {
         $data['ventas'] = $this->estadiaModel->obtenerVentas(session('id_usuario'));
         $data['titulo'] = "Listado de ventas";
 
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        echo view('estadia/listado_ventas', $data); 
+        echo view('estadia/listado_ventas', $data);
         echo view('template/footer');
-        
     }
-
-    
-
-    
 }

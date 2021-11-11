@@ -33,24 +33,19 @@ class VehiculoModel extends Model
             "VALUES ('$patente', '$id_usuario', '$marca', '$modelo')");
     }
 
-    public function obtenerVehiculo ($patente){
-        $consulta = $this->db->query('SELECT * FROM vehiculo WHERE patente = '. $patente);
+    public function obtenerVehiculo($patente)
+    {
+        $consulta = $this->db->query("SELECT * FROM 
+        vehiculo WHERE patente = '$patente'");
         return $consulta->getResultArray();
     }
 
-    public function estaEstacionado ($id_vehiculo){
+    public function estaEstacionado($id_vehiculo)
+    {
         $estadia = $this->db->query("SELECT * FROM estadia e WHERE e.id_vehiculo = '$id_vehiculo' AND fecha_fin IS NULL");
-        if ($estadia != null){
+        if ($estadia != null) {
             return true;
         }
         return false;
     }
-
-    
-
-
-
-
 }
-
-?>
