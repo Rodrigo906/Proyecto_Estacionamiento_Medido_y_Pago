@@ -12,7 +12,13 @@ class Filter_acceso implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if(!in_array(session('rol'), $arguments)){
-            throw PageNotFoundException::forPageNotFound();
+          $data['mensaje'] = "Acceso restringido: no posee los permisos necesarios para acceder a esta seccion";
+            echo view('template/head');
+            echo view('template/sidenav');
+            echo view('template/layout');
+            echo view('errores/accesoRestringido', $data);
+            echo view('template/footer');
+           exit;
         }
     }
 

@@ -3,8 +3,9 @@
     namespace App\Models;
 
     use CodeIgniter\Model;
+use mysqli;
 
-    class EstadiaModel extends Model{
+class EstadiaModel extends Model{
 
         protected $table = 'estadia';
         protected $primaryKey = 'id_estadia';
@@ -57,10 +58,10 @@
 
         public function tieneEstadiaActiva($id_vehiculo, $fecha_actual){
                 $result = $this->db->query("SELECT * FROM estadia WHERE id_vehiculo= '$id_vehiculo' AND (('$fecha_actual' BETWEEN fecha_inicio AND fecha_fin) OR fecha_fin IS NULL)");
-                if(empty($result)){
-                        return false;
+                if($result->getNumRows() != 0){
+                        return true;
                 }
-                return true;
+                return false;
         }
 
         public function obtenerVentas ($id_vendedor){

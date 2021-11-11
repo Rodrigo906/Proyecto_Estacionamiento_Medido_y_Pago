@@ -34,7 +34,12 @@ class VehiculoModel extends Model
     }
 
     public function obtenerVehiculo ($patente){
-        $consulta = $this->db->query('SELECT * FROM vehiculo WHERE patente = '. $patente);
+        $consulta = $this->db->query("SELECT * FROM vehiculo WHERE patente =".$patente);
+        return $consulta->getResultArray();
+    }
+
+    public function obtenerMisVehiculos ($id_usuario){
+        $consulta = $this->db->query("SELECT * FROM vehiculo_usuario vu JOIN vehiculo v ON (vu.id_vehiculo = v.id_vehiculo) WHERE vu.id_usuario=".$id_usuario);
         return $consulta->getResultArray();
     }
 
