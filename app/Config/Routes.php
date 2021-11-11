@@ -55,7 +55,7 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($ro
     $routes->post('registrar-usuario', 'User_controller::registrarUsuario');
     $routes->get('eliminar/(:num)', 'User_controller::eliminar/$1');
     $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::mostrarListadoAutosEstacionados');
-    
+
     /* SIN IMPLEMENTAR AUN
     $routes->get('modificar-zona', 'Zona_controller::  ');
     $routes->get('listar-multas', 'Infraccion_controller::  ');
@@ -99,10 +99,18 @@ $routes->group('/', ['filter' => 'Filter_permisos:Vendedor'], function ($routes)
 //INSPECTOR
 $routes->group('/', ['filter' => 'Filter_permisos:Inspector'], function ($routes) {
 
-    /* SIN IMPLEMENTAR AUN
-    $routes->get('consultar-estacionamiento', 'Vehiculo_controller::  ');
-    $routes->get('alta-infraccion', 'Infraccion_controller::  ');
-    */
+    $routes->get(
+        'consultar-estadia',
+        'Estadia_controller::mostrarConsultaEstadia'
+    );
+    $routes->get(
+        'estado-estadia',
+        'Estadia_controller::consultarEstadoEstadia'
+    );
+    $routes->get(
+        'alta-infraccion',
+        'Infraccion_controller::  '
+    );
 });
 
 
