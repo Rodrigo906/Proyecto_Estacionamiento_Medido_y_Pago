@@ -16,7 +16,7 @@
 
                                     <p class="text-danger"> <?= session('error_login') ?> </p>
 
-                                    <form class="user" method="POST" action="<?= base_url('Inicio_controller/loguear') ?>">
+                                    <form class="user" method="POST" action="<?= base_url('loguearme') ?>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="username" aria-describedby="username" placeholder="username" name="username" value="<?= old('username') ?>" required>
                                             <p class="text-danger"> <?= session('errors.username') ?> </p>
@@ -32,7 +32,7 @@
                                     </form>
                                     <div class="text-center">
 
-                                        <a class="small" href="<?= base_url('User_controller/mostrarFormularioRecuperacion')?>" > Olvidó su contraseña? </a>
+                                        <a class="small" href="<?= base_url('formulario-recuperacion')?>" > Olvidó su contraseña? </a>
 
                                     </div>
                                     <div class="text-center">

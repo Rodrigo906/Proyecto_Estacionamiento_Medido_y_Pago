@@ -32,9 +32,12 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Inicio_controller::index');
-
+$routes->post('recuperar-contraseña', 'User_controller::recuperarContraseña');
 $routes->get('cerrar-sesion', 'Inicio_controller::cerrarSesion');
 $routes->get('inicio', 'Inicio_controller::inicio');
+$routes->post('loguearme', 'Inicio_controller::loguear');
+$routes->get('formulario-recuperacion', 'User_controller::mostrarFormularioRecuperacion');
+
 
 $routes->get('registrarme', 'User_controller::MostrarFormularioRegistro');
 
@@ -51,10 +54,10 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($ro
     $routes->get('alta-usuario', 'User_controller::mostrarFormularioAltaUsuario');
     $routes->post('registrar-usuario', 'User_controller::registrarUsuario');
     $routes->get('eliminar/(:num)', 'User_controller::eliminar/$1');
+    $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::mostrarListadoAutosEstacionados');
     
     /* SIN IMPLEMENTAR AUN
     $routes->get('modificar-zona', 'Zona_controller::  ');
-    $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::  ');
     $routes->get('listar-multas', 'Infraccion_controller::  ');
     */
 });

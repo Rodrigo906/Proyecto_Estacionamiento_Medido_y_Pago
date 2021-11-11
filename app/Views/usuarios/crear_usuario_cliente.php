@@ -75,7 +75,7 @@
                                 Guardar
                             </button>
                             <hr>
-                            <a href="<?= base_url('inicio_controller') ?>" class="btn btn-google btn-user btn-block">
+                            <a href="<?= base_url('/') ?>" class="btn btn-google btn-user btn-block">
                                 Volver
                             </a>
                         </form>
