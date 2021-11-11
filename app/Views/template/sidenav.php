@@ -21,34 +21,44 @@
     </li>
 
     <!-- Nav Item - Usuarios -->
-    <li class="nav-item" id="usuarios">
-        <a class="nav-link" href="<?php echo base_url('listado-usuarios') ?>" <i class=" fas fa-fw fa-chart-area"></i>
-            <span> Usuarios </span></a>
-    </li>
+    <?php if(session('rol') == 'Administrador') : ?>
+        <li class="nav-item" id="usuarios">
+            <a class="nav-link" href="<?php echo base_url('listado-usuarios') ?>" <i class=" fas fa-fw fa-chart-area"></i>
+                <span> Usuarios </span></a>
+        </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Vehiculos estacionados -->
+    <?php if(session('rol') == 'Administrador') : ?>
     <li class="nav-item" id="vehiculos_estacionados">
         <a class="nav-link" href="<?= base_url('listar-vehiculos-estacionados') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Vehiculos estacionados</span></a>
     </li>
+    <?php endif; ?>
 
+    <?php if(session('rol') == 'Administrador') : ?>
     <!-- Nav Item - Multas -->
     <li class="nav-item" id="multas">
         <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Multas</span></a>
     </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Puntos de ventas -->
+    <?php if(session('rol') == 'Cliente') : ?>
     <li class="nav-item" id="puntos_venta">
         <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
             <span>Puntos de ventas</span></a>
     </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Registar vehiculo -->
+    <?php if(session('rol') == 'Cliente') : ?>
     <li class="nav-item" id="registrar_vehiculo">
         <a class="nav-link" href="<?= base_url('registro-auto') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> Registar vehiculo </span></a>
     </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -64,6 +74,7 @@
         </div>
     </li>
 
+    <?php if(session('rol') == 'Cliente') : ?>
     <li class="nav-item" id="estacionar_vehiculo">
         <a class="nav-link" href="<?= base_url('estacionar-vehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> Estacionar vehiculo </span></a>
@@ -73,6 +84,7 @@
         <a class="nav-link" href="<?= base_url('des_estacionar-vehiculo') ?>" <i class=" fas fa-fw fa-chart-area"></i>
             <span> DesEstacionar vehiculo </span></a>
     </li>
+    <?php endif; ?>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

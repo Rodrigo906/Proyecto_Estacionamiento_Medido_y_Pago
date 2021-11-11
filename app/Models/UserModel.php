@@ -69,4 +69,12 @@ class UserModel extends Model
         $estado = true;
         $this->db->query("UPDATE usuario SET eliminado='$estado' WHERE id_usuario='$id'");
     }
+
+    public function tieneVehiculos ($id_usuario){
+        $consulta = $this->db->query("SELECT * FROM vehiculo_usuario vu JOIN vehiculo v ON (vu.id_vehiculo = v.id_vehiculo) WHERE vu.id_usuario=".$id_usuario);
+        if($consulta->getNumRows() != 0){
+            return true;
+        }
+        return false;
+    }
 }

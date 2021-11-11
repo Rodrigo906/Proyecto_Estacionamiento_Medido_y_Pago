@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CuentaModel;
 use App\Models\EstadiaModel;
+use App\Models\UserModel;
 use App\Models\VehiculoModel;
 use App\Models\ZonaModel;
 use CodeIgniter\I18n\Time;
@@ -16,6 +17,7 @@ class Estadia_controller extends BaseController
     protected $zonaModel;
     protected $vehiculoModel;
     protected $cuentaModel;
+    protected $userModel;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class Estadia_controller extends BaseController
         $this->zonaModel = new ZonaModel();
         $this->vehiculoModel = new VehiculoModel();
         $this->cuentaModel = new CuentaModel();
+        $this->userModel = new UserModel();
     }
 
     //formulario para que el cliente estacione su vehiculo
@@ -32,9 +35,18 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        $data['zonas'] = $this->zonaModel->findAll();
-        $data['vehiculos'] = $this->vehiculoModel->findAll();
-        echo view('estadia/estacionar_vehiculo', $data);
+
+        if ($this->userModel->tieneVehiculos(session('id_usuario'))){
+        
+            $data['zonas'] = $this->zonaModel->findAll();
+            $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
+            echo view('estadia/estacionar_vehiculo', $data);
+
+        }
+        else{
+            $data['mensaje'] = "Aun no posee vehiculos registrados, por favor registre uno primero.";
+            echo view('errores/sinDatos', $data);
+        }
         echo view('template/footer');
     }
 
@@ -52,7 +64,6 @@ class Estadia_controller extends BaseController
     //Registro desde el cliente
     public function registrarEstadia()
     {
-
         $validation = service('validation');
         $validation->setRuleGroup('formEstacionarValidation');
 
@@ -205,7 +216,7 @@ class Estadia_controller extends BaseController
             echo view('errores/operacionExitosa', $data);
         } else {
 
-            $data['mensaje'] = "Debe estacionar un auto con anterioridad";
+            $data['mensaje'] = "No tiene ningun vehiculo estacionado";
             echo view('errores/accesoRestringido', $data);
         }
         echo view('template/footer');

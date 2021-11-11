@@ -1,4 +1,3 @@
-<!-- Mejorar el aspecto de esta ventana luego -->
 <html>
 
   <head>
@@ -10,19 +9,13 @@
 
     <body>
     
-            <h1> ¡Operación exitosa! </h1>
+            <h1> ¡Error! </h1>
             
             <p style="text-align: center;"> <?= $mensaje ?> </p>
-            <section class="error-container">
-            <img center height="150" width="150" src="<?= base_url('assets/img/icon-check.png')?>"> 
-            </section>
 
-            <div class="link-container" style="margin-top: -50px;">
+            <div class="link-container">
             <a href="<?=  $_SERVER['HTTP_REFERER'] ?>" class="more-link"> Volver </a>
             </div>
        
 
     </body>
-
-
-</html>

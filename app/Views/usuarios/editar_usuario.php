@@ -74,7 +74,7 @@
                                 Guardar
                             </button>
                             <hr>
-                            <a href="<?= base_url('listado-usuarios') ?>" class="btn btn-google btn-user btn-block">
+                            <a href="<?=  $_SERVER['HTTP_REFERER'] ?>" class="btn btn-google btn-user btn-block">
                                 Volver
                             </a>
                         </form>
