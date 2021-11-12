@@ -13,11 +13,8 @@ class Filter_acceso implements FilterInterface
     {
         if(!in_array(session('rol'), $arguments)){
           $data['mensaje'] = "Acceso restringido: no posee los permisos necesarios para acceder a esta seccion";
-            echo view('template/head');
-            echo view('template/sidenav');
-            echo view('template/layout');
+          $data['volver'] = base_url('/');
             echo view('errores/accesoRestringido', $data);
-            echo view('template/footer');
            exit;
         }
     }

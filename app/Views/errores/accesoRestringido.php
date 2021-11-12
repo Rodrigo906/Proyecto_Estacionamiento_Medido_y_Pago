@@ -23,8 +23,10 @@
         </section>
 
         <div class="link-container">
-        <a href="<?=  $_SERVER['HTTP_REFERER'] ?>" class="more-link"> Volver </a>
+        <a href="<?= $volver ?>" class="more-link"> Volver </a>
         </div>
+
+
 
     </body>
 

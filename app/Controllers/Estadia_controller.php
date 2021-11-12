@@ -44,6 +44,7 @@ class Estadia_controller extends BaseController
 
         }
         else{
+            $data['titulo'] ="¡Error!";
             $data['mensaje'] = "Aun no posee vehiculos registrados, por favor registre uno primero.";
             echo view('errores/sinDatos', $data);
         }
@@ -122,12 +123,6 @@ class Estadia_controller extends BaseController
 
         session()->set(['estadia' => $id_vehiculo]);
 
-        /*$mensajeExito = [
-        'exito' => 'Registrado correctamente',
-        'tipo' => 'alert',
-        ];
-
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);*/
         session()->setFlashdata('msg', 'Se registró correctamente');
         return redirect()->back();
     }
@@ -178,11 +173,6 @@ class Estadia_controller extends BaseController
             $precio,
         );
 
-        /*$mensajeExito = [
-            'exito' => 'Registrado correctamente',
-            'tipo' => 'alert',
-        ];
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);*/
         session()->setFlashdata('msg', 'Se registró correctamente');
         return redirect()->back();
     }
@@ -217,6 +207,7 @@ class Estadia_controller extends BaseController
         } else {
 
             $data['mensaje'] = "No tiene ningun vehiculo estacionado";
+            $data['volver'] = $_SERVER['HTTP_REFERER'];
             echo view('errores/accesoRestringido', $data);
         }
         echo view('template/footer');
@@ -225,12 +216,20 @@ class Estadia_controller extends BaseController
     public function mostrarListadoAutosEstacionados()
     {
         $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
-        $data['estadias'] = $this->estadiaModel->obtenerVehiculosEstacionados($fecha_actual);
-        $data['titulo'] = "Listado de vehiculos estacionados";
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        echo view('estadia/listado_autos_estacionados', $data);
+
+        if($this->estadiaModel->hayVehiculosEstacionados($fecha_actual)){
+            $data['estadias'] = $this->estadiaModel->obtenerVehiculosEstacionados($fecha_actual);
+            $data['titulo'] = "Listado de vehiculos estacionados";
+            echo view('estadia/listado_autos_estacionados', $data);
+        }
+        else{
+            $data['titulo'] ="¡Aviso!";
+            $data['mensaje'] = "No hay vehiculos estacionados en este momento";
+            echo view('errores/sinDatos', $data);
+        }
         echo view('template/footer');
     }
 
@@ -249,15 +248,13 @@ class Estadia_controller extends BaseController
         $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
 
         if ($this->estadiaModel->tieneEstadiaActiva($vehiculo[0]['id_vehiculo'], $fecha_actual)) {
-            /*mensaje = "La estadia del vehiculo " . $vehiculo['patente'] . " esta activa";*/
             session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está activa.");
             return redirect()->back();
+            
         } else {
-            /*$mensaje = "La estadia del vehiculo " . $vehiculo['patente'] . " esta inactiva";*/
-            session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo['patente'] . " está inactiva.");
+            session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está inactiva.");
             return redirect()->back();
         }
-        //return redirect()->back()->withInput()->with('mensaje', $mensaje);
     }
 
     //Consultado por el vendedor

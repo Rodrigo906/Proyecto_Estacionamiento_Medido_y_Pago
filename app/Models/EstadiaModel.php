@@ -69,6 +69,17 @@ class EstadiaModel extends Model{
                 return $result->getResultArray();
         }
 
+        public function hayVehiculosEstacionados($fecha_actual)
+        {
+                $result = $this->db->query("SELECT * FROM estadia e JOIN vehiculo v ON (e.id_vehiculo = v.id_vehiculo) " .
+                        "JOIN usuario u ON (e.id_usuario = u.id_usuario) WHERE " .
+                        "('$fecha_actual' BETWEEN e.fecha_inicio AND e.fecha_fin) OR e.fecha_fin IS NULL");
+                if ($result->getNumRows() != 0) {
+                        return true;
+                }
+                return false;
+        }
+
         public function tieneEstadiaActiva($id_vehiculo, $fecha_actual)
         {
                 $result = $this->db->query("SELECT * FROM estadia WHERE id_vehiculo= '$id_vehiculo' AND (('$fecha_actual' BETWEEN fecha_inicio AND fecha_fin) OR fecha_fin IS NULL)");
