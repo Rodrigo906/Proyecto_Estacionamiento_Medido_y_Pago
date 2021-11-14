@@ -1,15 +1,5 @@
 <div class="container">
 
-    <?php if (session()->get('msg')) : ?>
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <strong><?= session()->getFlashdata('msg') ?></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php endif; ?>
-
-
     <div class="card o-hidden border-0 shadow-lg my-1" style="margin: -2%;">
         <div class="card-body p-0 ">
             <!-- Nested Row within Card Body -->
@@ -17,6 +7,16 @@
 
                 <div class="col-lg-7">
                     <div class="p-5">
+
+                    <?php if (session()->get('msg')) : ?>
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                            <strong><?= session()->getFlashdata('msg') ?></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+                    
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4"> <?= $subtitulo ?> </h1>
                         </div>

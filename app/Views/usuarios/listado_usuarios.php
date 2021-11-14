@@ -1,16 +1,17 @@
+
+<div class="card-header py-3">
+    <h4 class="m-0 font-weight-bold text-primary">Usuarios</h4>
+</div>
+<div class="contenedor_tabla" style="margin: 20px;">
+
 <?php if (session()->get('msg')) : ?>
-    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <strong><?= session()->getFlashdata('msg') ?></strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 <?php endif; ?>
-
-<div class="card-header py-3">
-    <h4 class="m-0 font-weight-bold text-primary">Usuarios</h4>
-</div>
-<div class="contenedor_tabla" style="margin: 20px;">
 
     <div class="content-icono">
 

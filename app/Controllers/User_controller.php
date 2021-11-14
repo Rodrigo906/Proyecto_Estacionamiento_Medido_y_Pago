@@ -60,11 +60,8 @@ class User_controller extends BaseController
         echo view('template/footer');
     }
 
-    //tomara los datos del formulario y los guardara en la BD
-
     public function registrarUsuario()
     {
-
         $validation = service('validation');                  //inicializo la libreria de validacion
         $validation->setRuleGroup('formUsuarioValidation');          //establesco con que reglas se debe validar el formulario
 

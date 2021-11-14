@@ -1,14 +1,5 @@
 <div class="container">
     <!-- Outer Row -->
-    <?php if (session()->get('msg')) : ?>
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <strong><?= session()->getFlashdata('msg') ?></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php endif; ?>
-
     <div class="row justify-content-center">
 
         <div class="col-xl-15 col-lg-12 col-md-9">
@@ -19,6 +10,16 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="p-5">
+
+                            <?php if (session()->get('msg')) : ?>
+                                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                    <strong><?= session()->getFlashdata('msg') ?></strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+                            
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Estacionar vehiculo</h1>
                                 </div>

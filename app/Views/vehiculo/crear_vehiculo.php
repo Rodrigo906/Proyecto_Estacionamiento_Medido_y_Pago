@@ -1,13 +1,5 @@
 <div class="container">
 
-    <?php if (session()->get('msg')) : ?>
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <strong><?= session()->getFlashdata('msg') ?></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php endif; ?>
     <!-- Outer Row -->
     <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 8px;">
         <p> <?= session('mensajes.exito'); ?> </p>
@@ -23,6 +15,16 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="p-5">
+                            
+                            <?php if (session()->get('msg')) : ?>
+                                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                    <strong><?= session()->getFlashdata('msg') ?></strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">
                                         <?= $subtitulo ?>

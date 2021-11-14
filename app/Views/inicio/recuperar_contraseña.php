@@ -1,10 +1,5 @@
 <div class="container">
-    <!-- Outer Row -->
-
-    <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 10px; margin-bottom: -35px;" >   
-    <p> <?= session('mensajes.exito'); ?> </p>   
-    </div>
-    
+    <!-- Outer Row -->    
     <div class="row justify-content-center">
 
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -15,6 +10,11 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="p-5">
+
+                            <div class=" <?= session('mensajes.tipo'); ?> alert-success" role="alert" style="margin-top: 10px; margin-bottom: -35px;" >   
+                                <p> <?= session('mensajes.exito'); ?> </p>   
+                            </div>
+                            
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"> Recuperar contraseña </h1>
                                     <p style="text-align: justify;"> Complete el siguiente formulario y recibirá un email con su nueva contraseña de acceso. </p>
