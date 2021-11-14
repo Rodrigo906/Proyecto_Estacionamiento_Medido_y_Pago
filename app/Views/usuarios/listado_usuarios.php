@@ -18,7 +18,7 @@
         <a href="<?= base_url('alta-usuario') ?>" data-toggle="tooltip" title="Agregar">
 
 
-            <i class="bi bi-plus-circle-fill" style="font-size: 2rem;"></i>
+            <i class="bi bi-person-plus" style="font-size: 2rem;"></i>
         </a>
 
     </div>

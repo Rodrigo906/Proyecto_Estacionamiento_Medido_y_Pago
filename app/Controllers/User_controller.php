@@ -97,7 +97,6 @@ class User_controller extends BaseController
         );
 
         session()->setFlashdata('msg', 'Se registró correctamente');
-        //return redirect()->to('listado-usuarios');
         return redirect()->back();
     }
 

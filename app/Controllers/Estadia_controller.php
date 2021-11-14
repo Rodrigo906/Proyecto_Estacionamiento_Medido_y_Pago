@@ -266,7 +266,15 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        echo view('estadia/listado_ventas', $data);
+
+        if(!empty($data['ventas'])){
+            echo view('estadia/listado_ventas', $data);
+        }
+        else{
+            $data['titulo'] ="¡Aviso!";
+            $data['mensaje'] = "Aun no a realizado ninguna venta";
+            echo view('errores/sinDatos', $data);
+        }
         echo view('template/footer');
     }
 }

@@ -90,11 +90,8 @@ $routes->group('/', ['filter' => 'Filter_permisos:Vendedor'], function ($routes)
     $routes->get('formulario-venta', 'Estadia_controller::mostrarFormularioVentaEstadia');
     $routes->post('registrar-venta', 'Estadia_controller::venderEstadia');
 
-    /* SIN IMPLEMENTAR AUN
-    $routes->get('listar-ventas', 'Estadia_controller::  ');
-    $routes->get('mi-perfil', 'User_controller::  ');
-    $routes->get('editar-mi-perfil', 'User_controller:: ');
-    */
+    $routes->get('listar-ventas', 'Estadia_controller::mostrarMisVentas');
+
 });
 
 //INSPECTOR
