@@ -40,6 +40,7 @@ $routes->get('formulario-recuperacion', 'User_controller::mostrarFormularioRecup
 
 
 $routes->get('registrarme', 'User_controller::MostrarFormularioRegistro');
+$routes->post('registrar-nuevo-cliente', 'User_controller::registrarUsuario');
 
 $routes->get('actualizar-usuario/(:num)', 'User_controller::mostrarFormularioActualizacion/$1');
 $routes->post('actualizar-usuario', 'User_controller::actualizarInformacionPersonal');
@@ -58,7 +59,7 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($ro
 
     /* SIN IMPLEMENTAR AUN
     $routes->get('modificar-zona', 'Zona_controller::  ');
-    $routes->get('listar-multas', 'Infraccion_controller::  ');
+    $routes->get('listar-multas', 'Infraccion_controller:: ');
     */
 });
 
