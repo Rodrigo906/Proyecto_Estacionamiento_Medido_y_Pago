@@ -32,7 +32,6 @@ class Vehiculo_controller extends BaseController
 
     public function registrarVehiculo()
     {
-
         $validation = service('validation');
         $validation->setRuleGroup('formVehiculoValidation');
 
@@ -46,11 +45,6 @@ class Vehiculo_controller extends BaseController
 
         $this->vehiculoModel->registrarVehiculo($patente, session('id_usuario'), $marca, $modelo);
 
-        /*$mensajeExito = [
-            'exito' => 'Registrado correctamente',
-            'tipo' => 'alert',
-            ];
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);*/
         session()->setFlashdata('msg', 'Registrado correctamente');
         return redirect()->back();
     }

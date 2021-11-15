@@ -5,7 +5,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2021</span>
+            <span>Copyright &copy; Proyecto de software 2021</span>
         </div>
     </div>
 </footer>
@@ -36,4 +36,5 @@
 <script src="<?= base_url('assets/js/funciones.js'); ?>"></script>
 
 </body>
+
 </html>
