@@ -97,4 +97,17 @@ class EstadiaModel extends Model{
                         "JOIN usuario u ON (e.id_vendedor = u.id_usuario) WHERE e.id_vendedor= '$id_vendedor'");
                 return $result->getResultArray();
         }
+
+        public function tieneEstadiaAbierta ($id_usuario, &$tieneEstadia){
+                $result = $this->db->query("SELECT * FROM estadia e WHERE e.id_usuario ='$id_usuario' AND e.fecha_fin IS NULL");
+                
+                if ($result->getNumRows() != 0) {
+                        $tieneEstadia = true;
+                }
+                else{
+                        $tieneEstadia = false;
+                }
+                return $result->getResultArray();
+
+        }
 }

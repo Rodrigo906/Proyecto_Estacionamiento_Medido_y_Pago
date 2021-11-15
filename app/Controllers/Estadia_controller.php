@@ -121,8 +121,6 @@ class Estadia_controller extends BaseController
             $precio,
         );
 
-        session()->set(['estadia' => $id_vehiculo]);
-
         session()->setFlashdata('msg', 'Se registró correctamente');
         return redirect()->back();
     }
@@ -184,13 +182,14 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-
-        if (session('estadia') != null) {
-
-            $estadia = $this->estadiaModel->obtenerUltimaEstadia(session('estadia'));
+       
+        $estadia = $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $estadiaAbierta);
+       
+        if ($estadiaAbierta == true) {
+        
             $precio = 0;
             if ($estadia[0]['estado_pago'] == "En curso") {
-
+               
                 $fechaActual = new DateTime(new Time('now', 'America/Argentina/Buenos_Aires'));
                 $fechaInicio = new DateTime($estadia[0]['fecha_inicio']);
                 $diferenciaHoras = $fechaInicio->diff($fechaActual)->i;
@@ -199,9 +198,8 @@ class Estadia_controller extends BaseController
                 $precio = $zona['costo_hora'] * $hora_decimal;
             }
             $estado_pago = $this->cuentaModel->estadoPago($precio);
-            $this->estadiaModel->terminarEstadia(session('estadia'), new Time('now', 'America/Argentina/Buenos_Aires'), $precio, $estado_pago);
-            session()->remove('estadia');
-
+            $this->estadiaModel->terminarEstadia($estadia[0]['id_vehiculo'], new Time('now', 'America/Argentina/Buenos_Aires'), $precio, $estado_pago);
+    
             $data['mensaje'] = "Vehiculo desEstacionado correctamente";
             echo view('errores/operacionExitosa', $data);
         } else {
