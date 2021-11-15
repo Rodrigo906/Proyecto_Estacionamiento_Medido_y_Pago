@@ -106,7 +106,7 @@ class User_controller extends BaseController
     public function mostrarFormularioActualizacion($id_usuario)
     {
         //si no es administrador no puede acceder a la informacion de otro usuario, solo a la suya
-        if(session('rol') != "Administrador" && session('id_usuario') != $id_usuario){
+        if (session('rol') != "Administrador" && session('id_usuario') != $id_usuario) {
             throw PagenotFoundException::forPageNotFound();
         }
 
@@ -129,7 +129,7 @@ class User_controller extends BaseController
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-        
+
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $email = $_POST['email'];
@@ -143,14 +143,15 @@ class User_controller extends BaseController
         return redirect()->back();
     }
 
-    public function mostrarFormularioRecuperacion (){
+    public function mostrarFormularioRecuperacion()
+    {
         echo view('template/head');
         echo view('inicio/recuperar_contraseña');
         echo view('template/footer');
-      
     }
 
-    public function recuperarContraseña(){
+    public function recuperarContraseña()
+    {
 
         $validation = service('validation');
         $validation->setRuleGroup('formRestablecerContraseñaValidation');
@@ -160,12 +161,8 @@ class User_controller extends BaseController
         }
         //Aqui se deberia enviar un mail al usuario
         $this->userModel->restablecerContraseña($_POST['username']);
-
-        $mensajeExito = [
-            'exito' => 'Se restablecio su contraseña correctamente. Ahora esta es "1234" ',
-            'tipo' => 'alert',
-        ];
-        return redirect()->back()->withInput()->with('mensajes', $mensajeExito);
+        session()->setFlashdata('msg', 'Se restableció su contraseña correctamente. Su nueva contaseña es: "1234".');
+        return redirect()->back();
     }
 
     //Elimina cualquier usuario pasado por parametro
@@ -175,5 +172,4 @@ class User_controller extends BaseController
         session()->setFlashdata('msg', 'El usuario se eliminó correctamente.');
         return redirect()->back();
     }
-
 }

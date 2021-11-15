@@ -36,16 +36,14 @@ class Estadia_controller extends BaseController
         echo view('template/sidenav');
         echo view('template/layout');
 
-        if ($this->userModel->tieneVehiculos(session('id_usuario'))){
-        
+        if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
+
             $data['zonas'] = $this->zonaModel->findAll();
             $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
             echo view('estadia/estacionar_vehiculo', $data);
-
-        }
-        else{
-            $data['titulo'] ="¡Error!";
-            $data['mensaje'] = "Aun no posee vehiculos registrados, por favor registre uno primero.";
+        } else {
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre uno primero.";
             echo view('errores/sinDatos', $data);
         }
         echo view('template/footer');
@@ -69,7 +67,6 @@ class Estadia_controller extends BaseController
         $validation->setRuleGroup('formEstacionarValidation');
 
         if (!$validation->withRequest($this->request)->run()) {
-
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
@@ -203,10 +200,13 @@ class Estadia_controller extends BaseController
             $data['mensaje'] = "Vehiculo desEstacionado correctamente";
             echo view('errores/operacionExitosa', $data);
         } else {
-
-            $data['mensaje'] = "No tiene ningun vehiculo estacionado";
-            $data['volver'] = $_SERVER['HTTP_REFERER'];
-            echo view('errores/accesoRestringido', $data);
+            //$data['mensaje'] = "No tiene ningun vehiculo estacionado";
+            //$data['volver'] = $_SERVER['HTTP_REFERER'];
+            //echo view('errores/accesoRestringido', $data);
+            // Para mi va un aviso solamente y no un 404
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "Aún no posee vehiculos estacionados.";
+            echo view('errores/sinDatos', $data);
         }
         echo view('template/footer');
     }
@@ -218,13 +218,12 @@ class Estadia_controller extends BaseController
         echo view('template/sidenav');
         echo view('template/layout');
 
-        if($this->estadiaModel->hayVehiculosEstacionados($fecha_actual)){
+        if ($this->estadiaModel->hayVehiculosEstacionados($fecha_actual)) {
             $data['estadias'] = $this->estadiaModel->obtenerVehiculosEstacionados($fecha_actual);
             $data['titulo'] = "Listado de vehiculos estacionados";
             echo view('estadia/listado_autos_estacionados', $data);
-        }
-        else{
-            $data['titulo'] ="¡Aviso!";
+        } else {
+            $data['titulo'] = "¡Aviso!";
             $data['mensaje'] = "No hay vehiculos estacionados en este momento";
             echo view('errores/sinDatos', $data);
         }
@@ -248,7 +247,6 @@ class Estadia_controller extends BaseController
         if ($this->estadiaModel->tieneEstadiaActiva($vehiculo[0]['id_vehiculo'], $fecha_actual)) {
             session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está activa.");
             return redirect()->back();
-            
         } else {
             session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está inactiva.");
             return redirect()->back();
@@ -265,12 +263,11 @@ class Estadia_controller extends BaseController
         echo view('template/sidenav');
         echo view('template/layout');
 
-        if(!empty($data['ventas'])){
+        if (!empty($data['ventas'])) {
             echo view('estadia/listado_ventas', $data);
-        }
-        else{
-            $data['titulo'] ="¡Aviso!";
-            $data['mensaje'] = "Aun no a realizado ninguna venta";
+        } else {
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "Aún no ha realizado ninguna venta";
             echo view('errores/sinDatos', $data);
         }
         echo view('template/footer');

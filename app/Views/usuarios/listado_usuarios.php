@@ -1,24 +1,21 @@
-
 <div class="card-header py-3">
     <h4 class="m-0 font-weight-bold text-primary">Usuarios</h4>
 </div>
 <div class="contenedor_tabla" style="margin: 20px;">
 
-<?php if (session()->get('msg')) : ?>
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-        <strong><?= session()->getFlashdata('msg') ?></strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-<?php endif; ?>
+    <?php if (session()->get('msg')) : ?>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong><?= session()->getFlashdata('msg') ?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
 
     <div class="content-icono">
 
         <a href="<?= base_url('alta-usuario') ?>" data-toggle="tooltip" title="Agregar">
-
-
-            <i class="bi bi-person-plus" style="font-size: 2rem;"></i>
+            <i class="bi bi-person-plus" style="font-size: 2rem; margin: 1rem;"></i>
         </a>
 
     </div>
@@ -47,11 +44,11 @@
                     <td> <?php echo $usuario['email'] ?> </td>
                     <td> <?php echo $usuario['rol'] ?> </td>
                     <td>
-                    <a onclick="return confirm('¿Realmente desea eliminar al usuario <?= $usuario['username']?>?')" href="<?= base_url('eliminar/' . $usuario['id_usuario']) ?>" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
-                        <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
-                    </a>
+                        <a onclick="return confirm('¿Realmente desea eliminar al usuario <?= $usuario['username'] ?>?')" href="<?= base_url('eliminar/' . $usuario['id_usuario']) ?>" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash-fill" style="font-size: .8rem"></i>
+                        </a>
 
-                        <a href="<?= base_url('actualizar-usuario/'.$usuario['id_usuario']) ?>" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
+                        <a href="<?= base_url('actualizar-usuario/' . $usuario['id_usuario']) ?>" data-toggle="tooltip" title="Editar" class="btn btn-info btn-sm">
                             <i class="bi bi-pencil-square" style="font-size: .8rem"></i>
                         </a>
 
