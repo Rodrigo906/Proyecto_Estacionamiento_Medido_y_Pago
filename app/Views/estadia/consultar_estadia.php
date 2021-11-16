@@ -25,7 +25,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"> Consultar estadia </h1>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('Estadia_controller/consultarEstadoEstadia') ?>">
+                                <form class="user" method="POST" action="<?= base_url('estado-estadia') ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="dominio" aria-describedby="dominio" placeholder="Dominio" name="patente" value="<?= old('patente') ?>">
                                         <p class="text-danger"> <?= session('errors.patente') ?> </p>

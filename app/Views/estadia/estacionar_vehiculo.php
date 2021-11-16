@@ -61,12 +61,14 @@
 
                                     <div class="form-group row">
                                         <div class="col-sm-5 mb-4 mb-sm-0">
-                                            <label class="classLabel" style="margin-top: 1rem; margin-left: .6rem">Hora de salida: </label>
+                                            <label class="classLabel" style="margin-top: 1rem; margin-left: .6rem">Cantidad de horas: </label>
                                         </div>
+                                        
                                         <div class="col-sm-7">
                                             <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas" readonly>
                                             <p class="text-danger"> <?= session('errors.cant_horas') ?></p>
                                         </div>
+
                                         <div class="custom-control custom-checkbox small" style="margin-left: 1.3rem">
                                             <input type="checkbox" name="indefinido" class="custom-control-input" id="checkIndefinido" onchange="comprobar();" checked>
                                             <label class="custom-control-label" for="checkIndefinido"> Indefinido</label>

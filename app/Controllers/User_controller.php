@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\RolModel;
-use CodeIgniter\CLI\Console;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class User_controller extends BaseController

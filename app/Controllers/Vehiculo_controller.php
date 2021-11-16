@@ -43,9 +43,34 @@ class Vehiculo_controller extends BaseController
         $marca = $_POST['marca'];
         $modelo = $_POST['modelo'];
 
-        $this->vehiculoModel->registrarVehiculo($patente, session('id_usuario'), $marca, $modelo);
+        $this->vehiculoModel->registrarVehiculo($patente, $marca, $modelo, session('id_usuario'));
 
         session()->setFlashdata('msg', 'Registrado correctamente');
+        return redirect()->back();
+    }
+
+    public function mostrarFormAsociacion (){
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        echo view('vehiculo/asociar_vehiculo');
+        echo view('template/footer');
+    }
+    
+    public function asociarVehiculo (){
+
+        $validation = service('validation');
+        $validation->setRuleGroup('formConsultarEstadia');
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
+        $vehiculo =   $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
+
+        $this->vehiculoModel->asociarVehiculo(session('id_usuario'), $vehiculo[0]['id_vehiculo']);
+
+        session()->setFlashdata('msg', 'Vehiculo asociado correctamente');
         return redirect()->back();
     }
 }

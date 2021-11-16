@@ -131,8 +131,19 @@ class Validation
         'patente' => [
             'rules' => 'required|is_unique[vehiculo.patente]',
             'errors' => [
-                'required' => 'Este campo es obligatorio',
+                'required' =>  'Este campo es obligatorio',
                 'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+            ],
+        ],
+    ];
+
+    public $formConsultarEstadia = [
+
+        'patente' => [
+            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'errors' => [
+                'required' =>  'Este campo es obligatorio',
+                'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
             ],
         ],
     ];

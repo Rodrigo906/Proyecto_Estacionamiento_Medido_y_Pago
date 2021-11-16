@@ -68,15 +68,15 @@ $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($ro
 //CLIENTE
 $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function ($routes) {
 
-    //$routes->get('registrarme', 'User_controller::MostrarFormularioRegistro');
-    //$routes->post('registrar-cliente', 'User_controller::registrarUsuario');
-
     $routes->get('registro-auto', 'Vehiculo_controller::formularioRegistroVehiculo');
     $routes->post('registrar-auto', 'Vehiculo_controller::registrarVehiculo');
 
     $routes->get('estacionar-vehiculo', 'Estadia_controller::mostrarFormularioEstacionamiento');
     $routes->post('registrar-estacionamiento', 'Estadia_controller::registrarEstadia');
     $routes->get('des_estacionar-vehiculo', 'Estadia_controller::desEstacionar');
+
+    $routes->get('mostrar-asociar-auto', 'Vehiculo_controller::mostrarFormAsociacion');
+    $routes->post('asociar-auto', 'Vehiculo_controller::asociarVehiculo');
 
     /* SIN IMPLEMENTAR AUN
     $routes->get('cargar-saldo', 'User_controller::  ');

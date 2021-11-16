@@ -30,10 +30,15 @@ class CuentaModel extends Model
     public function estadoPago($costo)
     {
         $cuenta = $this->find(session('id_cuenta'));
-
-        if ($cuenta['saldo'] - $costo < 0) {
+        $diferencia = $cuenta['saldo'] - $costo;
+        if ($diferencia < 0) {
             return "Pendiente";
         }
+        $this->actualizarSaldo(session('id_cuenta'), $diferencia);
         return "Pagado";
+    }
+
+    public function actualizarSaldo ($cuenta, $saldo){
+        $this->db->query("UPDATE cuenta SET saldo=saldo+.'$saldo' WHERE id_cuenta='$cuenta'");
     }
 }

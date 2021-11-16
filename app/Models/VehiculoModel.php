@@ -15,7 +15,7 @@ class VehiculoModel extends Model
     protected $returnType = 'array';
     protected $useSoftdeletes = false;  //ver que tipo de eliminado se usara luego
 
-    protected $allowedFields = ['patente', 'id_usuario', 'marca', 'modelo'];
+    protected $allowedFields = ['patente', 'marca', 'modelo'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -27,10 +27,16 @@ class VehiculoModel extends Model
     protected $skipValidation = false;
 
 
-    public function registrarVehiculo($patente, $id_usuario, $marca, $modelo)
+    public function registrarVehiculo($patente, $marca, $modelo, $id_usuario)
     {
-        $this->db->query("INSERT INTO vehiculo (patente, id_usuario, marca, modelo) " .
-            "VALUES ('$patente', '$id_usuario', '$marca', '$modelo')");
+        $this->db->query("INSERT INTO vehiculo (patente, marca, modelo) " .
+            "VALUES ('$patente', '$marca', '$modelo')");
+
+        $vehiculo = $this->obtenerVehiculo($patente);
+        $id_vehiculo = $vehiculo[0]['id_vehiculo'];
+
+        $this->db->query("INSERT INTO vehiculo_usuario (id_vehiculo, id_usuario) " .
+            "VALUES ('$id_vehiculo', '$id_usuario')");
     }
 
     public function obtenerVehiculo($patente)
@@ -53,4 +59,11 @@ class VehiculoModel extends Model
         }
         return false;
     }
+
+    public function asociarVehiculo ($id_usuario, $id_vehiculo){
+
+        $this->db->query("INSERT INTO vehiculo_usuario (id_vehiculo, id_usuario) " .
+        "VALUES ('$id_vehiculo', '$id_usuario')");
+    }
+
 }

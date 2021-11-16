@@ -35,16 +35,19 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-
+    
         if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
 
             $data['zonas'] = $this->zonaModel->findAll();
             $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
             echo view('estadia/estacionar_vehiculo', $data);
+
         } else {
+
             $data['titulo'] = "¡Aviso!";
-            $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre uno primero.";
+            $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre o asocie uno primero.";
             echo view('errores/sinDatos', $data);
+            
         }
         echo view('template/footer');
     }
@@ -200,10 +203,7 @@ class Estadia_controller extends BaseController
             $data['mensaje'] = "Vehiculo desEstacionado correctamente";
             echo view('errores/operacionExitosa', $data);
         } else {
-            //$data['mensaje'] = "No tiene ningun vehiculo estacionado";
-            //$data['volver'] = $_SERVER['HTTP_REFERER'];
-            //echo view('errores/accesoRestringido', $data);
-            // Para mi va un aviso solamente y no un 404
+          
             $data['titulo'] = "¡Aviso!";
             $data['mensaje'] = "Aún no posee vehiculos estacionados.";
             echo view('errores/sinDatos', $data);
@@ -241,6 +241,13 @@ class Estadia_controller extends BaseController
 
     public function consultarEstadoEstadia()
     {
+        $validation = service('validation');
+        $validation->setRuleGroup('formConsultarEstadia');
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
         $vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
         $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
 

@@ -1,8 +1,6 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Se puede usar style="display: none" para ocultar un item-->
-
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('inicio') ?>">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -41,13 +39,14 @@
             </a>
         </li>
 
-        <!-- Nav Item - Multas -->
+        <!-- Nav Item - Multas 
         <li class="nav-item" id="multas">
             <a class="nav-link" href="">
                 <i class="fas fa-fw fa-list-alt" style="font-size: 18px;"></i>
                 <span>Multas</span>
             </a>
         </li>
+        -->
     <?php endif; ?>
 
 
@@ -59,6 +58,12 @@
             <a class="nav-link" href="<?= base_url('registro-auto') ?>">
                 <i class="fas fa-fw bi bi-plus-circle-fill" style="font-size: 18px;"></i>
                 <span> Registar vehiculo </span></a>
+        </li>
+
+        <li class="nav-item" id="asociar_vehiculo">
+            <a class="nav-link" href="<?= base_url('mostrar-asociar-auto') ?>">
+                <i class="fas fa-fw bi bi-plus-circle-fill" style="font-size: 18px;"></i>
+                <span> Asociar vehiculo </span></a>
         </li>
 
         <li class="nav-item" id="estacionar_vehiculo">
@@ -94,12 +99,14 @@
             </a>
         </li>
 
+        <!--
         <li class="nav-item" id="listar_ventas">
             <a class="nav-link" href="<?= base_url('listar-ventas') ?>">
                 <i class="fas fa-fw fa-list-alt" style="font-size: 18px;"></i>
                 <span> Listar ventas </span>
             </a>
         </li>
+        -->
 
     <?php endif; ?>
 
