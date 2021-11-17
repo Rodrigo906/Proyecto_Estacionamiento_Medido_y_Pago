@@ -39,6 +39,6 @@ class CuentaModel extends Model
     }
 
     public function actualizarSaldo ($cuenta, $saldo){
-        $this->db->query("UPDATE cuenta SET saldo=saldo+.'$saldo' WHERE id_cuenta='$cuenta'");
+        $this->db->query("UPDATE cuenta SET saldo=saldo+'$saldo' WHERE id_cuenta='$cuenta'");
     }
 }

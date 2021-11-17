@@ -32,23 +32,34 @@ class Estadia_controller extends BaseController
     //formulario para que el cliente estacione su vehiculo
     public function mostrarFormularioEstacionamiento()
     {
+        $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $tieneEstadiaAbierta);
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
+        $data['zonas'] = $this->zonaModel->findAll();
+                $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
+
+        if(!$tieneEstadiaAbierta){
     
-        if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
+            if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
 
-            $data['zonas'] = $this->zonaModel->findAll();
-            $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
-            echo view('estadia/estacionar_vehiculo', $data);
+                
+                echo view('estadia/estacionar_vehiculo', $data);
 
-        } else {
+            } else {
 
-            $data['titulo'] = "¡Aviso!";
-            $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre o asocie uno primero.";
-            echo view('errores/sinDatos', $data);
-            
+                $data['titulo'] = "¡Aviso!";
+                $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre o asocie uno primero.";
+                echo view('errores/sinDatos', $data);
+            }
+        
         }
+        else{
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "Ya tiene una estadia abierta, cierrela primero.";
+            echo view('errores/sinDatos', $data);
+        }
+
         echo view('template/footer');
     }
 
@@ -122,7 +133,7 @@ class Estadia_controller extends BaseController
         );
 
         session()->setFlashdata('msg', 'Se registró correctamente');
-        return redirect()->back();
+        return redirect()->back();    
     }
 
     //Venta de estadia por parte del usuario vendedor !!

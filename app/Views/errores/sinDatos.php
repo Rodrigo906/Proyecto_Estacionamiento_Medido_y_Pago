@@ -14,7 +14,7 @@
             <p style="text-align: center;"> <?= $mensaje ?> </p>
 
             <div class="link-container">
-            <a href="<?=  $_SERVER['HTTP_REFERER'] ?>" class="more-link"> Volver </a>
+              <a href="<?= $_SERVER['HTTP_REFERER'] ?>" class="more-link"> Volver </a>
             </div>
        
 

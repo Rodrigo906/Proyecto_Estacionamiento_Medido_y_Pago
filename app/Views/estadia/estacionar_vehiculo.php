@@ -74,10 +74,11 @@
                                             <label class="custom-control-label" for="checkIndefinido"> Indefinido</label>
                                         </div>
                                     </div>
-
+                                    
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
                                        Registrar
                                     </button>
+
                                 </form>
                             </div>
                         </div>
