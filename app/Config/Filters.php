@@ -35,7 +35,8 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             // 'csrf',
-            //'Filter_is_login' => ['except' => ['Inicio_controller', 'Inicio_controller/loguear', 'Inicio_controller/registrar_login']] ,
+        'Filter_is_login' => ['except' => ['/', 'loguearme', 'cerrar-sesion',
+        'formulario-recuperacion', 'recuperar-contrasenia', 'registrarme', 'registrar-nuevo-cliente']] ,
         ],
         'after' => [
             'toolbar',

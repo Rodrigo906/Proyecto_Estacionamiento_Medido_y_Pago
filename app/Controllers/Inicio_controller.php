@@ -71,7 +71,7 @@ class Inicio_controller extends BaseController
     public function cerrarSesion()
     {
         session()->destroy();
-        return redirect()->to('Inicio_controller');
+        return redirect()->to('/');
     }
 
 

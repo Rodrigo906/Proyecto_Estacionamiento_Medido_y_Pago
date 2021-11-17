@@ -151,7 +151,6 @@ class User_controller extends BaseController
 
     public function recuperarContraseña()
     {
-
         $validation = service('validation');
         $validation->setRuleGroup('formRestablecerContraseñaValidation');
 

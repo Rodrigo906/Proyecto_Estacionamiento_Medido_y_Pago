@@ -24,7 +24,7 @@
                                     <h1 class="h4 text-gray-900 mb-4"> Recuperar contraseña </h1>
                                     <p style="text-align: justify;"> Complete el siguiente formulario y recibirá un email con su nueva contraseña de acceso. </p>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('recuperar-contraseña') ?>">
+                                <form class="user" method="POST" action="<?= base_url('recuperar-contrasenia') ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="username" aria-describedby="username" placeholder="Username" name="username" value="<?= old('username') ?>">
                                         <p class="text-danger"> <?= session('errors.username') ?> </p>
