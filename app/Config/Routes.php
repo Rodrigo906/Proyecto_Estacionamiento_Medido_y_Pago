@@ -101,7 +101,7 @@ $routes->group('/', ['filter' => 'Filter_permisos:Inspector'], function ($routes
         'consultar-estadia',
         'Estadia_controller::mostrarConsultaEstadia'
     );
-    $routes->get(
+    $routes->post(
         'estado-estadia',
         'Estadia_controller::consultarEstadoEstadia'
     );

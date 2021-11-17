@@ -99,14 +99,13 @@
             </a>
         </li>
 
-        <!--
+        
         <li class="nav-item" id="listar_ventas">
             <a class="nav-link" href="<?= base_url('listar-ventas') ?>">
                 <i class="fas fa-fw fa-list-alt" style="font-size: 18px;"></i>
                 <span> Listar ventas </span>
             </a>
         </li>
-        -->
 
     <?php endif; ?>
 
