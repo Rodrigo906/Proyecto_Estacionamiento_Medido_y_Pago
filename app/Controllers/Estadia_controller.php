@@ -168,12 +168,11 @@ class Estadia_controller extends BaseController
             $hora_decimal = (($hora * 60) + $minutos) / 60;
             $precio = $zona['costo_hora'] * $hora_decimal;
 
-            $estado_pago = $this->cuentaModel->estadoPago($precio);
         } else {
             $precio = 0;
-            $estado_pago = "Pagado";
         }
         $id_usuario = null;
+        $estado_pago = "pagado";
 
         $this->estadiaModel->registrarEstadia(
             $id_usuario,
