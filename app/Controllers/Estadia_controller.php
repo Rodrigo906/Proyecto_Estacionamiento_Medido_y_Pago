@@ -32,14 +32,12 @@ class Estadia_controller extends BaseController
     //formulario para que el cliente estacione su vehiculo
     public function mostrarFormularioEstacionamiento()
     {
-        $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $tieneEstadiaAbierta);
+       
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
         $data['zonas'] = $this->zonaModel->findAll();
                 $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
-
-        if(!$tieneEstadiaAbierta){
     
             if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
 
@@ -52,14 +50,6 @@ class Estadia_controller extends BaseController
                 $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre o asocie uno primero.";
                 echo view('errores/sinDatos', $data);
             }
-        
-        }
-        else{
-            $data['titulo'] = "¡Aviso!";
-            $data['mensaje'] = "Ya tiene una estadia abierta, cierrela primero.";
-            echo view('errores/sinDatos', $data);
-        }
-
         echo view('template/footer');
     }
 
@@ -77,63 +67,77 @@ class Estadia_controller extends BaseController
     //Registro desde el cliente
     public function registrarEstadia()
     {
-        $validation = service('validation');
-        $validation->setRuleGroup('formEstacionarValidation');
+        $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $tieneEstadiaAbierta);
+        if(!$tieneEstadiaAbierta){
 
-        if (!$validation->withRequest($this->request)->run()) {
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-        }
+            $validation = service('validation');
+            $validation->setRuleGroup('formEstacionarValidation');
 
-        $id_usuario =  session('id_usuario');
-        $id_vehiculo = $_POST['patente'];
-        /**Trae el id del vehiculo */
-        $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
-
-        //indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
-        if (isset($_POST['indefinido'])) {
-            $fecha_fin = null;
-        } else {
-            $cantHoras = $_POST['cant_horas'];
-            list($hora, $minutos) = explode(":", $cantHoras);
-            $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
-        }
-
-        $id_zona = $_POST['zona'];
-
-        if ($this->zonaModel->esHorarioCobro($id_zona)) {
-
-            if (!isset($_POST['indefinido'])) {
-
-                $zona = $this->zonaModel->find($id_zona);
-
-                $hora_decimal = (($hora * 60) + $minutos) / 60;
-                $precio = $zona['costo_hora'] * $hora_decimal;
-
-                $estado_pago = $this->cuentaModel->estadoPago($precio);
-            } else {
-                $estado_pago = "En curso";
-                $precio = 0;
+            if (!$validation->withRequest($this->request)->run()) {
+                return redirect()->back()->withInput()->with('errors', $validation->getErrors());
             }
-        } else {
-            $precio = 0;
-            $estado_pago = "Pagado";
+
+            $id_usuario =  session('id_usuario');
+            $id_vehiculo = $_POST['patente'];
+            /**Trae el id del vehiculo */
+            $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
+
+            //indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
+            if (isset($_POST['indefinido'])) {
+                $fecha_fin = null;
+            } else {
+                $cantHoras = $_POST['cant_horas'];
+                list($hora, $minutos) = explode(":", $cantHoras);
+                $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
+            }
+
+            $id_zona = $_POST['zona'];
+
+            if ($this->zonaModel->esHorarioCobro($id_zona)) {
+
+                if (!isset($_POST['indefinido'])) {
+
+                    $zona = $this->zonaModel->find($id_zona);
+
+                    $hora_decimal = (($hora * 60) + $minutos) / 60;
+                    $precio = $zona['costo_hora'] * $hora_decimal;
+
+                    $estado_pago = $this->cuentaModel->estadoPago($precio);
+                } else {
+                    $estado_pago = "En curso";
+                    $precio = 0;
+                }
+            } else {
+                $precio = 0;
+                $estado_pago = "Pagado";
+            }
+
+            $id_vendedor = null;
+
+            $this->estadiaModel->registrarEstadia(
+                $id_usuario,
+                $id_vendedor,
+                $id_zona,
+                $id_vehiculo,
+                $estado_pago,
+                $fecha_inicio,
+                $fecha_fin,
+                $precio,
+            );
+
+            session()->setFlashdata('msg', 'Se registró correctamente');
+            return redirect()->back();
+        }    
+        else{
+
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "Ya tiene una estadia abierta, cierrela primero.";
+            echo view('template/head');
+            echo view('template/sidenav');
+            echo view('template/layout');
+            echo view('errores/sinDatos', $data);
+            echo view('template/footer');
         }
-
-        $id_vendedor = null;
-
-        $this->estadiaModel->registrarEstadia(
-            $id_usuario,
-            $id_vendedor,
-            $id_zona,
-            $id_vehiculo,
-            $estado_pago,
-            $fecha_inicio,
-            $fecha_fin,
-            $precio,
-        );
-
-        session()->setFlashdata('msg', 'Se registró correctamente');
-        return redirect()->back();    
     }
 
     //Venta de estadia por parte del usuario vendedor !!
