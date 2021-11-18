@@ -220,7 +220,7 @@ class Estadia_controller extends BaseController
         } else {
           
             $data['titulo'] = "¡Aviso!";
-            $data['mensaje'] = "Aún no posee vehiculos estacionados.";
+            $data['mensaje'] = "Aún no posee vehiculos estacionados indefinidamente.";
             echo view('errores/sinDatos', $data);
         }
         echo view('template/footer');
