@@ -254,4 +254,104 @@ class Validation
             ],
         ],
     ];
+
+
+    public $formCargarSaldo = [
+
+        'monto' => [
+            'rules' => 'required|decimal',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'decimal' => 'Solo ingrese valores numericos',
+            ],
+        ],
+        'numero' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'numeric' => 'Solo ingrese valores numericos',
+            ],
+        ],
+        'codigo_seguridad' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'numeric' => 'Solo ingrese valores numericos',
+            ],
+        ],
+        'fecha_vencimiento' => [
+            'rules' => 'required|valid_date',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'valid_date' => 'Formato de fecha invalido',
+            ],
+        ],
+
+    ];
+
+    public $formRegistrarInfraccion = [
+
+        'patente' => [
+            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'errors' => [
+                'required' =>  'Este campo es obligatorio',
+                'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+            ],
+        ],
+
+        'motivo' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+            ],
+        ],
+
+        'fecha' => [
+            'rules' => 'required|valid_date',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'valid_date' => 'Formato de fecha invalido',
+            ],
+        ],
+
+        'direccion' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+            ],
+        ],
+    ];
+
+    public $formActualizarZona = [
+        'costo_hora' => [
+            'rules' => 'required|decimal',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'decimal' => 'Solo ingrese valores numericos',
+            ],
+        ],
+
+        'horario_mañana' => [
+            'rules' => 'required|regex_match[^([0-2][0-9]):([0-6][0-9])$]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'regex_match' => 'Formato de hora invalido',
+            ],
+        ],
+
+        'horario_tarde' => [
+            'rules' => 'required|regex_match[^([0-2][0-9]):([0-6][0-9])$]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'regex_match' => 'Formato de hora invalido',
+            ],
+        ],
+
+
+
+
+
+    ];
+
+
 }

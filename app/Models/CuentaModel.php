@@ -34,11 +34,22 @@ class CuentaModel extends Model
         if ($diferencia < 0) {
             return "Pendiente";
         }
-        $this->actualizarSaldo(session('id_cuenta'), $diferencia);
+        $this->restarDineroCuenta(session('id_cuenta'), $diferencia);
         return "Pagado";
     }
 
-    public function actualizarSaldo ($cuenta, $saldo){
+    public function obtenerSaldo ($id_cuenta){
+        $saldo = $this->db->query("SELECT saldo FROM cuenta WHERE id_cuenta='$id_cuenta'");
+        return $saldo;
+    }
+
+    public function restarDineroCuenta ($cuenta, $saldo){
+        $this->db->query("UPDATE cuenta SET saldo=saldo-'$saldo' WHERE id_cuenta='$cuenta'");
+    }
+
+    public function cargarDineroCuenta ($cuenta, $saldo){
         $this->db->query("UPDATE cuenta SET saldo=saldo+'$saldo' WHERE id_cuenta='$cuenta'");
     }
+
+
 }

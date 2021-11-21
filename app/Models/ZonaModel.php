@@ -77,4 +77,8 @@ class ZonaModel extends Model
         list($hora, $minutos) = explode(":", $stringHora);
         return Time::createFromTime($hora, $minutos);
     }
+
+    public function actualizarHorarioCosto ($id_zona, $horario_mañana, $horario_tarde, $costoHora){
+        $this->db->query("UPDATE zona SET horario_pago_mañana= '$horario_mañana', horario_pago_tarde='$horario_tarde' , costo_hora='$costoHora' WHERE id_zona= '$id_zona'");
+    }
 }

@@ -293,4 +293,66 @@ class Estadia_controller extends BaseController
         }
         echo view('template/footer');
     }
+
+    public function listadoEstadiasPendientes(){
+
+        $data['estadias'] = $this->estadiaModel->obtenerEstadiasPendientes(session('id_usuario'));
+        $data['saldo'] = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
+        
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+
+        if (!empty($data['estadias'])) {
+            echo view('estadia/', $data);
+        } 
+        else {
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "No posee estadias pendientes de pago";
+            echo view('errores/sinDatos', $data);
+        }
+        echo view('template/footer');
+    }
+
+    //En la vista se debe comprobar que lo seleccionado no exeda el saldo de la cuenta
+    public function pagarEstadiasPendientes(){
+        
+        if(!empty($_POST['list_estadias'])) {
+            foreach ($_POST['list_estadias'] as $estadia) {
+                //redusco el dinero de su cuenta y cambio el estado de la estadia a Pagado
+                $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
+                $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
+            }
+            session()->setFlashdata('msg', 'Las estadias seleccionadas han sido saldadas');
+        }
+        else{
+            session()->setFlashdata('msg', "No selecciono ninguna estadia");
+        }
+
+        return redirect()->back();
+    }
+
+    public function formularioActualizacionZona(){
+        $data['zonas'] = $this->zonaModel->findAll();
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        //form
+        echo view('template/footer');
+    }
+
+    public function actualizarHorarioCostoZona (){
+
+        $validation = service('validation');
+        $validation->setRuleGroup('formActualizarZona');
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
+        $this->zonaModel->actualizarHorarioCosto($_POST['id_zona'], $_POST['horario_mañana'], $_POST['horario_tarde'], $_POST['costo_hora']);
+        
+        session()->setFlashdata('msg', 'Datos de zona actualizados');
+        return redirect()->back();
+    }
 }

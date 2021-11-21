@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CuentaModel;
 use App\Models\UserModel;
 use App\Models\RolModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -11,12 +12,14 @@ class User_controller extends BaseController
 
     protected $userModel;
     protected $rolModel;
+    protected $cuentaModel;
 
     public function __construct()
     {
 
         $this->userModel = new UserModel();
         $this->rolModel = new RolModel();
+        $this->cuentaModel = new CuentaModel();
     }
 
     //retorna el listado de todos los usuarios del sistema
@@ -170,4 +173,36 @@ class User_controller extends BaseController
         session()->setFlashdata('msg', 'El usuario se eliminó correctamente.');
         return redirect()->back();
     }
+
+    //Sprint 3
+
+    public function formularioCargarSaldo (){
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        //form
+        echo view('template/footer');
+    }
+
+    public function cargarSaldo (){
+
+        $validation = service('validation');
+        $validation->setRuleGroup('formCargarSaldo');
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+        
+        //Aqui se deberia Validar la tarjeta
+        $monto = $_POST['monto'];
+
+        $this->cuentaModel->cargarSaldo(session('id_cuenta', $monto));
+
+        session()->setFlashdata('msg', "Su carga de $'$monto' fue exitosa");
+        return redirect()->back();
+    }
+
+    
+
+
 }

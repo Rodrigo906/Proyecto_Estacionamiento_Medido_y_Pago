@@ -52,15 +52,18 @@ $routes->post('actualizar-usuario', 'User_controller::actualizarInformacionPerso
 $routes->group('/', ['filter' => 'Filter_permisos:Administrador'], function ($routes) {
 
     $routes->get('listado-usuarios', 'User_controller::index');
+
     $routes->get('alta-usuario', 'User_controller::mostrarFormularioAltaUsuario');
     $routes->post('registrar-usuario', 'User_controller::registrarUsuario');
+
     $routes->get('eliminar/(:num)', 'User_controller::eliminar/$1');
+
     $routes->get('listar-vehiculos-estacionados', 'Estadia_controller::mostrarListadoAutosEstacionados');
 
-    /* SIN IMPLEMENTAR AUN
-    $routes->get('modificar-zona', 'Zona_controller::  ');
-    $routes->get('listar-multas', 'Infraccion_controller:: ');
-    */
+    $routes->get('listar-infracciones', 'Infraccion_controller::mostrarListadoInfracciones');
+
+    $routes->get('form-actualizar-zona', 'Estadia_controller::formularioActualizacionZona');
+    $routes->post('actualizar-zona', 'Estadia_controller::actualizarHorarioCostoZona');
 });
 
 
@@ -78,10 +81,12 @@ $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function ($routes) 
     $routes->get('mostrar-asociar-auto', 'Vehiculo_controller::mostrarFormAsociacion');
     $routes->post('asociar-auto', 'Vehiculo_controller::asociarVehiculo');
 
-    /* SIN IMPLEMENTAR AUN
-    $routes->get('cargar-saldo', 'User_controller::  ');
-    $routes->get('pagar-estadias-pendientes', 'Estadia_controller::  ');
-    */
+    $routes->get('form-cargar-saldo', 'User_controller::formularioCargarSaldo');
+    $routes->post('cargar-saldo', 'User_controller::cargarSaldo');
+
+    $routes->get('listar-estadias-pendientes', 'Estadia_controller::listadoEstadiasPendientes');
+    $routes->post('pagar-estadias-pendientes', 'Estadia_controller::pagarEstadiasPendientes');
+
 });
 
 //VENDEDOR
@@ -106,9 +111,16 @@ $routes->group('/', ['filter' => 'Filter_permisos:Inspector'], function ($routes
         'Estadia_controller::consultarEstadoEstadia'
     );
     $routes->get(
-        'alta-infraccion',
-        'Infraccion_controller::  '
+        'form-infraccion',
+        'Infraccion_controller::mostrarFormularioInfraccion'
     );
+    $routes->post(
+        'alta-infraccion',
+        'Infraccion_controller::registrarInfraccion'
+    );
+
+
+
 });
 
 

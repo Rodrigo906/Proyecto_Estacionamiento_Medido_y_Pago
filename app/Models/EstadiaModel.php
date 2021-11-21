@@ -110,4 +110,13 @@ class EstadiaModel extends Model{
                 return $result->getResultArray();
 
         }
+
+        public function obtenerEstadiasPendientes ($id_usuario){
+                $result = $this->db->query("SELECT * FROM estadia e WHERE e.estado_pago = Pendiente AND e.id_usuario= '$id_usuario'");
+                $result->getResultArray();
+        }
+
+        public function pagarEstadia ($id_estadia){
+                $this->db->query("UPDATE estadia SET estado_pago=Pagado WHERE id_estadia = '$id_estadia'");
+        }
 }
