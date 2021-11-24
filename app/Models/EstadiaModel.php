@@ -68,7 +68,7 @@ class EstadiaModel extends Model{
                         "('$fecha_actual' BETWEEN e.fecha_inicio AND e.fecha_fin) OR e.fecha_fin IS NULL");
                 return $result->getResultArray();
         }
-
+        
         public function hayVehiculosEstacionados($fecha_actual)
         {
                 $result = $this->db->query("SELECT * FROM estadia e JOIN vehiculo v ON (e.id_vehiculo = v.id_vehiculo) " .
@@ -110,12 +110,12 @@ class EstadiaModel extends Model{
                 return $result->getResultArray();
 
         }
-
+        //Obtiene las estadias en estado "Pendiente" de un usuario determinado.
         public function obtenerEstadiasPendientes ($id_usuario){
                 $result = $this->db->query("SELECT * FROM estadia e WHERE e.estado_pago = Pendiente AND e.id_usuario= '$id_usuario'");
                 $result->getResultArray();
         }
-
+        
         public function pagarEstadia ($id_estadia){
                 $this->db->query("UPDATE estadia SET estado_pago=Pagado WHERE id_estadia = '$id_estadia'");
         }
