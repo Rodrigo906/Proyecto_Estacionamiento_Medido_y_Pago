@@ -279,14 +279,6 @@ class Validation
                 'numeric' => 'Solo ingrese valores numericos',
             ],
         ],
-        'fecha_vencimiento' => [
-            'rules' => 'required|valid_date',
-            'errors' => [
-                'required' => 'Este campo es obligatorio',
-                'valid_date' => 'Formato de fecha invalido',
-            ],
-        ],
-
     ];
 
     public $formRegistrarInfraccion = [

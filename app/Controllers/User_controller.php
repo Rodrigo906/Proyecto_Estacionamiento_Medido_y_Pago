@@ -200,9 +200,9 @@ class User_controller extends BaseController
         
         $monto = $_POST['monto'];
 
-        $this->cuentaModel->cargarSaldo(session('id_cuenta', $monto));
+        $this->cuentaModel->cargarDineroCuenta(session('id_cuenta'), $monto);
 
-        session()->setFlashdata('msg', "Su carga de $'$monto' fue exitosa");
+        session()->setFlashdata('msg', "Su carga de $$monto fue exitosa");
         return redirect()->back();
     }
 }

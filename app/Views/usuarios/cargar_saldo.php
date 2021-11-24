@@ -25,9 +25,10 @@
                                         <?= $subtitulo ?>
                                     </h1>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('registrar-auto') ?>">
+                                <form class="user" method="POST" action="<?= base_url('cargar-saldo') ?>">
                                     <div class="form-group">
-                                        <input type="number" class="form-control form-control-user" id="monto" placeholder="Monto" name="monto" required>
+                                        <input type="number" step="0.01" class="form-control form-control-user" id="monto" placeholder="Monto" name="monto" required>
+                                        <p class="text-danger"> <?= session('errors.monto') ?> </p>
                                     </div>
                                     <div style="margin: .6rem;">
                                         <span style="font-size: .9rem;">
@@ -36,6 +37,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="number" class="form-control form-control-user" id="numero" placeholder="Número" name="numero" required>
+                                        <p class="text-danger"> <?= session('errors.numero') ?> </p>
                                     </div>
                                     <div class="form-group">
                                         <span style="font-size: .9rem; margin-left: .6rem;">
@@ -66,7 +68,8 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" class="form-control form-control-user" id="codigoSeguridad" placeholder="Código de seguridad" name="codigoSeguridad" required>
+                                        <input type="number" class="form-control form-control-user" id="codigoSeguridad" placeholder="Código de seguridad" name="codigo_seguridad" required>
+                                        <p class="text-danger"> <?= session('errors.codigo_seguridad') ?> </p>
                                     </div>
 
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
