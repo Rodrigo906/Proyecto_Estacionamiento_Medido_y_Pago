@@ -88,6 +88,12 @@
                 <span> Consultar estadia </span>
             </a>
         </li>
+        <li class="nav-item" id="consultar_estadia">
+            <a class="nav-link" href="<?= base_url('form-infraccion') ?>">
+                <i class="fas fa-fw bi bi-cone-striped" style="font-size: 18px;"></i>
+                <span> Registrar infracción </span>
+            </a>
+        </li>
     <?php endif; ?>
 
     <?php if (session('rol') == 'Vendedor') : ?>
@@ -99,7 +105,7 @@
             </a>
         </li>
 
-        
+
         <li class="nav-item" id="listar_ventas">
             <a class="nav-link" href="<?= base_url('listar-ventas') ?>">
                 <i class="fas fa-fw fa-list-alt" style="font-size: 18px;"></i>
