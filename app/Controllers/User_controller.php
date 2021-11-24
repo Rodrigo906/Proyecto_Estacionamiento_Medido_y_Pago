@@ -176,15 +176,18 @@ class User_controller extends BaseController
 
     //Sprint 3
 
-    public function formularioCargarSaldo (){
+    public function formularioCargarSaldo()
+    {
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        //form
+        $data['subtitulo'] = "Cargar saldo";
+        echo view('usuarios/cargar_saldo', $data);
         echo view('template/footer');
     }
 
-    public function cargarSaldo (){
+    public function cargarSaldo()
+    {
 
         $validation = service('validation');
         $validation->setRuleGroup('formCargarSaldo');
@@ -192,7 +195,7 @@ class User_controller extends BaseController
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-        
+
         //Aqui se deberia Validar la tarjeta
         $monto = $_POST['monto'];
 
@@ -201,8 +204,4 @@ class User_controller extends BaseController
         session()->setFlashdata('msg', "Su carga de $'$monto' fue exitosa");
         return redirect()->back();
     }
-
-    
-
-
 }
