@@ -24,7 +24,7 @@
 
                                <div class="form-group">
                                    <input type="text" class="form-control form-control-user" id="patente" placeholder="Patente" name="patente" value="<?= old('patente') ?>" required>
-                                   <p class="text-danger"> <?= session('errors.direccion') ?> </p>
+                                   <p class="text-danger"> <?= session('errors.patente') ?> </p>
                                </div>
 
                                <div class="form-group">
@@ -58,7 +58,7 @@
                                        </label>
                                    </div>
                                    <div class="col-sm-8">
-                                       <input type="date" class="form-control form-control-user" id="fecha" name="fecha" value="<?= old('fecha') ?>" required>
+                                       <input type="datetime-local" class="form-control form-control-user" id="fecha" name="fecha" value="<?= old('fecha') ?>" required>
                                        <p class="text-danger"> <?= session('errors.fecha') ?> </p>
                                    </div>
                                </div>

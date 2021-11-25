@@ -112,8 +112,8 @@ class EstadiaModel extends Model{
         }
         //Obtiene las estadias en estado "Pendiente" de un usuario determinado.
         public function obtenerEstadiasPendientes ($id_usuario){
-                $result = $this->db->query("SELECT * FROM estadia e WHERE e.estado_pago = Pendiente AND e.id_usuario= '$id_usuario'");
-                $result->getResultArray();
+                $result = $this->db->query("SELECT * FROM estadia e WHERE e.estado_pago='Pendiente' AND e.id_usuario='$id_usuario'");
+                return $result->getResultArray();
         }
         
         public function pagarEstadia ($id_estadia){

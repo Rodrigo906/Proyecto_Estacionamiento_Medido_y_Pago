@@ -76,6 +76,7 @@ $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function ($routes) 
 
     $routes->get('estacionar-vehiculo', 'Estadia_controller::mostrarFormularioEstacionamiento');
     $routes->post('registrar-estacionamiento', 'Estadia_controller::registrarEstadia');
+
     $routes->get('des_estacionar-vehiculo', 'Estadia_controller::desEstacionar');
 
     $routes->get('mostrar-asociar-auto', 'Vehiculo_controller::mostrarFormAsociacion');

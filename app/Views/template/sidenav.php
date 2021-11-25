@@ -39,14 +39,13 @@
             </a>
         </li>
 
-        <!-- Nav Item - Multas 
-        <li class="nav-item" id="multas">
-            <a class="nav-link" href="">
-                <i class="fas fa-fw fa-list-alt" style="font-size: 18px;"></i>
-                <span>Multas</span>
+        <li class="nav-item" id="listar_infracciones">
+            <a class="nav-link" href="<?= base_url('listar-infracciones') ?>">
+                <i class="fas fa-fw bi bi-cone-striped" style="font-size: 18px;"></i>
+                <span> Listar infracciones </span>
             </a>
         </li>
-        -->
+
     <?php endif; ?>
 
 
@@ -79,7 +78,7 @@
                 <span> DesEstacionar vehiculo </span>
             </a>
         </li>
-        <li class="nav-item" id="registrar_vehiculo">
+        <li class="nav-item" id="cargar_saldo">
             <a class="nav-link" href="<?= base_url('form-cargar-saldo') ?>">
                 <i class="bi bi-currency-dollar" style="font-size: 18px;"></i>
                 <span> Cargar saldo </span></a>
@@ -93,7 +92,8 @@
                 <span> Consultar estadia </span>
             </a>
         </li>
-        <li class="nav-item" id="consultar_estadia">
+
+        <li class="nav-item" id="registrar_infraccion">
             <a class="nav-link" href="<?= base_url('form-infraccion') ?>">
                 <i class="fas fa-fw bi bi-cone-striped" style="font-size: 18px;"></i>
                 <span> Registrar infracción </span>

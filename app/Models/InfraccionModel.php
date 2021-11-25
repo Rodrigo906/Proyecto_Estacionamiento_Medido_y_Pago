@@ -34,6 +34,11 @@ class InfraccionModel extends Model
             "VALUES ('$id_vehiculo', '$id_zona', '$motivo', '$fecha','$direccion')");
     }
 
+    public function obtenerInfracciones (){
+        $infracciones = $this->db->query("SELECT patente, fecha, z.nombre_zona, direccion, motivo FROM infraccion i JOIN vehiculo v ON (i.id_vehiculo = v.id_vehiculo) JOIN zona z ON (i.id_zona = z.id_zona)");
+        return $infracciones->getResultArray();
+    }
+
    
 
 
