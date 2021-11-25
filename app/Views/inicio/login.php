@@ -32,11 +32,11 @@
                                     </form>
                                     <div class="text-center">
 
-                                        <a class="small" href="<?= base_url('formulario-recuperacion')?>" > Olvidó su contraseña? </a>
+                                        <a class="small" href="<?= base_url('formulario-recuperacion')?>" > ¿Olvidó su contraseña? </a>
 
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href=" <?= base_url('registrarme') ?> ">Crear una cuenta!</a>
+                                        <a class="small" href=" <?= base_url('registrarme') ?> ">¡Crea tu cuenta!</a>
                                     </div>
                                 </div>
                             </div>

@@ -312,21 +312,21 @@ class Estadia_controller extends BaseController
     }
 
     //En la vista se debe comprobar que lo seleccionado no exeda el saldo de la cuenta
-    public function pagarEstadiasPendientes()
-    {
+    public function pagarEstadiasPendientes(){
+      
+        $cuenta = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
+        $estadia = $this->estadiaModel->find($_POST['id_estadia']);
 
-        if (!empty($_POST['list_estadias'])) {
-            foreach ($_POST['list_estadias'] as $estadia) {
-                //redusco el dinero de su cuenta y cambio el estado de la estadia a Pagado
-                $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
-                $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
-            }
-            session()->setFlashdata('msg', 'Las estadias seleccionadas han sido saldadas');
-        } else {
-            session()->setFlashdata('msg', "No selecciono ninguna estadia");
+        if( ($cuenta[0]['saldo'] - $estadia['precio']) >= 0 ){
+            $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
+            $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
+            session()->setFlashdata('msg', "La estadia N° ".$estadia['id_estadia']." fue saldada");
         }
-
+        else{
+            session()->setFlashdata('msg', "Saldo insuficiente");
+        }
         return redirect()->back();
+
     }
 
     public function formularioActualizacionZona()

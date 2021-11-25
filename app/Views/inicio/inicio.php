@@ -60,26 +60,26 @@
                     </div>
                 </div>
             </div>
-            <!-- Multas 
+
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="text-center">
                             <div class="col-auto">
-                                <a class="nav-link" href="">
-                                    <i class="fas fa-list-alt fa-2x text-gray-600"></i>
+                                <a class="nav-link" href="<?= base_url('listar-infracciones') ?>">
+                                    <i class="fas fa-fw bi bi-cone-striped text-gray-600" style="font-size: 35px;"></i>
                                 </a>
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Multas
+                                    Listar infracciones
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            -->
+
         <?php endif; ?>
 
         <?php if (session('rol') == 'Cliente') : ?>
@@ -102,6 +102,7 @@
                     </div>
                 </div>
             </div>
+
         <!-- Asociar vehiculo -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -160,7 +161,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="col-auto">
+                                <a class="nav-link" href="<?= base_url('form-cargar-saldo') ?>">
+                                    <i class="bi bi-currency-dollar text-gray-600" style="font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="mt-4 text-center small">
+                                <span class="mr-2">
+                                    Cargar saldo
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         <?php endif; ?>
+
 
         <?php if (session('rol') == 'Inspector') : ?>
             <!-- Consultar estadia -->
@@ -182,6 +204,26 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="col-auto">
+                                <a class="nav-link" href="<?= base_url('form-infraccion') ?>">
+                                    <i class="fas bi bi-cone-striped fa-2x text-gray-600"></i>
+                                </a>
+                            </div>
+                            <div class="mt-4 text-center small">
+                                <span class="mr-2">
+                                    Registrar infraccion
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         <?php endif; ?>
 
         <?php if (session('rol') == 'Vendedor') : ?>

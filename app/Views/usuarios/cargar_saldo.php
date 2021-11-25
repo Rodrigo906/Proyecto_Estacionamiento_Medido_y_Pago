@@ -27,7 +27,7 @@
                                 </div>
                                 <form class="user" method="POST" action="<?= base_url('cargar-saldo') ?>">
                                     <div class="form-group">
-                                        <input type="number" step="0.01" class="form-control form-control-user" id="monto" placeholder="Monto" name="monto" required>
+                                        <input type="number" min="1" step="0.01" class="form-control form-control-user" id="monto" placeholder="Monto" name="monto" required>
                                         <p class="text-danger"> <?= session('errors.monto') ?> </p>
                                     </div>
                                     <div style="margin: .6rem;">

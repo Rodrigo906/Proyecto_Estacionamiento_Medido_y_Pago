@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\InfraccionModel;
+use App\Models\VehiculoModel;
 use App\Models\ZonaModel;
 
 class Infraccion_controller extends BaseController
@@ -10,11 +11,13 @@ class Infraccion_controller extends BaseController
 
     protected $zonaModel;
     protected $infraccionModel;
+    protected $vehiculoModel;
 
     public function __construct()
     {
         $this->zonaModel = new ZonaModel();
         $this->infraccionModel = new InfraccionModel();
+        $this->vehiculoModel = new VehiculoModel();
     }
 
     public function mostrarFormularioInfraccion()
@@ -37,8 +40,8 @@ class Infraccion_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        $vehiculo = $this->vehiculoModel->first($_POST['patente']);
-        $id_vehiculo = $vehiculo['id_vehiculo'];
+        $vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
+        $id_vehiculo = $vehiculo[0]['id_vehiculo'];
         $id_zona = $_POST['zona'];
 
         $this->infraccionModel->registrarInfraccion(
@@ -55,12 +58,12 @@ class Infraccion_controller extends BaseController
 
     public function mostrarListadoInfracciones()
     {
-        $data['infracciones'] = $this->infraccionModel->findAll();
+        $data['infracciones'] = $this->infraccionModel->obtenerInfracciones();
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
         if (!empty($data['infracciones'])) {
-            //form
+            echo view('infraccion/listar_infracciones', $data);
         } else {
 
             $data['titulo'] = "¡Aviso!";
