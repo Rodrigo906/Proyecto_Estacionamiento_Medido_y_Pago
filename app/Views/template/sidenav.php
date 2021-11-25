@@ -46,9 +46,14 @@
             </a>
         </li>
 
+        <li class="nav-item" id="usuarios">
+            <a class="nav-link" href="<?php echo base_url('form-actualizar-zona') ?>">
+                <i class="fas fa-map-marker-alt" style="font-size: 18px;"></i>
+                <span> Actualizar zona </span>
+            </a>
+        </li>
+
     <?php endif; ?>
-
-
 
     <?php if (session('rol') == 'Cliente') : ?>
 
@@ -61,7 +66,7 @@
 
         <li class="nav-item" id="asociar_vehiculo">
             <a class="nav-link" href="<?= base_url('mostrar-asociar-auto') ?>">
-                <i class="fas fa-fw bi bi-plus-circle-fill" style="font-size: 18px;"></i>
+                <i class="fas fa-key" style="font-size: 18px;"></i>
                 <span> Asociar vehiculo </span></a>
         </li>
 
@@ -87,7 +92,7 @@
         <!-- Nav Item - Estadias pendientes -->
         <li class="nav-item" id="registrar_vehiculo">
             <a class="nav-link" href="<?= base_url('listar-estadias-pendientes') ?>">
-                <i class="fas fa-fw bi bi-plus-circle-fill" style="font-size: 18px;"></i>
+                <i class="bi bi-card-list" style="font-size: 18px;"></i>
                 <span> Estadias pendientes </span></a>
         </li>
     <?php endif; ?>

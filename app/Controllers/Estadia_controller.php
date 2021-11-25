@@ -332,7 +332,6 @@ class Estadia_controller extends BaseController
             $this->enviarMensaje("Saldo insuficiente","alert-danger");
         }
         return redirect()->back();
-
     }
 
     public function formularioActualizacionZona()
@@ -341,7 +340,7 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        //form
+        echo view('zonas/actualizar_zona', $data);
         echo view('template/footer');
     }
 

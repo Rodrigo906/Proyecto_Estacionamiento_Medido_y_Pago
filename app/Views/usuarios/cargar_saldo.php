@@ -43,7 +43,7 @@
                                         <span style="font-size: .9rem; margin-left: .6rem;">
                                             Fecha de vencimiento
                                         </span>
-                                        <select style="font-size: .8rem; border-radius: 10rem; height: calc(1.5em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;">
+                                        <select class="form-control" style="font-size: .8rem; border-radius: 10rem; height: calc(1.5em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;">
                                             <option value="01">Enero</option>
                                             <option value="02"> Febrero</option>
                                             <option value="03">Marzo</option>
@@ -57,7 +57,7 @@
                                             <option value="11">Noviembre</option>
                                             <option value="12">Diciembre</option>
                                         </select>
-                                        <select style="font-size: .8rem; border-radius: 10rem; height: calc(1.5em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;">
+                                        <select class="form-control" style="font-size: .8rem; border-radius: 10rem; height: calc(1.5em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;">
                                             <option value="16"> 2021</option>
                                             <option value="17"> 2022</option>
                                             <option value="18"> 2023</option>

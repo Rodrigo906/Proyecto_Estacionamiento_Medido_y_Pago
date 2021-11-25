@@ -1,5 +1,5 @@
    <div class="container">
-    
+
        <div class="card o-hidden border-0 shadow-lg my-1" style="margin: -2%;">
            <div class="card-body p-0 ">
                <!-- Nested Row within Card Body -->
@@ -7,15 +7,15 @@
                    <div class="col-lg-7">
                        <div class="p-5">
 
-                       <?php if (session()->get('msg')) : ?>
-                            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                                <strong><?= session()->getFlashdata('msg') ?></strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                       <?php endif; ?>
-                       
+                           <?php if (session()->get('msg')) : ?>
+                               <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                   <strong><?= session()->getFlashdata('msg') ?></strong>
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                   </button>
+                               </div>
+                           <?php endif; ?>
+
                            <div class="text-center">
                                <h1 class="h4 text-gray-900 mb-4"> <?= $subtitulo ?> </h1>
                            </div>
@@ -56,7 +56,7 @@
 
                                <div class="form-group row">
                                    <div class="col-sm-6 mb-3 mb-sm-1">
-                                       <select class="classSelect" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="rol" required>
+                                       <select class="form-control" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="rol" required>
                                            <option value="" disabled selected>Seleccione un rol</option>
                                            <?php
 
