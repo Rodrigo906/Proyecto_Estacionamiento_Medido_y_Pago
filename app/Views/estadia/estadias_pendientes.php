@@ -3,7 +3,7 @@
 </div>
 
 <?php if (session()->get('msg')) : ?>
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    <div class="alert <?= session()->get('tipoMsg')?> alert-dismissible fade show text-center" role="alert">
         <strong><?= session()->getFlashdata('msg') ?></strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -20,7 +20,7 @@
                 <th scope="col"> Patente </th>
                 <th scope="col"> Fecha </th>
                 <th scope="col"> Monto </th>
-                <th scope="col"> Opción </th>
+                <th scope="col"> Pagar </th>
             </tr>
         </thead>
         <tbody>
@@ -33,9 +33,11 @@
                     <td> <?php echo $estadia['fecha'] ?> </td>
                     <td> <?php echo $estadia['precio'] ?> </td>
                     <td>
-                        <a href="pagar-estadias-pendientes" data-toggle="tooltip" title="Pagar" class="btn btn-success btn-sm">
+                    
+                        <a onclick="return confirm('¿Realmente desea abonar la estadia N° <?= $estadia['id_estadia'] ?>?')" href="<?= base_url('pagar-estadia-pendiente/'.$estadia['id_estadia']) ?>" data-toggle="tooltip" title="Pagar" class="btn btn-success btn-sm">
                             <i class="fas fa-dollar-sign" style="font-size: .8rem"></i>
                         </a>
+
                     </td>
                 </tr>
             <?php };

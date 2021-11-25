@@ -29,6 +29,14 @@ class Estadia_controller extends BaseController
         $this->userModel = new UserModel();
     }
 
+    private function enviarMensaje($mensaje, $tipo){
+        session()->setFlashdata(
+            ['msg' => $mensaje,
+            'tipoMsg' => $tipo,
+            ]
+        );
+    }
+
     //formulario para que el cliente estacione su vehiculo
     public function mostrarFormularioEstacionamiento()
     {
@@ -169,7 +177,7 @@ class Estadia_controller extends BaseController
             $precio = 0;
         }
         $id_usuario = null;
-        $estado_pago = "pagado";
+        $estado_pago = "Pagado";
 
         $this->estadiaModel->registrarEstadia(
             $id_usuario,
@@ -263,12 +271,11 @@ class Estadia_controller extends BaseController
         $fecha_actual = new Time('now', 'America/Argentina/Buenos_Aires');
 
         if ($this->estadiaModel->tieneEstadiaActiva($vehiculo[0]['id_vehiculo'], $fecha_actual)) {
-            session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está activa.");
-            return redirect()->back();
+            $this->enviarMensaje("La estadia del vehiculo " . $vehiculo[0]['patente'] . " está activa.", "alert-success");
         } else {
-            session()->setFlashdata('msg', 'La estadia del vehiculo ' . $vehiculo[0]['patente'] . " está inactiva.");
-            return redirect()->back();
+            $this->enviarMensaje("La estadia del vehiculo " . $vehiculo[0]['patente'] . " está inactiva.", "alert-warning");
         }
+        return redirect()->back();
     }
 
     //Consultado por el vendedor
@@ -294,7 +301,6 @@ class Estadia_controller extends BaseController
     public function listadoEstadiasPendientes()
     {
         $data['estadias'] = $this->estadiaModel->obtenerEstadiasPendientes(session('id_usuario'));
-        $data['saldo'] = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
 
         echo view('template/head');
         echo view('template/sidenav');
@@ -312,18 +318,18 @@ class Estadia_controller extends BaseController
     }
 
     //En la vista se debe comprobar que lo seleccionado no exeda el saldo de la cuenta
-    public function pagarEstadiasPendientes()
-    {
+    public function pagarEstadiaPendiente($id_estadia){
+      
+        $saldo = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
+        $estadia = $this->estadiaModel->find($id_estadia);
 
-        $cuenta = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
-        $estadia = $this->estadiaModel->find($_POST['id_estadia']);
-
-        if (($cuenta[0]['saldo'] - $estadia['precio']) >= 0) {
+        if( ($saldo - $estadia['precio']) >= 0 ){
             $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
-            $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
-            session()->setFlashdata('msg', "La estadia N° " . $estadia['id_estadia'] . " fue saldada");
-        } else {
-            session()->setFlashdata('msg', "Saldo insuficiente");
+            $this->estadiaModel->pagarEstadia($id_estadia);
+            $this->enviarMensaje("La estadia N° ".$id_estadia." fue saldada","alert-success");
+        }
+        else{
+            $this->enviarMensaje("Saldo insuficiente","alert-danger");
         }
         return redirect()->back();
     }
