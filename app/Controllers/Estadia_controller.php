@@ -320,7 +320,7 @@ class Estadia_controller extends BaseController
         $cuenta = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
         $estadia = $this->estadiaModel->find($_POST['id_estadia']);
 
-        if( ($cuenta['saldo'] - $estadia['precio']) >= 0 ){
+        if( ($cuenta[0]['saldo'] - $estadia['precio']) >= 0 ){
             $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
             $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
             session()->setFlashdata('msg', "La estadia N° ".$estadia['id_estadia']." fue saldada");
