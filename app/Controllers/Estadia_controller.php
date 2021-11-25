@@ -312,21 +312,20 @@ class Estadia_controller extends BaseController
     }
 
     //En la vista se debe comprobar que lo seleccionado no exeda el saldo de la cuenta
-    public function pagarEstadiasPendientes(){
-      
+    public function pagarEstadiasPendientes()
+    {
+
         $cuenta = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
         $estadia = $this->estadiaModel->find($_POST['id_estadia']);
 
-        if( ($cuenta[0]['saldo'] - $estadia['precio']) >= 0 ){
+        if (($cuenta[0]['saldo'] - $estadia['precio']) >= 0) {
             $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
             $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
-            session()->setFlashdata('msg', "La estadia N° ".$estadia['id_estadia']." fue saldada");
-        }
-        else{
+            session()->setFlashdata('msg', "La estadia N° " . $estadia['id_estadia'] . " fue saldada");
+        } else {
             session()->setFlashdata('msg', "Saldo insuficiente");
         }
         return redirect()->back();
-
     }
 
     public function formularioActualizacionZona()
@@ -335,7 +334,7 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-        //form
+        echo view('zonas/actualizar_zona', $data);
         echo view('template/footer');
     }
 

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <!-- Page Heading -->
-   
+
     <div class="row" style="margin-top: 40px;">
         <!-- Inicio -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Infracciones -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -73,6 +73,26 @@
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
                                     Listar infracciones
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actualizar zona -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="col-auto">
+                                <a href="<?php echo base_url('form-actualizar-zona') ?>">
+                                    <i class="fas fa-map-marker-alt fa-2x text-gray-600"></i>
+                                </a>
+                            </div>
+                            <div class="mt-4 text-center small">
+                                <span class="mr-2">
+                                    Actualizar zona
                                 </span>
                             </div>
                         </div>
@@ -103,14 +123,14 @@
                 </div>
             </div>
 
-        <!-- Asociar vehiculo -->
+            <!-- Asociar vehiculo -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="text-center">
                             <div class="col-auto">
                                 <a class="nav-link" href="<?= base_url('registro-auto') ?>">
-                                    <i class="fas bi bi-plus-circle-fill fa-2x text-gray-600"></i>
+                                    <i class="fas fa-key fa-2x text-gray-600"></i>
                                 </a>
                             </div>
                             <div class="mt-4 text-center small">
@@ -161,7 +181,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Cargar saldo -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -180,6 +200,26 @@
                     </div>
                 </div>
             </div>
+            <!-- Estadias pendientes -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="col-auto">
+                                <a class="nav-link" href="<?= base_url('listar-estadias-pendientes') ?>">
+                                    <i class="bi bi-card-list text-gray-600" style="font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="mt-4 text-center small">
+                                <span class="mr-2">
+                                    Estadias pendientes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         <?php endif; ?>
 

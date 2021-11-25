@@ -21,27 +21,11 @@
                                 <?php endif; ?>
 
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Estacionar vehiculo</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">
+                                        Actualizar zona
+                                    </h1>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('registrar-estacionamiento') ?>">
-                                    <div class="form-group">
-                                        <select class="form-control" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="patente" required>
-                                            <option value='' disabled selected>
-                                                Seleccione una patente
-                                            </option>
-
-                                            <?php
-                                            foreach ($vehiculos as $vehiculo) {
-                                            ?>
-                                                <option value='<?= $vehiculo['id_vehiculo'] ?>'>
-                                                    <?= $vehiculo['patente'] ?>
-                                                </option>
-                                            <?php };
-                                            ?>
-                                        </select>
-                                        <p class="text-danger"> <?= session('errors.patente') ?></p>
-                                    </div>
-
+                                <form class="user" method="POST" action="<?= base_url('actualizar-zona') ?>">
                                     <div class="form-group">
                                         <select class="form-control" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona" required>
                                             <option value='' disabled selected>
@@ -59,24 +43,44 @@
                                         </select>
                                     </div>
 
+                                    <div class="form-group">
+                                        <input type="number" class="form-control form-control-user" id="precio" placeholder="Precio" name="precio" value="<?= old('precio') ?>" required>
+                                        <p class="text-danger"> <?= session('errors.precio') ?> </p>
+                                    </div>
+
                                     <div class="form-group row">
-                                        <div class="col-sm-5 mb-4 mb-sm-0">
-                                            <label class="classLabel" style="margin-top: 1rem; margin-left: .6rem">Cantidad de horas: </label>
+
+                                        <span style="font-size: .9rem;
+                                        margin-top: 1rem; margin-left: 1.1rem;">
+                                            Hora de mañana
+                                        </span>
+
+                                        <div class="col-sm-4 mb-3 mb-sm-0">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaDesdeMañana" name="horaDesdeMañana">
+                                            <p class="text-danger"> <?= session('errors.horaDesdeMañana') ?></p>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaHastaMañana" name="horaHastaMañana">
+                                            <p class="text-danger"> <?= session('errors.horaHastaMañana') ?></p>
                                         </div>
 
-                                        <div class="col-sm-7">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas" readonly>
-                                            <p class="text-danger"> <?= session('errors.cant_horas') ?></p>
-                                        </div>
+                                        <span style="font-size: .9rem;
+                                        margin-top: 1rem; margin-left: 1.1rem;">
+                                            Hora de tarde
+                                        </span>
 
-                                        <div class="custom-control custom-checkbox small" style="margin-left: 1.3rem">
-                                            <input type="checkbox" name="indefinido" class="custom-control-input" id="checkIndefinido" onchange="comprobar();" checked>
-                                            <label class="custom-control-label" for="checkIndefinido"> Indefinido</label>
+                                        <div class="col-sm-4 mb-3 mb-sm-0" style="margin-left: 1rem;">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaDesdeTarde" name="horaDesdeTarde">
+                                            <p class="text-danger"> <?= session('errors.horaDesdeTarde') ?></p>
+                                        </div>
+                                        <div class="col-sm-4" style="margin-left: .1rem;">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaHastaTarde" name="horaHastaTarde">
+                                            <p class="text-danger"> <?= session('errors.horaHastaTarde') ?></p>
                                         </div>
                                     </div>
 
                                     <button class="btn btn-primary btn-user btn-block" type="submit">
-                                        Registrar
+                                        Aceptar
                                     </button>
 
                                 </form>
