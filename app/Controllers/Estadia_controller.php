@@ -32,24 +32,23 @@ class Estadia_controller extends BaseController
     //formulario para que el cliente estacione su vehiculo
     public function mostrarFormularioEstacionamiento()
     {
-       
+
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
         $data['zonas'] = $this->zonaModel->findAll();
-                $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
-    
-            if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
+        $data['vehiculos'] = $this->vehiculoModel->obtenerMisVehiculos(session('id_usuario'));
 
-                
-                echo view('estadia/estacionar_vehiculo', $data);
+        if ($this->userModel->tieneVehiculos(session('id_usuario'))) {
 
-            } else {
 
-                $data['titulo'] = "¡Aviso!";
-                $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre o asocie uno primero.";
-                echo view('errores/sinDatos', $data);
-            }
+            echo view('estadia/estacionar_vehiculo', $data);
+        } else {
+
+            $data['titulo'] = "¡Aviso!";
+            $data['mensaje'] = "Aún no posee vehiculos registrados, por favor registre o asocie uno primero.";
+            echo view('errores/sinDatos', $data);
+        }
         echo view('template/footer');
     }
 
@@ -68,7 +67,7 @@ class Estadia_controller extends BaseController
     public function registrarEstadia()
     {
         $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $tieneEstadiaAbierta);
-        if(!$tieneEstadiaAbierta){
+        if (!$tieneEstadiaAbierta) {
 
             $validation = service('validation');
             $validation->setRuleGroup('formEstacionarValidation');
@@ -127,8 +126,7 @@ class Estadia_controller extends BaseController
 
             session()->setFlashdata('msg', 'Se registró correctamente');
             return redirect()->back();
-        }    
-        else{
+        } else {
 
             $data['titulo'] = "¡Aviso!";
             $data['mensaje'] = "Ya tiene una estadia abierta, cierrela primero.";
@@ -167,7 +165,6 @@ class Estadia_controller extends BaseController
 
             $hora_decimal = (($hora * 60) + $minutos) / 60;
             $precio = $zona['costo_hora'] * $hora_decimal;
-
         } else {
             $precio = 0;
         }
@@ -196,14 +193,14 @@ class Estadia_controller extends BaseController
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
-       
+
         $estadia = $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $estadiaAbierta);
-       
+
         if ($estadiaAbierta == true) {
-        
+
             $precio = 0;
             if ($estadia[0]['estado_pago'] == "En curso") {
-               
+
                 $fechaActual = new DateTime(new Time('now', 'America/Argentina/Buenos_Aires'));
                 $fechaInicio = new DateTime($estadia[0]['fecha_inicio']);
                 $diferenciaHoras = $fechaInicio->diff($fechaActual)->i;
@@ -213,11 +210,11 @@ class Estadia_controller extends BaseController
             }
             $estado_pago = $this->cuentaModel->estadoPago($precio);
             $this->estadiaModel->terminarEstadia($estadia[0]['id_vehiculo'], new Time('now', 'America/Argentina/Buenos_Aires'), $precio, $estado_pago);
-    
+
             $data['mensaje'] = "Vehiculo desEstacionado correctamente";
             echo view('errores/operacionExitosa', $data);
         } else {
-          
+
             $data['titulo'] = "¡Aviso!";
             $data['mensaje'] = "Aún no posee vehiculos estacionados indefinidamente.";
             echo view('errores/sinDatos', $data);
@@ -294,19 +291,19 @@ class Estadia_controller extends BaseController
         echo view('template/footer');
     }
 
-    public function listadoEstadiasPendientes(){
-
+    public function listadoEstadiasPendientes()
+    {
         $data['estadias'] = $this->estadiaModel->obtenerEstadiasPendientes(session('id_usuario'));
         $data['saldo'] = $this->cuentaModel->obtenerSaldo(session('id_cuenta'));
-        
+
         echo view('template/head');
         echo view('template/sidenav');
         echo view('template/layout');
 
         if (!empty($data['estadias'])) {
-            echo view('estadia/', $data);
-        } 
-        else {
+            $data['titulo'] = "Estadias pendientes";
+            echo view('estadia/estadias_pendientes', $data);
+        } else {
             $data['titulo'] = "¡Aviso!";
             $data['mensaje'] = "No posee estadias pendientes de pago";
             echo view('errores/sinDatos', $data);
@@ -315,24 +312,25 @@ class Estadia_controller extends BaseController
     }
 
     //En la vista se debe comprobar que lo seleccionado no exeda el saldo de la cuenta
-    public function pagarEstadiasPendientes(){
-        
-        if(!empty($_POST['list_estadias'])) {
+    public function pagarEstadiasPendientes()
+    {
+
+        if (!empty($_POST['list_estadias'])) {
             foreach ($_POST['list_estadias'] as $estadia) {
                 //redusco el dinero de su cuenta y cambio el estado de la estadia a Pagado
                 $this->cuentaModel->restarDineroCuenta(session('id_cuenta'), $estadia['precio']);
                 $this->estadiaModel->pagarEstadia($estadia['id_estadia']);
             }
             session()->setFlashdata('msg', 'Las estadias seleccionadas han sido saldadas');
-        }
-        else{
+        } else {
             session()->setFlashdata('msg', "No selecciono ninguna estadia");
         }
 
         return redirect()->back();
     }
 
-    public function formularioActualizacionZona(){
+    public function formularioActualizacionZona()
+    {
         $data['zonas'] = $this->zonaModel->findAll();
         echo view('template/head');
         echo view('template/sidenav');
@@ -341,7 +339,8 @@ class Estadia_controller extends BaseController
         echo view('template/footer');
     }
 
-    public function actualizarHorarioCostoZona (){
+    public function actualizarHorarioCostoZona()
+    {
 
         $validation = service('validation');
         $validation->setRuleGroup('formActualizarZona');
@@ -351,7 +350,7 @@ class Estadia_controller extends BaseController
         }
 
         $this->zonaModel->actualizarHorarioCosto($_POST['id_zona'], $_POST['horario_mañana'], $_POST['horario_tarde'], $_POST['costo_hora']);
-        
+
         session()->setFlashdata('msg', 'Datos de zona actualizados');
         return redirect()->back();
     }

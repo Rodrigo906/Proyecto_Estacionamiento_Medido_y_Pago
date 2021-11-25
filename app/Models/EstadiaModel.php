@@ -5,7 +5,8 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 
-class EstadiaModel extends Model{
+class EstadiaModel extends Model
+{
 
 
         protected $table = 'estadia';
@@ -68,7 +69,7 @@ class EstadiaModel extends Model{
                         "('$fecha_actual' BETWEEN e.fecha_inicio AND e.fecha_fin) OR e.fecha_fin IS NULL");
                 return $result->getResultArray();
         }
-        
+
         public function hayVehiculosEstacionados($fecha_actual)
         {
                 $result = $this->db->query("SELECT * FROM estadia e JOIN vehiculo v ON (e.id_vehiculo = v.id_vehiculo) " .
@@ -98,25 +99,30 @@ class EstadiaModel extends Model{
                 return $result->getResultArray();
         }
 
-        public function tieneEstadiaAbierta ($id_usuario, &$tieneEstadia){
+        public function tieneEstadiaAbierta($id_usuario, &$tieneEstadia)
+        {
                 $result = $this->db->query("SELECT * FROM estadia e WHERE e.id_usuario ='$id_usuario' AND e.fecha_fin IS NULL");
-                
+
                 if ($result->getNumRows() != 0) {
                         $tieneEstadia = true;
-                }
-                else{
+                } else {
                         $tieneEstadia = false;
                 }
                 return $result->getResultArray();
-
         }
         //Obtiene las estadias en estado "Pendiente" de un usuario determinado.
-        public function obtenerEstadiasPendientes ($id_usuario){
-                $result = $this->db->query("SELECT * FROM estadia e WHERE e.estado_pago = Pendiente AND e.id_usuario= '$id_usuario'");
-                $result->getResultArray();
+        public function obtenerEstadiasPendientes($id_usuario)
+        {
+                $result = $this->db->query("SELECT e.id_estadia, CONCAT('Desde ', e.fecha_inicio, ' hasta ', e.fecha_fin) fecha, e.precio ,v.patente
+                FROM estadia e
+                JOIN vehiculo v ON (v.id_vehiculo=e.id_vehiculo)
+                WHERE e.estado_pago='Pendiente' AND 
+                e.id_usuario='$id_usuario'");
+                return $result->getResultArray();
         }
-        
-        public function pagarEstadia ($id_estadia){
+
+        public function pagarEstadia($id_estadia)
+        {
                 $this->db->query("UPDATE estadia SET estado_pago=Pagado WHERE id_estadia = '$id_estadia'");
         }
 }

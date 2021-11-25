@@ -84,6 +84,13 @@
                 <i class="bi bi-currency-dollar" style="font-size: 18px;"></i>
                 <span> Cargar saldo </span></a>
         </li>
+
+        <!-- Nav Item - Estadias pendientes -->
+        <li class="nav-item" id="registrar_vehiculo">
+            <a class="nav-link" href="<?= base_url('listar-estadias-pendientes') ?>">
+                <i class="fas fa-fw bi bi-plus-circle-fill" style="font-size: 18px;"></i>
+                <span> Estadias pendientes </span></a>
+        </li>
     <?php endif; ?>
 
     <?php if (session('rol') == 'Inspector') : ?>
