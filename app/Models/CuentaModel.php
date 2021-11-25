@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Entity\Cast\IntegerCast;
 use CodeIgniter\Model;
 
 class CuentaModel extends Model
@@ -39,8 +40,9 @@ class CuentaModel extends Model
     }
 
     public function obtenerSaldo ($id_cuenta){
-        $saldo = $this->db->query("SELECT saldo FROM cuenta WHERE id_cuenta='$id_cuenta'");
-        return $saldo;
+        $result = $this->db->query("SELECT saldo FROM cuenta WHERE id_cuenta='$id_cuenta'");
+        $row = $result->getRow();
+        return $row->saldo;
     }
 
     public function restarDineroCuenta ($cuenta, $saldo){

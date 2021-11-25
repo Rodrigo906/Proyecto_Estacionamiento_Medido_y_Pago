@@ -123,6 +123,6 @@ class EstadiaModel extends Model
 
         public function pagarEstadia($id_estadia)
         {
-                $this->db->query("UPDATE estadia SET estado_pago=Pagado WHERE id_estadia = '$id_estadia'");
+                $this->db->query("UPDATE estadia SET estado_pago='Pagado' WHERE id_estadia = '$id_estadia'");
         }
 }

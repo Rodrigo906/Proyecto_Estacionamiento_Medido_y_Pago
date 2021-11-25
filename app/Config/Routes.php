@@ -86,7 +86,7 @@ $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function ($routes) 
     $routes->post('cargar-saldo', 'User_controller::cargarSaldo');
 
     $routes->get('listar-estadias-pendientes', 'Estadia_controller::listadoEstadiasPendientes');
-    $routes->post('pagar-estadias-pendientes', 'Estadia_controller::pagarEstadiasPendientes');
+    $routes->get('pagar-estadia-pendiente/(:num)', 'Estadia_controller::pagarEstadiaPendiente/$1');
 
 });
 
