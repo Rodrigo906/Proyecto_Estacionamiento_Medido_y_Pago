@@ -27,7 +27,7 @@
                                 </div>
                                 <form class="user" method="POST" action="<?= base_url('actualizar-zona') ?>">
                                     <div class="form-group">
-                                        <select class="form-control" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona" required>
+                                        <select class="form-control" style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona" required id="zona" onchange="actualizarDatos();">
                                             <option value='' disabled selected>
                                                 Seleccione una zona
                                             </option>
@@ -56,11 +56,11 @@
                                         </span>
 
                                         <div class="col-sm-4 mb-3 mb-sm-0">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaDesdeMañana" name="horaDesdeMañana">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaDesdeManiana" name="horaDesdeManiana">
                                             <p class="text-danger"> <?= session('errors.horaDesdeMañana') ?></p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaHastaMañana" name="horaHastaMañana">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaHastaManiana" name="horaHastaMañana">
                                             <p class="text-danger"> <?= session('errors.horaHastaMañana') ?></p>
                                         </div>
 
@@ -92,3 +92,34 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function actualizarDatos() {
+        var select = document.getElementById('zona');
+        let zonas = <?= json_encode($zonas) ?>;
+        for (var i = 0; i < zonas.length; i++) {
+            if (zonas[i]['id_zona'] == select.selectedIndex) {
+                document.getElementById("precio").value = zonas[i]['costo_hora'];
+                if (zonas[i]['horario_pago_mañana'] != null) {
+                    let horas = zonas[i]['horario_pago_mañana'].split("-");
+                    document.getElementById("horaDesdeManiana").value = horas[0];
+                    document.getElementById("horaHastaManiana").value = horas[1];
+                } else {
+                    document.getElementById("horaDesdeManiana").value = '00:00';
+                    document.getElementById("horaHastaManiana").value = '00:00';
+                }
+                if (zonas[i]['horario_pago_tarde'] != null) {
+                    horas = zonas[i]['horario_pago_tarde'].split("-");
+                    document.getElementById("horaDesdeTarde").value = horas[0];
+                    document.getElementById("horaHastaTarde").value = horas[1];
+                } else {
+                    document.getElementById("horaDesdeTarde").value = '00:00';
+                    document.getElementById("horaHastaTarde").value = '00:00';
+                }
+
+
+                return 0;
+            }
+        }
+    }
+</script>
