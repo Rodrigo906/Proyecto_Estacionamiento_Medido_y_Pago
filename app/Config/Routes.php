@@ -88,6 +88,8 @@ $routes->group('/', ['filter' => 'Filter_permisos:Cliente'], function ($routes) 
     $routes->get('listar-estadias-pendientes', 'Estadia_controller::listadoEstadiasPendientes');
     $routes->get('pagar-estadia-pendiente/(:num)', 'Estadia_controller::pagarEstadiaPendiente/$1');
 
+    $routes->get('mostrar-puntos-venta', 'User_controller::mostrarPuntosVenta');
+
 });
 
 //VENDEDOR

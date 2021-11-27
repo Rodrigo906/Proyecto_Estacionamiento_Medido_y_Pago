@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CuentaModel;
+use App\Models\PuntoVentaModel;
 use App\Models\UserModel;
 use App\Models\RolModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -13,6 +14,7 @@ class User_controller extends BaseController
     protected $userModel;
     protected $rolModel;
     protected $cuentaModel;
+    protected $puntoVentaModel;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class User_controller extends BaseController
         $this->userModel = new UserModel();
         $this->rolModel = new RolModel();
         $this->cuentaModel = new CuentaModel();
+        $this->puntoVentaModel = new PuntoVentaModel();
     }
 
     //retorna el listado de todos los usuarios del sistema
@@ -204,5 +207,15 @@ class User_controller extends BaseController
 
         session()->setFlashdata('msg', "Su carga de $$monto fue exitosa");
         return redirect()->back();
+    }
+
+    public function mostrarPuntosVenta (){
+        $data['puntos_venta'] = $this->puntoVentaModel->findAll();
+        $data['subtitulo'] = "Puntos de venta";
+        echo view('template/head');
+        echo view('template/sidenav');
+        echo view('template/layout');
+        echo view('zonas/listado_puntos_venta', $data);
+        echo view('template/footer');
     }
 }

@@ -222,6 +222,30 @@
                 </div>
             </div>
 
+            <!-- Puntos de venta -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="col-auto">
+                                <a class="nav-link" href="<?= base_url('mostrar-puntos-venta') ?>">
+                                    <i class="fas fa-fw fa-info-circle text-gray-600" style="font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="mt-4 text-center small">
+                                <span class="mr-2">
+                                    Puntos de venta
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
         <?php endif; ?>
 
 

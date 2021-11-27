@@ -156,12 +156,12 @@
     </li> 
     -->
 
-    <!-- Nav Item - Puntos de ventas 
+
      <li class="nav-item" id="puntos_venta">
-        <a class="nav-link" href="" <i class=" fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="<?= base_url('mostrar-puntos-venta')?>" > 
+            <i class="fas fa-fw fa-info-circle" style="font-size: 18px;"></i>
             <span>Puntos de ventas</span></a>
     </li>
-    -->
 
 
     <!-- Divider -->
