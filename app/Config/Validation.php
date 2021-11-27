@@ -315,7 +315,7 @@ class Validation
     ];
 
     public $formActualizarZona = [
-        'costo_hora' => [
+        'precio' => [
             'rules' => 'required|decimal',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
@@ -323,7 +323,7 @@ class Validation
             ],
         ],
 
-        'horario_mañana' => [
+        'horaDesdeManiana' => [
             'rules' => 'required|regex_match[^([0-2][0-9]):([0-6][0-9])$]',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
@@ -331,7 +331,23 @@ class Validation
             ],
         ],
 
-        'horario_tarde' => [
+        'horaHastaManiana' => [
+            'rules' => 'required|regex_match[^([0-2][0-9]):([0-6][0-9])$]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'regex_match' => 'Formato de hora invalido',
+            ],
+        ],
+
+        'horaDesdeTarde' => [
+            'rules' => 'required|regex_match[^([0-2][0-9]):([0-6][0-9])$]',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
+                'regex_match' => 'Formato de hora invalido',
+            ],
+        ],
+
+        'horaHastaTarde' => [
             'rules' => 'required|regex_match[^([0-2][0-9]):([0-6][0-9])$]',
             'errors' => [
                 'required' => 'Este campo es obligatorio',

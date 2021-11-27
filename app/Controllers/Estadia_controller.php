@@ -345,8 +345,7 @@ class Estadia_controller extends BaseController
     }
 
     public function actualizarHorarioCostoZona()
-    {
-
+    {       
         $validation = service('validation');
         $validation->setRuleGroup('formActualizarZona');
 
@@ -354,7 +353,20 @@ class Estadia_controller extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        $this->zonaModel->actualizarHorarioCosto($_POST['id_zona'], $_POST['horario_mañana'], $_POST['horario_tarde'], $_POST['costo_hora']);
+        $horarioMañana = null;
+        $horarioTarde = null;
+
+        if(!isset($_POST['indfManiana']))
+        {
+            $horarioMañana = $_POST['horaDesdeManiana']."-".$_POST['horaHastaManiana'];
+        }
+
+        if(!isset($_POST['indfTarde']))
+        {
+            $horarioTarde = $_POST['horaDesdeTarde']."-".$_POST['horaHastaTarde'];
+        }
+
+        $this->zonaModel->actualizarHorarioCosto($_POST['zona'], $horarioMañana, $horarioTarde, $_POST['precio']);
 
         session()->setFlashdata('msg', 'Datos de zona actualizados');
         return redirect()->back();

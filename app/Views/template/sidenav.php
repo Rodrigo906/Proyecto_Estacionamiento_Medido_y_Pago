@@ -70,19 +70,28 @@
                 <span> Asociar vehiculo </span></a>
         </li>
 
-        <li class="nav-item" id="estacionar_vehiculo">
-            <a class="nav-link" href="<?= base_url('estacionar-vehiculo') ?>">
-                <i class="fas fa-fw fa-car" style="font-size: 18px;"></i>
-                <span> Estacionar vehiculo </span>
-            </a>
-        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 
-        <li class="nav-item" id="desEstacionar_vehiculo">
-            <a class="nav-link" href="<?= base_url('des_estacionar-vehiculo') ?>">
-                <i class="fas fa-fw fa-car-side" style="font-size: 18px;"></i>
-                <span> DesEstacionar vehiculo </span>
+                <span>Estacionar</span>
             </a>
-        </li>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="collapse-inner rounded">
+                <a class="nav-link" href="<?= base_url('estacionar-vehiculo') ?>">
+                    <i class="fas fa-fw fa-car" style="font-size: 18px;"></i>
+                    <span> Estacionar vehiculo </span>
+                </a>
+
+                <a class="nav-link" href="<?= base_url('des_estacionar-vehiculo') ?>">
+                    <i class="fas fa-fw fa-car-side" style="font-size: 18px;"></i>
+                    <span> DesEstacionar vehiculo </span>
+                </a>
+
+                </div>
+            </div>
+        </li> 
+
+    
         <li class="nav-item" id="cargar_saldo">
             <a class="nav-link" href="<?= base_url('form-cargar-saldo') ?>">
                 <i class="bi bi-currency-dollar" style="font-size: 18px;"></i>

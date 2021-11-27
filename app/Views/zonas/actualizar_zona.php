@@ -44,37 +44,42 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="number" class="form-control form-control-user" id="precio" placeholder="Precio" name="precio" value="<?= old('precio') ?>" required>
+                                        <input step="0.01" type="number" class="form-control form-control-user" id="precio" placeholder="Precio" name="precio" value="<?= old('precio') ?>" required>
                                         <p class="text-danger"> <?= session('errors.precio') ?> </p>
                                     </div>
 
                                     <div class="form-group row">
 
-                                        <span style="font-size: .9rem;
-                                        margin-top: 1rem; margin-left: 1.1rem;">
-                                            Hora de mañana
-                                        </span>
-
+                                       
+                                        <div class="custom-control custom-checkbox small" style="margin-top: 15px; margin-left: 17px;">
+                                            <input type="checkbox" name="indfManiana" class="custom-control-input" id="indfManiana" onchange="comprobarHoraManiana();">
+                                            <label class="custom-control-label" style="padding-bottom: 20px;" for="indfManiana"> Hora de mañana </label>
+                                        </div>
+                                          
                                         <div class="col-sm-4 mb-3 mb-sm-0">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaDesdeManiana" name="horaDesdeManiana">
+                                            <input type="time" min="00:00" max="24:59" class="form-control form-control-user" id="horaDesdeManiana" name="horaDesdeManiana">
                                             <p class="text-danger"> <?= session('errors.horaDesdeMañana') ?></p>
                                         </div>
+                            
                                         <div class="col-sm-4">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaHastaManiana" name="horaHastaMañana">
+                                            <input type="time" min="00:00" max="24:59" class="form-control form-control-user" id="horaHastaManiana" name="horaHastaManiana">
                                             <p class="text-danger"> <?= session('errors.horaHastaMañana') ?></p>
+                                
                                         </div>
 
-                                        <span style="font-size: .9rem;
-                                        margin-top: 1rem; margin-left: 1.1rem;">
-                                            Hora de tarde
-                                        </span>
+                                
+
+                                        <div class="custom-control custom-checkbox small" style="margin-top: 15px; margin-left: 17px;">
+                                            <input type="checkbox" name="indfTarde" class="custom-control-input" id="indfTarde" onchange="comprobarHoraTarde();">
+                                            <label class="custom-control-label" style="padding-bottom: 20px;" for="indfTarde"> Hora de Tarde   </label>
+                                        </div>
 
                                         <div class="col-sm-4 mb-3 mb-sm-0" style="margin-left: 1rem;">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaDesdeTarde" name="horaDesdeTarde">
+                                            <input type="time" min="01:00" max="24:59" class="form-control form-control-user" id="horaDesdeTarde" name="horaDesdeTarde">
                                             <p class="text-danger"> <?= session('errors.horaDesdeTarde') ?></p>
                                         </div>
                                         <div class="col-sm-4" style="margin-left: .1rem;">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="horaHastaTarde" name="horaHastaTarde">
+                                            <input type="time" min="01:00" max="24:59" class="form-control form-control-user" id="horaHastaTarde" name="horaHastaTarde">
                                             <p class="text-danger"> <?= session('errors.horaHastaTarde') ?></p>
                                         </div>
                                     </div>
@@ -97,29 +102,58 @@
     function actualizarDatos() {
         var select = document.getElementById('zona');
         let zonas = <?= json_encode($zonas) ?>;
+        let checkManiana =  document.getElementById("indfManiana");
+        let checkTarde =  document.getElementById("indfTarde");
+        
         for (var i = 0; i < zonas.length; i++) {
             if (zonas[i]['id_zona'] == select.selectedIndex) {
                 document.getElementById("precio").value = zonas[i]['costo_hora'];
                 if (zonas[i]['horario_pago_mañana'] != null) {
                     let horas = zonas[i]['horario_pago_mañana'].split("-");
+                    verificarCheck(checkManiana);
                     document.getElementById("horaDesdeManiana").value = horas[0];
                     document.getElementById("horaHastaManiana").value = horas[1];
                 } else {
+                    presionar(checkManiana);
                     document.getElementById("horaDesdeManiana").value = '00:00';
                     document.getElementById("horaHastaManiana").value = '00:00';
                 }
                 if (zonas[i]['horario_pago_tarde'] != null) {
                     horas = zonas[i]['horario_pago_tarde'].split("-");
+                    verificarCheck(checkTarde);
                     document.getElementById("horaDesdeTarde").value = horas[0];
                     document.getElementById("horaHastaTarde").value = horas[1];
                 } else {
+                    presionar(checkTarde);
                     document.getElementById("horaDesdeTarde").value = '00:00';
                     document.getElementById("horaHastaTarde").value = '00:00';
                 }
-
-
                 return 0;
             }
         }
     }
+
+    function verificarCheck(check){
+        if(check.checked){
+            check.click();
+        }
+    }
+
+    function presionar (check){
+        if(!check.checked){
+            check.click();
+        }
+    }
+
+    function comprobarHoraManiana(){
+        document.getElementById("horaDesdeManiana").readOnly = document.getElementById("indfManiana").checked;
+        document.getElementById("horaHastaManiana").readOnly = document.getElementById("indfManiana").checked;
+    }
+
+    function comprobarHoraTarde(){
+        document.getElementById("horaDesdeTarde").readOnly = document.getElementById("indfTarde").checked;
+        document.getElementById("horaHastaTarde").readOnly = document.getElementById("indfTarde").checked;
+    }
+
+
 </script>
