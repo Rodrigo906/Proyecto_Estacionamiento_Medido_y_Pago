@@ -157,8 +157,8 @@ class Estadia_controller extends BaseController
         }
 
         $id_vendedor = session('id_usuario');
-        $vehiculo = $this->vehiculoModel->first($_POST['patente']);
-        $id_vehiculo = $vehiculo['id_vehiculo'];
+        $vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
+        $id_vehiculo = $vehiculo[0]['id_vehiculo'];
         $estado_pago = "Pagado";
         $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
 

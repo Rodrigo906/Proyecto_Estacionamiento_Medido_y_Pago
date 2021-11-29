@@ -117,10 +117,18 @@ class Validation
         ],
 
         'patente' => [
-            'rules' => 'required|is_unique[vehiculo.patente]',
+            'rules' => 'required|is_unique[vehiculo.patente]|regex_match[/^[A-Z]{3} [0-9]{3}$/]',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
                 'is_unique' => 'Esta patente ya se encuentra registrada en el sistema',
+                'regex_match' => 'Ingrese la patente en formato LLL NNN',
+            ],
+        ],
+
+        'modelo' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Este campo es obligatorio',
             ],
         ],
 
@@ -129,10 +137,9 @@ class Validation
     public $formEstacionarValidation = [
 
         'patente' => [
-            'rules' => 'required|is_unique[vehiculo.patente]',
+            'rules' => 'required',
             'errors' => [
                 'required' =>  'Este campo es obligatorio',
-                'is_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
             ],
         ],
     ];
@@ -140,20 +147,22 @@ class Validation
     public $formConsultarEstadia = [
 
         'patente' => [
-            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'rules' => 'required|is_not_unique[vehiculo.patente]|regex_match[/^[A-Z]{3} [0-9]{3}$/]',
             'errors' => [
                 'required' =>  'Este campo es obligatorio',
                 'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+                'regex_match' => 'Ingrese la patente en formato LLL NNN',
             ],
         ],
     ];
 
     public $formVentaEstadiaValidation = [
         'patente' => [
-            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'rules' => 'required|is_not_unique[vehiculo.patente]|regex_match[/^[A-Z]{3} [0-9]{3}$/]',
             'errors' => [
                 'required' => 'Este campo es obligatorio',
                 'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+                'regex_match' => 'Ingrese la patente en formato LLL NNN',
             ],
         ],
 
@@ -165,8 +174,12 @@ class Validation
             ],
         ],
 
-
-
+        'cant_horas' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' =>  'Por favor, seleccione una zona',
+            ],
+        ],
     ];
 
 
@@ -284,10 +297,11 @@ class Validation
     public $formRegistrarInfraccion = [
 
         'patente' => [
-            'rules' => 'required|is_not_unique[vehiculo.patente]',
+            'rules' => 'required|is_not_unique[vehiculo.patente]|regex_match[/^[A-Z]{3} [0-9]{3}$/]',
             'errors' => [
                 'required' =>  'Este campo es obligatorio',
                 'is_not_unique' => 'Esta patente aun no se encuentra registrada en el sistema',
+                'regex_match' => 'Ingrese la patente en formato LLL NNN',
             ],
         ],
 
@@ -354,11 +368,6 @@ class Validation
                 'regex_match' => 'Formato de hora invalido',
             ],
         ],
-
-
-
-
-
     ];
 
 

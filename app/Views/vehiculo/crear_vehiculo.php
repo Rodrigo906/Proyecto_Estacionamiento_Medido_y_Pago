@@ -29,14 +29,17 @@
                                 </div>
                                 <form class="user" method="POST" action="<?= base_url('registrar-auto') ?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="patente" placeholder="Patente" name="patente" required>
+                                        <input type="text" class="form-control form-control-user" id="patente" placeholder="Patente" name="patente" value="<?= old('patente') ?>" required>
+                                        <p class="text-danger"> <?= session('errors.patente') ?> </p>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="marca" placeholder="Marca" name="marca" required>
+                                        <input type="text" class="form-control form-control-user" id="marca" placeholder="Marca" name="marca" value="<?= old('marca') ?>" required>
+                                        <p class="text-danger"> <?= session('errors.marca') ?> </p>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="modelo" placeholder="Modelo" name="modelo" required>
+                                        <input type="text" class="form-control form-control-user" id="modelo" placeholder="Modelo" name="modelo" value="<?= old('modelo') ?>" required>
+                                        <p class="text-danger"> <?= session('errors.modelo') ?> </p>
                                     </div>
 
                                     <button class="btn btn-primary btn-user btn-block" type="submit">

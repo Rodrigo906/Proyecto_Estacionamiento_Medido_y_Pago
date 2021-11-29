@@ -104,6 +104,14 @@
                 <i class="bi bi-card-list" style="font-size: 18px;"></i>
                 <span> Estadias pendientes </span></a>
         </li>
+
+        <li class="nav-item" id="puntos_venta">
+            <a class="nav-link" href="<?= base_url('mostrar-puntos-venta')?>" > 
+                <i class="fas fa-fw fa-info-circle" style="font-size: 18px;"> </i>
+                <span>Puntos de venta </span>
+            </a>
+        </li>
+        
     <?php endif; ?>
 
     <?php if (session('rol') == 'Inspector') : ?>
@@ -155,14 +163,6 @@
         </div>
     </li> 
     -->
-
-
-     <li class="nav-item" id="puntos_venta">
-        <a class="nav-link" href="<?= base_url('mostrar-puntos-venta')?>" > 
-            <i class="fas fa-fw fa-info-circle" style="font-size: 18px;"></i>
-            <span>Puntos de ventas</span></a>
-    </li>
-
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

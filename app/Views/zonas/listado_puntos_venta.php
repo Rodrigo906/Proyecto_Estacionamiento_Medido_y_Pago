@@ -7,7 +7,7 @@
         <thead>
             <tr class="text-center">
                 <th scope="col"> Comercio </th>
-                <th scope="col"> Direccion </th>
+                <th scope="col"> Dirección </th>
             </tr>
         </thead>
         <tbody>

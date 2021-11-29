@@ -26,12 +26,12 @@
                                 </div>
                                 <form class="user" method="POST" action="<?= base_url('registrar-venta') ?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="dominio" aria-describedby="dominio" placeholder="Dominio" name="patente" value="<?= old('patente') ?>">
+                                        <input type="text" class="form-control form-control-user" id="dominio" aria-describedby="dominio" placeholder="Dominio" name="patente" value="<?= old('patente') ?>" required>
                                         <p class="text-danger"> <?= session('errors.patente') ?> </p>
                                     </div>
 
                                     <div class="form-group">
-                                        <select class="form-control" required style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona">
+                                        <select class="form-control" required style="font-size: .8rem; border-radius: 10rem; width: 100%; height: calc(2em + 1.3rem + 1.7px);padding: 0.375rem 0.75rem; background-color: #fff; color: #6e707e;border: 1px solid #d1d3e2;" name="zona" required>
                                             <option value='' disabled selected>
                                                 Seleccione una zona
                                             </option>
@@ -55,7 +55,7 @@
                                         </div>
 
                                         <div class="col-sm-7">
-                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas">
+                                            <input type="time" min="01:00" max="12:00" class="form-control form-control-user" id="cantidad_hora" name="cant_horas" required>
                                             <p class="text-danger"> <?= session('errors.cant_horas') ?></p>
                                         </div>
 
