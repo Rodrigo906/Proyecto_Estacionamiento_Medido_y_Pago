@@ -120,7 +120,7 @@ class Estadia_controller extends BaseController
             }
 
             $id_vendedor = null;
-
+            
             $this->estadiaModel->registrarEstadia(
                 $id_usuario,
                 $id_vendedor,

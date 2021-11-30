@@ -13,7 +13,7 @@
                             <div class="p-5">
 
                             <?php if (session()->get('msg')) : ?>
-                                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                <div class="alert <?= session()->get('tipoMsg')?> alert-dismissible fade show text-center" role="alert">
                                     <strong><?= session()->getFlashdata('msg') ?></strong>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>

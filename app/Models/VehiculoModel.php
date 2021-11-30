@@ -62,8 +62,21 @@ class VehiculoModel extends Model
 
     public function asociarVehiculo ($id_usuario, $id_vehiculo){
 
-        $this->db->query("INSERT INTO vehiculo_usuario (id_vehiculo, id_usuario) " .
-        "VALUES ('$id_vehiculo', '$id_usuario')");
+        if(!$this->yaEstaAsociado($id_usuario, $id_vehiculo)){
+            $this->db->query("INSERT INTO vehiculo_usuario (id_vehiculo, id_usuario) " .
+            "VALUES ('$id_vehiculo', '$id_usuario')");
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private function yaEstaAsociado ($id_usuario, $id_vehiculo){
+        $result = $this->db->query("SELECT * FROM vehiculo_usuario vu WHERE id_usuario='$id_usuario' AND id_vehiculo='$id_vehiculo'");
+        if ($result->getNumRows() != 0) {
+            return true;
+        }
+        return false;
     }
 
 }

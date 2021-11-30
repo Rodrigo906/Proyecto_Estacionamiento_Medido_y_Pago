@@ -14,8 +14,12 @@ class Vehiculo_controller extends BaseController
         $this->vehiculoModel = new VehiculoModel();
     }
 
-    public function index()
-    {
+    private function enviarMensaje($mensaje, $tipo){
+        session()->setFlashdata(
+            ['msg' => $mensaje,
+            'tipoMsg' => $tipo,
+            ]
+        );
     }
 
     //mostrara el formulario de registro
@@ -67,10 +71,12 @@ class Vehiculo_controller extends BaseController
         }
 
         $vehiculo =   $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
-
-        $this->vehiculoModel->asociarVehiculo(session('id_usuario'), $vehiculo[0]['id_vehiculo']);
-
-        session()->setFlashdata('msg', 'Vehiculo asociado correctamente');
+        if ($this->vehiculoModel->asociarVehiculo(session('id_usuario'), $vehiculo[0]['id_vehiculo'])){
+            $this->enviarMensaje("Vehiculo asociado correctamente", "alert-success");
+        }
+        else{
+            $this->enviarMensaje("El vehiculo ya se encuentra asociado", "alert-warning");
+        }
         return redirect()->back();
     }
 }
