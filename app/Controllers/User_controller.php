@@ -210,7 +210,7 @@ class User_controller extends BaseController
     }
 
     public function mostrarPuntosVenta (){
-        $data['puntos_venta'] = $this->puntoVentaModel->findAll();
+        $data['puntos_venta'] = $this->puntoVentaModel->obtenerPuntosVenta();
         $data['subtitulo'] = "Puntos de venta";
         echo view('template/head');
         echo view('template/sidenav');

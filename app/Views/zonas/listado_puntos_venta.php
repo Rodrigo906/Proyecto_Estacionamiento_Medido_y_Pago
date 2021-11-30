@@ -7,6 +7,7 @@
         <thead>
             <tr class="text-center">
                 <th scope="col"> Comercio </th>
+                <th scope="col"> Zona </th>
                 <th scope="col"> Dirección </th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
             ?>
                 <tr class="text-center">
                     <td> <?php echo $p_venta['nombre'] ?> </td>
+                    <td> <?php echo $p_venta['nombre_zona'] ?> </td>
                     <td> <?php echo $p_venta['direccion'] ?> </td>
                 </tr>
             <?php };

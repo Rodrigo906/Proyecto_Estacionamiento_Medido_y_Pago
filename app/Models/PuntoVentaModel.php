@@ -25,6 +25,12 @@
         protected $validationMessages = [];
         protected $skipValidation = false;
     
+
+        public function obtenerPuntosVenta (){
+            $result = $this->db->query("SELECT * FROM punto_venta pv JOIN zona z ON (pv.id_zona = z.id_zona)");
+            return $result->getResultArray();
+        }
+
     }
 
 ?>
