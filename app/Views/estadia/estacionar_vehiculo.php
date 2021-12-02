@@ -59,6 +59,8 @@
                                         </select>
                                     </div>
 
+                                                
+
                                     <div class="form-group row">
                                         <div class="col-sm-5 mb-4 mb-sm-0">
                                             <label class="classLabel" style="margin-top: 1rem; margin-left: .6rem">Cantidad de horas: </label>

@@ -13,7 +13,7 @@ class VehiculoModel extends Model
     protected $useAutoIncrement = true;
 
     protected $returnType = 'array';
-    protected $useSoftdeletes = false;  //ver que tipo de eliminado se usara luego
+    protected $useSoftdeletes = false; 
 
     protected $allowedFields = ['patente', 'marca', 'modelo'];
 

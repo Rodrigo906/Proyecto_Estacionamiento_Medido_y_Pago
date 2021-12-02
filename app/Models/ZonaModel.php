@@ -14,7 +14,7 @@ class ZonaModel extends Model
     protected $useAutoIncrement = true;
 
     protected $returnType = 'array';
-    protected $useSoftdeletes = false;  //ver que tipo de eliminado se usara luego
+    protected $useSoftdeletes = false;
 
     protected $allowedFields = [
         'id_zona', 'nombre_zona', 'horario_pago_mañana', 'horario_pago_tarde',
@@ -41,23 +41,21 @@ class ZonaModel extends Model
 
         $fechaActual = new Time('now', 'America/Argentina/Buenos_Aires');
 
-        $hora = strtotime(Time::createFromTime(13, 30)->toDateTimeString());
-
-        if (strtotime($fechaActual->toDateTimeString()) <= $hora) {
+        if ($zona['horario_pago_mañana'] != null) {
             if ($this->horaActualSeEncuentraEnRango($zona['horario_pago_mañana'], $fechaActual)) {
                 return true;
             }
-        } else {
-            if ($zona['horario_pago_tarde'] != null) {
-                if ($this->horaActualSeEncuentraEnRango($zona['horario_pago_tarde'], $fechaActual)) {
-                    return true;
-                }
+        }
+
+        if ($zona['horario_pago_tarde'] != null) {
+            if ($this->horaActualSeEncuentraEnRango($zona['horario_pago_tarde'], $fechaActual)) {
+                 return true;
             }
         }
         return false;
     }
 
-    private function horaActualSeEncuentraEnRango($horario_pago, $fechaActual): bool
+    public function horaActualSeEncuentraEnRango($horario_pago, $fechaActual): bool
     {
         list($inf_hMañana, $sup_hMañana) = explode("-", $horario_pago);
 
@@ -76,9 +74,5 @@ class ZonaModel extends Model
     {
         list($hora, $minutos) = explode(":", $stringHora);
         return Time::createFromTime($hora, $minutos);
-    }
-
-    public function actualizarHorarioCosto ($id_zona, $horario_mañana, $horario_tarde, $costoHora){
-        $this->db->query("UPDATE zona SET horario_pago_mañana=NULLIF('$horario_mañana', ''), horario_pago_tarde=NULLIF('$horario_tarde', ''), costo_hora='$costoHora' WHERE id_zona= '$id_zona'");
     }
 }

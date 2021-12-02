@@ -89,17 +89,19 @@ class User_controller extends BaseController
             $rol = $this->rolModel->obtenerIdRol("Cliente");
             $id_rol = $rol[0]['id_rol'];
         }
+       
+        $data = [
+            'id_rol' => $id_rol,
+            'username' => $username,
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'email' => $email,
+            'dni' => $dni,
+            'fecha_nacimiento' => $fecha_nacimiento,
+            'contraseña' => $contraseña,
+        ];
 
-        $this->userModel->registrarUsuario(
-            $username,
-            $nombre,
-            $apellido,
-            $email,
-            $dni,
-            $fecha_nacimiento,
-            $contraseña,
-            $id_rol
-        );
+        $this->userModel->save($data);
 
         session()->setFlashdata('msg', 'Se registró correctamente');
         return redirect()->back();
@@ -142,7 +144,16 @@ class User_controller extends BaseController
         $contraseña = $_POST['contraseña'];
         $username = $_POST['username'];
 
-        $this->userModel->actualizarDatosPersonales($username, $nombre, $apellido, $email, $fecha_nacimiento, $contraseña);
+        $data = [
+            'username' => $username,
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'email' => $email,
+            'fecha_nacimiento' => $fecha_nacimiento,
+            'contraseña' => $contraseña,
+        ];
+
+        $this->userModel->update(session('id_usuario'), $data);
 
         session()->setFlashdata('msg', 'Se actualizaron sus datos correctamente');
         return redirect()->back();
@@ -173,6 +184,7 @@ class User_controller extends BaseController
     public function eliminar($id_usuario)
     {
         $this->userModel->eliminarUsuario($id_usuario);
+
         session()->setFlashdata('msg', 'El usuario se eliminó correctamente.');
         return redirect()->back();
     }
@@ -204,6 +216,7 @@ class User_controller extends BaseController
         $monto = $_POST['monto'];
 
         $this->cuentaModel->cargarDineroCuenta(session('id_cuenta'), $monto);
+
 
         session()->setFlashdata('msg', "Su carga de $$monto fue exitosa");
         return redirect()->back();

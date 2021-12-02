@@ -88,49 +88,86 @@ class Estadia_controller extends BaseController
             $id_vehiculo = $_POST['patente'];
             /**Trae el id del vehiculo */
             $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
-
-            //indefinido seria un checbox al lado de la cant de horas. Se ignora la cant horas en caso de seleccionarlo
+            $fecha_fin = null;
+            $id_zona = $_POST['zona'];
+            $zona = $this->zonaModel->find($id_zona);
+            
+            
+            //Se ignora la cant horas en caso de seleccionar el checkBox indefinido
             if (isset($_POST['indefinido'])) {
-                $fecha_fin = null;
-            } else {
+
+                //Si el horario no es null y actualmente estamos en el rango horario de la mañana
+                if (isset($zona['horario_pago_mañana']) && $this->zonaModel->horaActualSeEncuentraEnRango($zona['horario_pago_mañana'], $fecha_inicio))
+                {
+                    list($horaMin, $horaMax) = explode("-", $zona['horario_pago_mañana']);
+                    list($hora, $minutos) = explode(":", $horaMax);
+                    $fecha_fin =  Time::createFromTime($hora, $minutos);
+
+                    $diferenciaHoras = $fecha_inicio->diff($fecha_fin)->i;
+                    $hora_decimal = $diferenciaHoras / 60;
+                    $precio = $zona['costo_hora'] * $hora_decimal;
+                }
+
+                if(isset($zona['horario_pago_tarde']) && $this->zonaModel->horaActualSeEncuentraEnRango($zona['horario_pago_tarde'], $fecha_inicio))
+                {
+                    list($horaMin, $horaMax) = explode("-", $zona['horario_pago_tarde']);
+                    list($hora, $minutos) = explode(":", $horaMax);
+                    $fecha_fin =  Time::createFromTime($hora, $minutos);
+
+                    $diferenciaHoras = $fecha_inicio->diff($fecha_fin)->i;
+                    $hora_decimal = $diferenciaHoras / 60;
+                    $precio = $zona['costo_hora'] * $hora_decimal;
+                }
+                $indefinido = true;
+
+            }
+            //si no es indefinido se calcula la fecha_fin
+            else 
+            {
+
                 $cantHoras = $_POST['cant_horas'];
                 list($hora, $minutos) = explode(":", $cantHoras);
                 $fecha_fin = new Time('now +' . $hora . 'hours' . $minutos . 'minutes', 'America/Argentina/Buenos_Aires');
+                $indefinido = false;
             }
 
-            $id_zona = $_POST['zona'];
 
-            if ($this->zonaModel->esHorarioCobro($id_zona)) {
+            if ($this->zonaModel->esHorarioCobro($id_zona)) 
+            {
 
-                if (!isset($_POST['indefinido'])) {
-
-                    $zona = $this->zonaModel->find($id_zona);
+                if (!isset($_POST['indefinido'])) 
+                {
 
                     $hora_decimal = (($hora * 60) + $minutos) / 60;
                     $precio = $zona['costo_hora'] * $hora_decimal;
 
                     $estado_pago = $this->cuentaModel->estadoPago($precio);
-                } else {
+                } 
+                else 
+                {
                     $estado_pago = "En curso";
-                    $precio = 0;
                 }
-            } else {
+            } 
+            else 
+            {
                 $precio = 0;
                 $estado_pago = "Pagado";
             }
 
             $id_vendedor = null;
-            
-            $this->estadiaModel->registrarEstadia(
-                $id_usuario,
-                $id_vendedor,
-                $id_zona,
-                $id_vehiculo,
-                $estado_pago,
-                $fecha_inicio,
-                $fecha_fin,
-                $precio,
-            );
+           
+            $data = [
+                'id_usuario' => $id_usuario,
+                'id_vendedor' => $id_vendedor,
+                'id_zona' => $id_zona,
+                'id_vehiculo' => $id_vehiculo,
+                'estado_pago' => $estado_pago,
+                'indefinido' => $indefinido,
+                'fecha_inicio' => $fecha_inicio,
+                'fecha_fin' => $fecha_fin,
+                'precio' => $precio,
+            ];
+            $this->estadiaModel->save($data);
 
             session()->setFlashdata('msg', 'Se registró correctamente');
             return redirect()->back();
@@ -179,16 +216,18 @@ class Estadia_controller extends BaseController
         $id_usuario = null;
         $estado_pago = "Pagado";
 
-        $this->estadiaModel->registrarEstadia(
-            $id_usuario,
-            $id_vendedor,
-            $id_zona,
-            $id_vehiculo,
-            $estado_pago,
-            $fecha_inicio,
-            $fecha_fin,
-            $precio,
-        );
+        $data = [
+            'id_usuario' => $id_usuario,
+            'id_vendedor' => $id_vendedor,
+            'id_zona' => $id_zona,
+            'id_vehiculo' => $id_vehiculo,
+            'estado_pago' => $estado_pago,
+            'indefinido' => false,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_fin' => $fecha_fin,
+            'precio' => $precio,
+        ];
+        $this->estadiaModel->save($data);
 
         session()->setFlashdata('msg', 'Se registró correctamente');
         return redirect()->back();
@@ -365,8 +404,14 @@ class Estadia_controller extends BaseController
         {
             $horarioTarde = $_POST['horaDesdeTarde']."-".$_POST['horaHastaTarde'];
         }
+        
+        $data = [
+            'horario_pago_mañana' => $horarioMañana,
+            'horario_pago_tarde' => $horarioTarde,
+            'costo_hora' => $_POST['precio'],
+        ];
 
-        $this->zonaModel->actualizarHorarioCosto($_POST['zona'], $horarioMañana, $horarioTarde, $_POST['precio']);
+        $this->zonaModel->update($_POST['zona'], $data);
 
         session()->setFlashdata('msg', 'Datos de zona actualizados');
         return redirect()->back();
