@@ -24,15 +24,13 @@
                         <form class="user" method="POST" action="<?= base_url('actualizar-usuario') ?>">
                             <div class="form-group row">
                                 
+                            <input type="hidden" class="form-control form-control-user" id="id_usuario" name="id_usuario" value="<?=$usuario['id_usuario']?>">
+
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <p> Nombre: </p>
                                     <input type="text" class="form-control form-control-user" id="nombre" placeholder="Nombre" name="nombre" value="<?=$usuario['nombre']?>" required>
                                     <p class="text-danger"> <?= session('errors.nombre') ?> </p>
                                   
-                                </div>
-
-                                <div class="col-sm-6" style="display: none;">
-                                    <input type="text" class="form-control form-control-user" id="username" placeholder="Username" name="username" value="<?=$usuario['username']?>" required>
                                 </div>
 
                                 <div class="col-sm-6">

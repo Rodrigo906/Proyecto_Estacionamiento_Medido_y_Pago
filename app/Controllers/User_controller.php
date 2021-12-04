@@ -142,10 +142,8 @@ class User_controller extends BaseController
         $email = $_POST['email'];
         $fecha_nacimiento = $_POST['fecha_nacimiento'];
         $contraseña = $_POST['contraseña'];
-        $username = $_POST['username'];
 
         $data = [
-            'username' => $username,
             'nombre' => $nombre,
             'apellido' => $apellido,
             'email' => $email,
@@ -153,7 +151,7 @@ class User_controller extends BaseController
             'contraseña' => $contraseña,
         ];
 
-        $this->userModel->update(session('id_usuario'), $data);
+        $this->userModel->update($_POST['id_usuario'], $data);
 
         session()->setFlashdata('msg', 'Se actualizaron sus datos correctamente');
         return redirect()->back();

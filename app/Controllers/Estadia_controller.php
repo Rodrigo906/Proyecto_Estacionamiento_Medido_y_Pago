@@ -74,8 +74,10 @@ class Estadia_controller extends BaseController
     //Registro desde el cliente
     public function registrarEstadia()
     {
-        $this->estadiaModel->tieneEstadiaAbierta(session('id_usuario'), $tieneEstadiaAbierta);
-        if (!$tieneEstadiaAbierta) {
+        $id_vehiculo = $_POST['patente'];
+        $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
+
+        if (!$this->estadiaModel->tieneEstadiaActiva($id_vehiculo, $fecha_inicio)) {
 
             $validation = service('validation');
             $validation->setRuleGroup('formEstacionarValidation');
@@ -85,9 +87,6 @@ class Estadia_controller extends BaseController
             }
 
             $id_usuario =  session('id_usuario');
-            $id_vehiculo = $_POST['patente'];
-            /**Trae el id del vehiculo */
-            $fecha_inicio = new Time('now', 'America/Argentina/Buenos_Aires');
             $fecha_fin = null;
             $id_zona = $_POST['zona'];
             $zona = $this->zonaModel->find($id_zona);
