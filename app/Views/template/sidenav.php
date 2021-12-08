@@ -35,7 +35,7 @@
         <li class="nav-item" id="vehiculos_estacionados">
             <a class="nav-link" href="<?= base_url('listar-vehiculos-estacionados') ?>">
                 <i class="fas fa-fw fa-car" style="font-size: 18px;"></i>
-                <span>Vehiculos estacionados</span>
+                <span>Vehículos estacionados</span>
             </a>
         </li>
 
@@ -61,37 +61,37 @@
         <li class="nav-item" id="registrar_vehiculo">
             <a class="nav-link" href="<?= base_url('registro-auto') ?>">
                 <i class="fas fa-fw bi bi-plus-circle-fill" style="font-size: 18px;"></i>
-                <span> Registar vehiculo </span></a>
+                <span> Registrar vehículo </span></a>
         </li>
 
         <li class="nav-item" id="asociar_vehiculo">
             <a class="nav-link" href="<?= base_url('mostrar-asociar-auto') ?>">
                 <i class="fas fa-key" style="font-size: 18px;"></i>
-                <span> Asociar vehiculo </span></a>
+                <span> Asociar vehículo </span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 
-                <span>Estacionar</span>
+                <span>Estacionamiento</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="collapse-inner rounded">
-                <a class="nav-link" href="<?= base_url('estacionar-vehiculo') ?>">
-                    <i class="fas fa-fw fa-car" style="font-size: 18px;"></i>
-                    <span> Estacionar vehiculo </span>
-                </a>
+                    <a class="nav-link" href="<?= base_url('estacionar-vehiculo') ?>">
+                        <i class="fas fa-fw fa-car" style="font-size: 18px;"></i>
+                        <span> Estacionar vehículo </span>
+                    </a>
 
-                <a class="nav-link" href="<?= base_url('des_estacionar-vehiculo') ?>">
-                    <i class="fas fa-fw fa-car-side" style="font-size: 18px;"></i>
-                    <span> DesEstacionar vehiculo </span>
-                </a>
+                    <a class="nav-link" href="<?= base_url('des_estacionar-vehiculo') ?>">
+                        <i class="fas fa-fw fa-car-side" style="font-size: 18px;"></i>
+                        <span> DesEstacionar vehículo </span>
+                    </a>
 
                 </div>
             </div>
-        </li> 
+        </li>
 
-    
+
         <li class="nav-item" id="cargar_saldo">
             <a class="nav-link" href="<?= base_url('form-cargar-saldo') ?>">
                 <i class="bi bi-currency-dollar" style="font-size: 18px;"></i>
@@ -102,23 +102,23 @@
         <li class="nav-item" id="registrar_vehiculo">
             <a class="nav-link" href="<?= base_url('listar-estadias-pendientes') ?>">
                 <i class="bi bi-card-list" style="font-size: 18px;"></i>
-                <span> Estadias pendientes </span></a>
+                <span> Estadías pendientes </span></a>
         </li>
 
         <li class="nav-item" id="puntos_venta">
-            <a class="nav-link" href="<?= base_url('mostrar-puntos-venta')?>" > 
-                <i class="fas fa-fw fa-info-circle" style="font-size: 18px;"> </i>
+            <a class="nav-link" href="<?= base_url('mostrar-puntos-venta') ?>">
+                <i class="bi bi-shop" style="font-size: 18px;"> </i>
                 <span>Puntos de venta </span>
             </a>
         </li>
-        
+
     <?php endif; ?>
 
     <?php if (session('rol') == 'Inspector') : ?>
         <li class="nav-item" id="consultar_estadia">
             <a class="nav-link" href="<?= base_url('consultar-estadia') ?>">
-                <i class="fas fa-fw bi bi-cone-striped" style="font-size: 18px;"></i>
-                <span> Consultar estadia </span>
+                <i class="fas fa-fw bi bi-info-circle" style="font-size: 18px;"></i>
+                <span> Consultar estadía </span>
             </a>
         </li>
 
@@ -135,7 +135,7 @@
         <li class="nav-item" id="vender_estadia">
             <a class="nav-link" href="<?= base_url('formulario-venta') ?>">
                 <i class="fas fa-fw fa-hand-holding-usd" style="font-size: 18px;"></i>
-                <span> Vender estadia </span>
+                <span> Vender estadía </span>
             </a>
         </li>
 

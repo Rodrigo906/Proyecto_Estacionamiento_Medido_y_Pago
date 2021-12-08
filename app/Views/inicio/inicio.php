@@ -54,7 +54,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Vehiculos estacionados
+                                    Vehículos estacionados
                                 </span>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Registrar vehiculo
+                                    Registrar vehículo
                                 </span>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Asociar vehiculo
+                                    Asociar vehículo
                                 </span>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Estacionar vehiculo
+                                    Estacionar vehículo
                                 </span>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    DesEstacionar vehiculo
+                                    DesEstacionar vehículo
                                 </span>
                             </div>
                         </div>
@@ -214,7 +214,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Estadias pendientes
+                                    Estadías pendientes
                                 </span>
                             </div>
                         </div>
@@ -229,7 +229,7 @@
                         <div class="text-center">
                             <div class="col-auto">
                                 <a class="nav-link" href="<?= base_url('mostrar-puntos-venta') ?>">
-                                    <i class="fas fa-fw fa-info-circle text-gray-600" style="font-size: 30px;"></i>
+                                    <i class="bi bi-shop text-gray-600" style="font-size: 30px;"></i>
                                 </a>
                             </div>
                             <div class="mt-4 text-center small">
@@ -257,12 +257,12 @@
                         <div class="text-center">
                             <div class="col-auto">
                                 <a class="nav-link" href="<?= base_url('consultar-estadia') ?>">
-                                    <i class="fas bi bi-cone-striped fa-2x text-gray-600"></i>
+                                    <i class="fas bi bi-info-circle fa-2x text-gray-600"></i>
                                 </a>
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Consultar estadia
+                                    Consultar estadía
                                 </span>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Registrar infraccion
+                                    Registrar infracción
                                 </span>
                             </div>
                         </div>
@@ -304,7 +304,7 @@
                             </div>
                             <div class="mt-4 text-center small">
                                 <span class="mr-2">
-                                    Vender estadia
+                                    Vender estadía
                                 </span>
                             </div>
                         </div>
