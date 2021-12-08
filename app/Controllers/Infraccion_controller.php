@@ -41,16 +41,15 @@ class Infraccion_controller extends BaseController
         }
 
         $vehiculo = $this->vehiculoModel->obtenerVehiculo($_POST['patente']);
-        $id_vehiculo = $vehiculo[0]['id_vehiculo'];
-        $id_zona = $_POST['zona'];
-
-        $this->infraccionModel->registrarInfraccion(
-            $id_vehiculo,
-            $id_zona,
-            $_POST['motivo'],
-            $_POST['fecha'],
-            $_POST['direccion']
-        );
+    
+        $data = [
+            'id_vehiculo' => $vehiculo[0]['id_vehiculo'],
+            'id_zona' => $_POST['zona'],
+            'motivo' => $_POST['motivo'],
+            'fecha' => $_POST['fecha'],
+            'direccion' => $_POST['direccion'],
+        ];
+        $this->infraccionModel->save($data);
 
         session()->setFlashdata('msg', 'Registrado correctamente');
         return redirect()->back();

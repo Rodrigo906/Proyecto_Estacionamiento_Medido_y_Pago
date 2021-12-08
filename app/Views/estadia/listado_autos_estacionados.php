@@ -7,11 +7,11 @@
     <table class=" table table-striped table-bordered">
         <thead>
             <tr class="text-center">
+                <th scope="col"> N° estadia </th>
                 <th scope="col"> Patente </th>
-                <th scope="col"> Username </th>
                 <th scope="col"> Marca </th>
-                <th scope="col"> Nombre </th>
-                <th scope="col"> Apellido </th>
+                <th scope="col"> Modelo </th>
+                <th scope="col"> Zona </th>
             </tr>
         </thead>
         <tbody>
@@ -19,11 +19,11 @@
             foreach ($estadias as $estadia) {
             ?>
                 <tr class="text-center">
+                    <td> <?php echo $estadia['id_estadia'] ?> </td>
                     <td> <?php echo $estadia['patente'] ?> </td>
-                    <td> <?php echo $estadia['username'] ?> </td>
                     <td> <?php echo $estadia['marca'] ?> </td>
-                    <td> <?php echo $estadia['nombre'] ?> </td>
-                    <td> <?php echo $estadia['apellido'] ?> </td>
+                    <td> <?php echo $estadia['modelo'] ?> </td>
+                    <td> <?php echo $estadia['nombre_zona'] ?> </td>
                 </tr>
             <?php };
             ?>

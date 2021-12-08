@@ -13,7 +13,7 @@ class UserModel extends Model
     protected $useAutoIncrement = true;
 
     protected $returnType = 'array';
-    protected $useSoftdeletes = false;  //ver que tipo de eliminado se usara luego
+    protected $useSoftdeletes = false;
 
     protected $allowedFields = ['username', 'nombre', 'apellido', 'contraseña', 'email', 'dni', 'fecha_nacimiento', 'id_rol'];
 
@@ -34,14 +34,6 @@ class UserModel extends Model
         return $consulta->getResultArray();
     }
 
-    public function registrarUsuario($username, $nombre, $apellido, $email, $dni, $fecha_nacimiento, $contraseña, $rol)
-    {
-
-        $this->db->query("INSERT INTO usuario (username, nombre, apellido, contraseña, email, dni, fecha_nacimiento, id_rol) " .
-            "VALUES ('$username', '$nombre', '$apellido', '$contraseña','$email','$dni', '$fecha_nacimiento', '$rol')");
-    }
-
-
     public function obtenerDatosUsuario($username)
     {
         $result = $this->db->query("SELECT * FROM usuario WHERE username='$username'");
@@ -53,11 +45,6 @@ class UserModel extends Model
         $result = $this->db->query("SELECT * FROM usuario u JOIN cuenta c ON (u.id_usuario = c.id_usuario) WHERE u.username = '$username'");
 
         return $result->getResultArray();
-    }
-
-    public function actualizarDatosPersonales($username, $nombre, $apellido, $email, $fecha_nacimiento, $contraseña)
-    {
-        $this->db->query("UPDATE usuario SET nombre= '$nombre', apellido='$apellido', email='$email', fecha_nacimiento='$fecha_nacimiento', contraseña='$contraseña' WHERE username= '$username'");
     }
 
     public function restablecerContraseña($username)
